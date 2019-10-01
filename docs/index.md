@@ -2,7 +2,7 @@
 home: true
 heroImage: /hero.png
 heroText: Laravel Orion
-tagline: Laravel & Vue.js API Generator
+tagline: The easiest way to create REST API with Laravel
 actionText: Get Started →
 actionLink: /guide/
 features:

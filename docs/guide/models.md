@@ -9,6 +9,7 @@ To expose a model through API, first you need to create a controller for it. As 
 
 namespace App\Http\Controllers\API;
 
+use App\Models\Post;
 use Laralord\Orion\Http\Controllers\Controller;
 
 class PostsController extends Controller

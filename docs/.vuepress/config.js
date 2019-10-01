@@ -25,13 +25,6 @@ module.exports = {
                         'security',
                         'responses'
                     ]
-                },
-                {
-                    title: 'Advanced',
-                    collapsable: false,
-                    children: [
-                        '',
-                    ]
                 }
             ],
         },
