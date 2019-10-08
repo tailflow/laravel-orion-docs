@@ -1,7 +1,7 @@
 # Query Parameters
 Laravel Orion allows consumers of your API to use query parameters for filtering, sorting, searching of resources as well as including other related resources (defined as relations on a particular model) together in response.
 
-But first, <s>let me take a selfie</s> allowed set of attributes and relations to be used in query parameters needs to be defined in controller.
+But first, allowed set of attributes and relations to be used in query parameters needs to be defined in controller.
 
 ## Filtering
 
@@ -30,6 +30,8 @@ class PostsController extends Controller
 ```
 
 To filter results based on one or several attributes, url needs to contain attribute names and values as query parameters.
+
+Note `user.id` - using the dot notation you can specify fields on relations.
 
 <b>Pattern:</b> `https://<app url>/api/<resource>?<attribute>=<value>...`
 
