@@ -1,7 +1,9 @@
 # Relationships
+
 ## Setting up Controller
 
 Defining model relationship controller is very similar to defining model controller.
+
 ```php
 <?php
 
@@ -27,9 +29,11 @@ class PostCommentsController extends RelationController
 At this point, you do not need to worry about different relationship types - controllers are defined in the same way for all types of the relationships.
 
 ::: warning KEY TAKEAWAYS
+
 * Model relationship controllers always extend `Laralord\Orion\Http\Controllers\RelationController`
 * `$model` property is set to a fully qualified model class name
 * `$relation` property is set to the exact relationship name as it is defined on the model
+
 :::
 
 ## Setting up Routes
@@ -49,8 +53,8 @@ Route::group(['as' => 'api.'], function() {
 });
 
 ```
-While you need to call different methods, their signature is the same: resource name, relation name, and controller.
 
+While you need to call different methods, their signature is the same: resource name, relation name, and controller.
 
 Alternatively, you can register routes using `Orion::resourceRelation` method and a fully-qualified relationship class name.
 
