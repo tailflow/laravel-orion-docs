@@ -3,6 +3,7 @@
 ## Installation
 
 Laravel Orion can be installed into a new or existing project, simply by adding a composer dependency:
+
 ```bash
 composer require laralord/laravel-orion
 ```
@@ -14,6 +15,7 @@ Let's assume you have a model `Post` that represents a blog post and you would l
 With Laravel Orion it can be acomplished in 3 simple steps:
 
 1. Create `PostsController` and extend it from `Laralord\Orion\Http\Controllers\Controller`
+
 ```php
 <?php
 

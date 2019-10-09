@@ -20,9 +20,12 @@ class PostsController extends Controller
     protected static $model = Post::class; // or "App\Models\Post"
 }
 ```
+
 ::: warning KEY TAKEAWAYS
+
 * Model controllers always extend `Laralord\Orion\Http\Controllers\Controller`
 * `$model` property is set to a fully qualified model class name
+
 :::
 
 ## Setting up Routes
