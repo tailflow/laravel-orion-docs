@@ -11,7 +11,7 @@ features:
 - title: Easy to use and learn
   details: Utilizes standard Laravel features such as Request classes, Policies and API Resources.
 - title: SDK out of box
-  details: (coming soon...) TypesScript, Javascript, and Swift SDKs for your API. VueJS and Angular libraries.
+  details: (coming soon...) TypesScript, Javascript SDKs; VueJS and Angular libraries for your API.
 footer: MIT Licensed | Copyright © 2019-present Aleksei Zarubin
 ---
 
