@@ -1,6 +1,6 @@
 module.exports = {
     title: 'Laravel Orion',
-    description: 'Just playing around',
+    description: 'The easiest way to create REST API with Laravel',
     themeConfig: {
         repo: 'laravel-orion/laravel-orion',
         docsRepo: 'laravel-orion/docs',
@@ -21,6 +21,7 @@ module.exports = {
                         'getting-started',
                         'models',
                         'relationships',
+                        'hooks',
                         'query-parameters',
                         'security',
                         'responses'
