@@ -194,10 +194,41 @@ Orion::hasOneThroughResource('posts', 'meta' , 'API\PostMetaController');
 Orion::hasManyThroughResource('users', 'comments' , 'API\UserCommentsController');
 ```
 
+**Available endpoints**
+
+```bash
++--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
+| Domain | Method    | URI                                             | Name                                   | Action                                                                    | Middleware                                      |
++--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
+|        | GET|HEAD  | api/users/{user}/comments                       | api.users.relation.comments.index      | App\Http\Controllers\API\UserCommentsController@index                     | api                                             |
+|        | PATCH     | api/users/{user}/comments/{comments?}           | api.users.relation.comments.update     | App\Http\Controllers\API\UserCommentsController@update                    | api                                             |
+|        | GET|HEAD  | api/users/{user}/comments/{comments?}           | api.users.relation.comments.show       | App\Http\Controllers\API\UserCommentsController@show                      | api                                             |
+|        | PUT       | api/users/{user}/comments/{comments?}           | api.users.relation.comments.update     | App\Http\Controllers\API\UserCommentsController@update                    | api                                             |
+|        | DELETE    | api/users/{user}/comments/{comments?}           | api.users.relation.comments.destroy    | App\Http\Controllers\API\UserCommentsController@destroy                   | api                                             |
+|        | POST      | api/users/{user}/comments/attach                | api.users.relation.comments.attach     | App\Http\Controllers\API\UserCommentsController@attach                    | api                                             |
+|        | DELETE    | api/users/{user}/comments/detach                | api.users.relation.comments.detach     | App\Http\Controllers\API\UserCommentsController@detach                    | api                                             |
+|        | PATCH     | api/users/{user}/comments/sync                  | api.users.relation.comments.sync       | App\Http\Controllers\API\UserCommentsController@sync                      | api                                             |
+|        | PATCH     | api/users/{user}/comments/toggle                | api.users.relation.comments.toggle     | App\Http\Controllers\API\UserCommentsController@toggle                    | api                                             |
+|        | PATCH     | api/users/{user}/comments/{comments}/pivot      | api.users.relation.comments.pivot      | App\Http\Controllers\API\UserCommentsController@updatePivot               | api                                             |
+```
+
 ## One To One (Polymorphic)
 
 ```php
 Orion::morphOneResource('posts', 'image', 'API\PostImageController');
+```
+
+**Available endpoints**
+
+```bash
++--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
+| Domain | Method    | URI                                             | Name                                   | Action                                                                    | Middleware                                      |
++--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
+|        | POST      | api/posts/{post}/image                          | api.posts.relation.image.store         | App\Http\Controllers\API\PostImageController@store                        | api                                             |
+|        | PATCH     | api/posts/{post}/image/{image?}                 | api.posts.relation.image.update        | App\Http\Controllers\API\PostImageController@update                       | api                                             |
+|        | DELETE    | api/posts/{post}/image/{image?}                 | api.posts.relation.image.destroy       | App\Http\Controllers\API\PostImageController@destroy                      | api                                             |
+|        | PUT       | api/posts/{post}/image/{image?}                 | api.posts.relation.image.update        | App\Http\Controllers\API\PostImageController@update                       | api                                             |
+|        | GET|HEAD  | api/posts/{post}/image/{image?}                 | api.posts.relation.image.show          | App\Http\Controllers\API\PostImageController@show                         | api                                             |
 ```
 
 ## One To Many (Polymorphic)
