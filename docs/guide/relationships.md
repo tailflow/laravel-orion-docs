@@ -79,14 +79,57 @@ Route::group(['as' => 'api.'], function() {
 Orion::hasOneResource('profiles', 'image' , 'API\ProfileImageController');
 ```
 
+**Available endpoints**
+
+```bash
++--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
+| Domain | Method    | URI                                             | Name                                   | Action                                                                    | Middleware                                      |
++--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
+|        | POST      | api/profiles/{profile}/image                    | api.profiles.relation.image.store      | App\Http\Controllers\API\ProfileImageController@store                     | api                                             |
+|        | GET|HEAD  | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.show       | App\Http\Controllers\API\ProfileImageController@show                      | api                                             |
+|        | PATCH     | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.update     | App\Http\Controllers\API\ProfileImageController@update                    | api                                             |
+|        | PUT       | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.update     | App\Http\Controllers\API\ProfileImageController@update                    | api                                             |
+|        | DELETE    | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.destroy    | App\Http\Controllers\API\ProfileImageController@destroy                   | api                                             |
+```
+
 ## One to Many
 
 ```php
 Orion::hasManyResource('users', 'posts' , 'API\UserPostsController');
 ```
 
+**Available endpoints**
+
+```bash
++--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
+| Domain | Method    | URI                                             | Name                                   | Action                                                                    | Middleware                                      |
++--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
+|        | POST      | api/users/{user}/posts                          | api.users.relation.posts.store         | App\Http\Controllers\API\UserPostsController@store                        | api                                             |
+|        | GET|HEAD  | api/users/{user}/posts                          | api.users.relation.posts.index         | App\Http\Controllers\API\UserPostsController@index                        | api                                             |
+|        | PATCH     | api/users/{user}/posts/{posts?}                 | api.users.relation.posts.update        | App\Http\Controllers\API\UserPostsController@update                       | api                                             |
+|        | DELETE    | api/users/{user}/posts/{posts?}                 | api.users.relation.posts.destroy       | App\Http\Controllers\API\UserPostsController@destroy                      | api                                             |
+|        | GET|HEAD  | api/users/{user}/posts/{posts?}                 | api.users.relation.posts.show          | App\Http\Controllers\API\UserPostsController@show                         | api                                             |
+|        | PUT       | api/users/{user}/posts/{posts?}                 | api.users.relation.posts.update        | App\Http\Controllers\API\UserPostsController@update                       | api                                             |
+|        | POST      | api/users/{user}/posts/associate                | api.users.relation.posts.associate     | App\Http\Controllers\API\UserPostsController@associate                    | api                                             |
+|        | DELETE    | api/users/{user}/posts/{posts}/dissociate       | api.users.relation.posts.dissociate    | App\Http\Controllers\API\UserPostsController@dissociate                   | api                                             |
+```
+
+### Inversed One to Many
+
 ```php
 Orion::belongsToResource('posts', 'user' , 'API\PostUserController');
+```
+
+**Available endpoints**
+
+```bash
++--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
+| Domain | Method    | URI                                             | Name                                   | Action                                                                    | Middleware                                      |
++--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
+|        | PUT       | api/posts/{post}/user/{user?}                   | api.posts.relation.user.update         | App\Http\Controllers\API\PostUserController@update                        | api                                             |
+|        | DELETE    | api/posts/{post}/user/{user?}                   | api.posts.relation.user.destroy        | App\Http\Controllers\API\PostUserController@destroy                       | api                                             |
+|        | GET|HEAD  | api/posts/{post}/user/{user?}                   | api.posts.relation.user.show           | App\Http\Controllers\API\PostUserController@show                          | api                                             |
+|        | PATCH     | api/posts/{post}/user/{user?}                   | api.posts.relation.user.update         | App\Http\Controllers\API\PostUserController@update                        | api                                             |
 ```
 
 ## Many to Many
@@ -95,8 +138,48 @@ Orion::belongsToResource('posts', 'user' , 'API\PostUserController');
 Orion::belongsToManyResource('users', 'roles' , 'API\UserRolesController');
 ```
 
+**Available endpoints**
+
+```bash
++--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
+| Domain | Method    | URI                                             | Name                                   | Action                                                                    | Middleware                                      |
++--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
+|        | POST      | api/users/{user}/roles                          | api.users.relation.roles.store         | App\Http\Controllers\API\UserRolesController@store                        | api                                             |
+|        | GET|HEAD  | api/users/{user}/roles                          | api.users.relation.roles.index         | App\Http\Controllers\API\UserRolesController@index                        | api                                             |
+|        | PUT       | api/users/{user}/roles/{roles?}                 | api.users.relation.roles.update        | App\Http\Controllers\API\UserRolesController@update                       | api                                             |
+|        | PATCH     | api/users/{user}/roles/{roles?}                 | api.users.relation.roles.update        | App\Http\Controllers\API\UserRolesController@update                       | api                                             |
+|        | GET|HEAD  | api/users/{user}/roles/{roles?}                 | api.users.relation.roles.show          | App\Http\Controllers\API\UserRolesController@show                         | api                                             |
+|        | DELETE    | api/users/{user}/roles/{roles?}                 | api.users.relation.roles.destroy       | App\Http\Controllers\API\UserRolesController@destroy                      | api                                             |
+|        | POST      | api/users/{user}/roles/attach                   | api.users.relation.roles.attach        | App\Http\Controllers\API\UserRolesController@attach                       | api                                             |
+|        | DELETE    | api/users/{user}/roles/detach                   | api.users.relation.roles.detach        | App\Http\Controllers\API\UserRolesController@detach                       | api                                             |
+|        | PATCH     | api/users/{user}/roles/sync                     | api.users.relation.roles.sync          | App\Http\Controllers\API\UserRolesController@sync                         | api                                             |
+|        | PATCH     | api/users/{user}/roles/toggle                   | api.users.relation.roles.toggle        | App\Http\Controllers\API\UserRolesController@toggle                       | api                                             |
+|        | PATCH     | api/users/{user}/roles/{roles}/pivot            | api.users.relation.roles.pivot         | App\Http\Controllers\API\UserRolesController@updatePivot                  | api                                             |
+```
+
+### Inversed Many to Many
+
 ```php
 Orion::belongsToManyResource('roles', 'users' , 'API\RoleUsersController');
+```
+
+**Available endpoints**
+
+```bash
++--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
+| Domain | Method    | URI                                             | Name                                   | Action                                                                    | Middleware                                      |
++--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
+|        | POST      | api/roles/{role}/users                          | api.roles.relation.users.store         | App\Http\Controllers\API\RoleUsersController@store                        | api                                             |
+|        | GET|HEAD  | api/roles/{role}/users                          | api.roles.relation.users.index         | App\Http\Controllers\API\RoleUsersController@index                        | api                                             |
+|        | PUT       | api/roles/{role}/users/{users?}                 | api.roles.relation.users.update        | App\Http\Controllers\API\RoleUsersController@update                       | api                                             |
+|        | PATCH     | api/roles/{role}/users/{users?}                 | api.roles.relation.users.update        | App\Http\Controllers\API\RoleUsersController@update                       | api                                             |
+|        | GET|HEAD  | api/roles/{role}/users/{users?}                 | api.roles.relation.users.show          | App\Http\Controllers\API\RoleUsersController@show                         | api                                             |
+|        | DELETE    | api/roles/{role}/users/{users?}                 | api.roles.relation.users.destroy       | App\Http\Controllers\API\RoleUsersController@destroy                      | api                                             |
+|        | POST      | api/roles/{role}/users/attach                   | api.roles.relation.users.attach        | App\Http\Controllers\API\RoleUsersController@attach                       | api                                             |
+|        | DELETE    | api/roles/{role}/users/detach                   | api.roles.relation.users.detach        | App\Http\Controllers\API\RoleUsersController@detach                       | api                                             |
+|        | PATCH     | api/roles/{role}/users/sync                     | api.roles.relation.users.sync          | App\Http\Controllers\API\RoleUsersController@sync                         | api                                             |
+|        | PATCH     | api/roles/{role}/users/toggle                   | api.roles.relation.users.toggle        | App\Http\Controllers\API\RoleUsersController@toggle                       | api                                             |
+|        | PATCH     | api/roles/{role}/users/{users}/pivot            | api.roles.relation.users.pivot         | App\Http\Controllers\API\RoleUsersController@updatePivot                  | api                                             |
 ```
 
 ## Has One Through
