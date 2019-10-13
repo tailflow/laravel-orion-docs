@@ -67,7 +67,7 @@ use Laralord\Orion\Orion;
 
 Route::group(['as' => 'api.'], function() {
     Orion::resource('posts', 'API\PostsController');
-    Orion::hasManyResource('users', 'posts' , 'API\UserPostsController');
+    Orion::morphToManyResource('posts', 'tags' , 'API\PostTagsController');
 });
 
 ```
@@ -78,17 +78,19 @@ Route::group(['as' => 'api.'], function() {
 +--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
 | Domain | Method    | URI                                             | Name                                   | Action                                                                    | Middleware                                      |
 +--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
-|        | POST      | api/posts                                       | api.posts.store                        | App\Http\Controllers\API\PostsController@store                            | api                                             |
 |        | GET|HEAD  | api/posts                                       | api.posts.index                        | App\Http\Controllers\API\PostsController@index                            | api                                             |
-|        | DELETE    | api/posts/{post}                                | api.posts.destroy                      | App\Http\Controllers\API\PostsController@destroy                          | api                                             |
-|        | PUT|PATCH | api/posts/{post}                                | api.posts.update                       | App\Http\Controllers\API\PostsController@update                           | api                                             |
+|        | POST      | api/posts                                       | api.posts.store                        | App\Http\Controllers\API\PostsController@store                            | api                                             |
 |        | GET|HEAD  | api/posts/{post}                                | api.posts.show                         | App\Http\Controllers\API\PostsController@show                             | api                                             |
-|        | POST      | api/users/{user}/posts                          | api.users.relation.posts.store         | App\Http\Controllers\API\UserPostsController@store                        | api                                             |
-|        | GET|HEAD  | api/users/{user}/posts                          | api.users.relation.posts.index         | App\Http\Controllers\API\UserPostsController@index                        | api                                             |
-|        | POST      | api/users/{user}/posts/associate                | api.users.relation.posts.associate     | App\Http\Controllers\API\UserPostsController@associate                    | api                                             |
-|        | PATCH     | api/users/{user}/posts/{posts?}                 | api.users.relation.posts.update        | App\Http\Controllers\API\UserPostsController@update                       | api                                             |
-|        | DELETE    | api/users/{user}/posts/{posts?}                 | api.users.relation.posts.destroy       | App\Http\Controllers\API\UserPostsController@destroy                      | api                                             |
-|        | GET|HEAD  | api/users/{user}/posts/{posts?}                 | api.users.relation.posts.show          | App\Http\Controllers\API\UserPostsController@show                         | api                                             |
-|        | PUT       | api/users/{user}/posts/{posts?}                 | api.users.relation.posts.update        | App\Http\Controllers\API\UserPostsController@update                       | api                                             |
-|        | DELETE    | api/users/{user}/posts/{posts}/dissociate       | api.users.relation.posts.dissociate    | App\Http\Controllers\API\UserPostsController@dissociate                   | api                                             | 
+|        | PUT|PATCH | api/posts/{post}                                | api.posts.update                       | App\Http\Controllers\API\PostsController@update                           | api                                             |
+|        | DELETE    | api/posts/{post}                                | api.posts.destroy                      | App\Http\Controllers\API\PostsController@destroy                          | api                                             |
+|        | GET|HEAD  | api/posts/{post}/tags                           | api.posts.relation.tags.index          | App\Http\Controllers\API\PostTagsController@index                         | api                                             |
+|        | POST      | api/posts/{post}/tags                           | api.posts.relation.tags.store          | App\Http\Controllers\API\PostTagsController@store                         | api                                             |
+|        | GET|HEAD  | api/posts/{post}/tags/{tags?}                   | api.posts.relation.tags.show           | App\Http\Controllers\API\PostTagsController@show                          | api                                             |
+|        | PUT|PATCH | api/posts/{post}/tags/{tags?}                   | api.posts.relation.tags.update         | App\Http\Controllers\API\PostTagsController@update                        | api                                             |
+|        | DELETE    | api/posts/{post}/tags/{tags?}                   | api.posts.relation.tags.destroy        | App\Http\Controllers\API\PostTagsController@destroy                       | api                                             |
+|        | POST      | api/posts/{post}/tags/attach                    | api.posts.relation.tags.attach         | App\Http\Controllers\API\PostTagsController@attach                        | api                                             |
+|        | DELETE    | api/posts/{post}/tags/detach                    | api.posts.relation.tags.detach         | App\Http\Controllers\API\PostTagsController@detach                        | api                                             |
+|        | PATCH     | api/posts/{post}/tags/sync                      | api.posts.relation.tags.sync           | App\Http\Controllers\API\PostTagsController@sync                          | api                                             |
+|        | PATCH     | api/posts/{post}/tags/toggle                    | api.posts.relation.tags.toggle         | App\Http\Controllers\API\PostTagsController@toggle                        | api                                             |
+|        | PATCH     | api/posts/{post}/tags/{tags}/pivot              | api.posts.relation.tags.pivot          | App\Http\Controllers\API\PostTagsController@updatePivot                   | api                                             |
 ```
