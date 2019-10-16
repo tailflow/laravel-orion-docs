@@ -111,7 +111,7 @@ Orion::hasManyResource('users', 'posts' , 'API\UserPostsController');
 | PUT       | api/users/{user}/posts/{post}                   | api.users.relation.posts.update        | App\Http\Controllers\API\UserPostsController@update                       |
 | DELETE    | api/users/{user}/posts/{post}                   | api.users.relation.posts.destroy       | App\Http\Controllers\API\UserPostsController@destroy                      |
 | POST      | api/users/{user}/posts/associate                | api.users.relation.posts.associate     | App\Http\Controllers\API\UserPostsController@associate                    |
-| DELETE    | api/users/{user}/posts/{posts}/dissociate       | api.users.relation.posts.dissociate    | App\Http\Controllers\API\UserPostsController@dissociate                   |
+| DELETE    | api/users/{user}/posts/{post}/dissociate       | api.users.relation.posts.dissociate    | App\Http\Controllers\API\UserPostsController@dissociate                   |
 ```
 
 ## belongsTo
@@ -154,7 +154,7 @@ Orion::belongsToManyResource('users', 'roles' , 'API\UserRolesController');
 | DELETE    | api/users/{user}/roles/detach                   | api.users.relation.roles.detach        | App\Http\Controllers\API\UserRolesController@detach                       |
 | PATCH     | api/users/{user}/roles/sync                     | api.users.relation.roles.sync          | App\Http\Controllers\API\UserRolesController@sync                         |
 | PATCH     | api/users/{user}/roles/toggle                   | api.users.relation.roles.toggle        | App\Http\Controllers\API\UserRolesController@toggle                       |
-| PATCH     | api/users/{user}/roles/{roles}/pivot            | api.users.relation.roles.pivot         | App\Http\Controllers\API\UserRolesController@updatePivot                  |
+| PATCH     | api/users/{user}/roles/{role}/pivot            | api.users.relation.roles.pivot         | App\Http\Controllers\API\UserRolesController@updatePivot                  |
 ```
 
 ## hasOneThrough
@@ -194,7 +194,7 @@ Orion::hasManyThroughResource('users', 'comments' , 'API\UserCommentsController'
 | PUT       | api/users/{user}/comments/{comment}             | api.users.relation.comments.update     | App\Http\Controllers\API\UserCommentsController@update                    |
 | DELETE    | api/users/{user}/comments/{comment}             | api.users.relation.comments.destroy    | App\Http\Controllers\API\UserCommentsController@destroy                   |
 | POST      | api/users/{user}/comments/associate             | api.users.relation.comments.associate  | App\Http\Controllers\API\UserCommentsController@associate                 |
-| DELETE    | api/users/{user}/comments/{comments}/dissociate | api.users.relation.comments.dissociate | App\Http\Controllers\API\UserCommentsController@dissociate                |
+| DELETE    | api/users/{user}/comments/{comment}/dissociate | api.users.relation.comments.dissociate | App\Http\Controllers\API\UserCommentsController@dissociate                |
 ```
 
 ## morphOne
@@ -235,7 +235,7 @@ Orion::morphManyResource('posts', 'comments', 'API\PostCommentsController');
 | PUT       | api/posts/{post}/comments/{comment}             | api.posts.relation.comments.update     | App\Http\Controllers\API\PostCommentsController@update                    |
 | DELETE    | api/posts/{post}/comments/{comment}             | api.posts.relation.comments.destroy    | App\Http\Controllers\API\PostCommentsController@destroy                   |
 | POST      | api/posts/{post}/comments/associate             | api.posts.relation.comments.associate  | App\Http\Controllers\API\PostCommentsController@associate                 |
-| DELETE    | api/posts/{post}/comments/{comments}/dissociate | api.posts.relation.comments.dissociate | App\Http\Controllers\API\PostCommentsController@dissociate                |
+| DELETE    | api/posts/{post}/comments/{comment}/dissociate | api.posts.relation.comments.dissociate | App\Http\Controllers\API\PostCommentsController@dissociate                |
 ```
 
 ## morphToMany
@@ -260,5 +260,5 @@ Orion::morphToManyResource('posts', 'tags', 'API\PostTagsController');
 | DELETE    | api/posts/{post}/tags/detach                    | api.posts.relation.tags.detach         | App\Http\Controllers\API\PostTagsController@detach                        |
 | PATCH     | api/posts/{post}/tags/sync                      | api.posts.relation.tags.sync           | App\Http\Controllers\API\PostTagsController@sync                          |
 | PATCH     | api/posts/{post}/tags/toggle                    | api.posts.relation.tags.toggle         | App\Http\Controllers\API\PostTagsController@toggle                        |
-| PATCH     | api/posts/{post}/tags/{tags}/pivot              | api.posts.relation.tags.pivot          | App\Http\Controllers\API\PostTagsController@updatePivot                   |
+| PATCH     | api/posts/{post}/tags/{tag}/pivot              | api.posts.relation.tags.pivot          | App\Http\Controllers\API\PostTagsController@updatePivot                   |
 ```
