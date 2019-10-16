@@ -86,10 +86,10 @@ Orion::hasOneResource('profiles', 'image' , 'API\ProfileImageController');
 | Method    | URI                                             | Name                                   | Action                                                                    |
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
 | POST      | api/profiles/{profile}/image                    | api.profiles.relation.image.store      | App\Http\Controllers\API\ProfileImageController@store                     |
-| GET|HEAD  | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.show       | App\Http\Controllers\API\ProfileImageController@show                      |
-| PATCH     | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.update     | App\Http\Controllers\API\ProfileImageController@update                    |
-| PUT       | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.update     | App\Http\Controllers\API\ProfileImageController@update                    |
-| DELETE    | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.destroy    | App\Http\Controllers\API\ProfileImageController@destroy                   |
+| GET|HEAD  | api/profiles/{profile}/image/{image}            | api.profiles.relation.image.show       | App\Http\Controllers\API\ProfileImageController@show                      |
+| PATCH     | api/profiles/{profile}/image/{image}            | api.profiles.relation.image.update     | App\Http\Controllers\API\ProfileImageController@update                    |
+| PUT       | api/profiles/{profile}/image/{image}            | api.profiles.relation.image.update     | App\Http\Controllers\API\ProfileImageController@update                    |
+| DELETE    | api/profiles/{profile}/image/{image}            | api.profiles.relation.image.destroy    | App\Http\Controllers\API\ProfileImageController@destroy                   |
 ```
 
 ## hasMany
@@ -106,10 +106,10 @@ Orion::hasManyResource('users', 'posts' , 'API\UserPostsController');
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
 | GET|HEAD  | api/users/{user}/posts                          | api.users.relation.posts.index         | App\Http\Controllers\API\UserPostsController@index                        |
 | POST      | api/users/{user}/posts                          | api.users.relation.posts.store         | App\Http\Controllers\API\UserPostsController@store                        |
-| GET|HEAD  | api/users/{user}/posts/{posts?}                 | api.users.relation.posts.show          | App\Http\Controllers\API\UserPostsController@show                         |
-| PATCH     | api/users/{user}/posts/{posts?}                 | api.users.relation.posts.update        | App\Http\Controllers\API\UserPostsController@update                       |
-| PUT       | api/users/{user}/posts/{posts?}                 | api.users.relation.posts.update        | App\Http\Controllers\API\UserPostsController@update                       |
-| DELETE    | api/users/{user}/posts/{posts?}                 | api.users.relation.posts.destroy       | App\Http\Controllers\API\UserPostsController@destroy                      |
+| GET|HEAD  | api/users/{user}/posts/{post}                   | api.users.relation.posts.show          | App\Http\Controllers\API\UserPostsController@show                         |
+| PATCH     | api/users/{user}/posts/{post}                   | api.users.relation.posts.update        | App\Http\Controllers\API\UserPostsController@update                       |
+| PUT       | api/users/{user}/posts/{post}                   | api.users.relation.posts.update        | App\Http\Controllers\API\UserPostsController@update                       |
+| DELETE    | api/users/{user}/posts/{post}                   | api.users.relation.posts.destroy       | App\Http\Controllers\API\UserPostsController@destroy                      |
 | POST      | api/users/{user}/posts/associate                | api.users.relation.posts.associate     | App\Http\Controllers\API\UserPostsController@associate                    |
 | DELETE    | api/users/{user}/posts/{posts}/dissociate       | api.users.relation.posts.dissociate    | App\Http\Controllers\API\UserPostsController@dissociate                   |
 ```
@@ -126,10 +126,10 @@ Orion::belongsToResource('posts', 'user' , 'API\PostUserController');
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
 | Method    | URI                                             | Name                                   | Action                                                                    |
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
-| GET|HEAD  | api/posts/{post}/user/{user?}                   | api.posts.relation.user.show           | App\Http\Controllers\API\PostUserController@show                          |
-| PATCH     | api/posts/{post}/user/{user?}                   | api.posts.relation.user.update         | App\Http\Controllers\API\PostUserController@update                        |
-| PUT       | api/posts/{post}/user/{user?}                   | api.posts.relation.user.update         | App\Http\Controllers\API\PostUserController@update                        |
-| DELETE    | api/posts/{post}/user/{user?}                   | api.posts.relation.user.destroy        | App\Http\Controllers\API\PostUserController@destroy                       |
+| GET|HEAD  | api/posts/{post}/user/{user}                    | api.posts.relation.user.show           | App\Http\Controllers\API\PostUserController@show                          |
+| PATCH     | api/posts/{post}/user/{user}                    | api.posts.relation.user.update         | App\Http\Controllers\API\PostUserController@update                        |
+| PUT       | api/posts/{post}/user/{user}                    | api.posts.relation.user.update         | App\Http\Controllers\API\PostUserController@update                        |
+| DELETE    | api/posts/{post}/user/{user}                    | api.posts.relation.user.destroy        | App\Http\Controllers\API\PostUserController@destroy                       |
 ```
 
 ## belongsToMany
@@ -146,10 +146,10 @@ Orion::belongsToManyResource('users', 'roles' , 'API\UserRolesController');
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
 | GET|HEAD  | api/users/{user}/roles                          | api.users.relation.roles.index         | App\Http\Controllers\API\UserRolesController@index                        |
 | POST      | api/users/{user}/roles                          | api.users.relation.roles.store         | App\Http\Controllers\API\UserRolesController@store                        |
-| GET|HEAD  | api/users/{user}/roles/{roles?}                 | api.users.relation.roles.show          | App\Http\Controllers\API\UserRolesController@show                         |
-| PATCH     | api/users/{user}/roles/{roles?}                 | api.users.relation.roles.update        | App\Http\Controllers\API\UserRolesController@update                       |
-| PUT       | api/users/{user}/roles/{roles?}                 | api.users.relation.roles.update        | App\Http\Controllers\API\UserRolesController@update                       |
-| DELETE    | api/users/{user}/roles/{roles?}                 | api.users.relation.roles.destroy       | App\Http\Controllers\API\UserRolesController@destroy                      |
+| GET|HEAD  | api/users/{user}/roles/{role}                   | api.users.relation.roles.show          | App\Http\Controllers\API\UserRolesController@show                         |
+| PATCH     | api/users/{user}/roles/{role}                   | api.users.relation.roles.update        | App\Http\Controllers\API\UserRolesController@update                       |
+| PUT       | api/users/{user}/roles/{role}                   | api.users.relation.roles.update        | App\Http\Controllers\API\UserRolesController@update                       |
+| DELETE    | api/users/{user}/roles/{role}                   | api.users.relation.roles.destroy       | App\Http\Controllers\API\UserRolesController@destroy                      |
 | POST      | api/users/{user}/roles/attach                   | api.users.relation.roles.attach        | App\Http\Controllers\API\UserRolesController@attach                       |
 | DELETE    | api/users/{user}/roles/detach                   | api.users.relation.roles.detach        | App\Http\Controllers\API\UserRolesController@detach                       |
 | PATCH     | api/users/{user}/roles/sync                     | api.users.relation.roles.sync          | App\Http\Controllers\API\UserRolesController@sync                         |
@@ -161,6 +161,19 @@ Orion::belongsToManyResource('users', 'roles' , 'API\UserRolesController');
 
 ```php
 Orion::hasOneThroughResource('posts', 'meta' , 'API\PostMetaController');
+```
+
+**Available endpoints**
+
+```bash
++-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
+| Method    | URI                                             | Name                                   | Action                                                                    |
++-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
+| POST      | api/posts/{post}/meta                           | api.posts.relation.meta.store          | App\Http\Controllers\API\PostMetaController@store                         |
+| GET|HEAD  | api/posts/{post}/meta/{meta}                    | api.posts.relation.meta.show           | App\Http\Controllers\API\PostMetaController@show                          |
+| PATCH     | api/posts/{post}/meta/{meta}                    | api.posts.relation.meta.update         | App\Http\Controllers\API\PostMetaController@update                        |
+| PUT       | api/posts/{post}/meta/{meta}                    | api.posts.relation.meta.update         | App\Http\Controllers\API\PostMetaController@update                        |
+| DELETE    | api/posts/{post}/meta/{meta}                    | api.posts.relation.meta.destroy        | App\Http\Controllers\API\PostMetaController@destroy                       |
 ```
 
 ## hasManyThrough
@@ -176,15 +189,13 @@ Orion::hasManyThroughResource('users', 'comments' , 'API\UserCommentsController'
 | Method    | URI                                             | Name                                   | Action                                                                    |
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
 | GET|HEAD  | api/users/{user}/comments                       | api.users.relation.comments.index      | App\Http\Controllers\API\UserCommentsController@index                     |
-| GET|HEAD  | api/users/{user}/comments/{comments?}           | api.users.relation.comments.show       | App\Http\Controllers\API\UserCommentsController@show                      |
-| PATCH     | api/users/{user}/comments/{comments?}           | api.users.relation.comments.update     | App\Http\Controllers\API\UserCommentsController@update                    |
-| PUT       | api/users/{user}/comments/{comments?}           | api.users.relation.comments.update     | App\Http\Controllers\API\UserCommentsController@update                    |
-| DELETE    | api/users/{user}/comments/{comments?}           | api.users.relation.comments.destroy    | App\Http\Controllers\API\UserCommentsController@destroy                   |
+| GET|HEAD  | api/users/{user}/comments/{comment}             | api.users.relation.comments.show       | App\Http\Controllers\API\UserCommentsController@show                      |
+| PATCH     | api/users/{user}/comments/{comment}             | api.users.relation.comments.update     | App\Http\Controllers\API\UserCommentsController@update                    |
+| PUT       | api/users/{user}/comments/{comment}             | api.users.relation.comments.update     | App\Http\Controllers\API\UserCommentsController@update                    |
+| DELETE    | api/users/{user}/comments/{comment}             | api.users.relation.comments.destroy    | App\Http\Controllers\API\UserCommentsController@destroy                   |
 | POST      | api/users/{user}/comments/associate             | api.users.relation.comments.associate  | App\Http\Controllers\API\UserCommentsController@associate                 |
 | DELETE    | api/users/{user}/comments/{comments}/dissociate | api.users.relation.comments.dissociate | App\Http\Controllers\API\UserCommentsController@dissociate                |
 ```
-
-Inverse?
 
 ## morphOne
 
@@ -199,10 +210,10 @@ Orion::morphOneResource('posts', 'image', 'API\PostImageController');
 | Method    | URI                                             | Name                                   | Action                                                                    |
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
 | POST      | api/posts/{post}/image                          | api.posts.relation.image.store         | App\Http\Controllers\API\PostImageController@store                        |
-| GET|HEAD  | api/posts/{post}/image/{image?}                 | api.posts.relation.image.show          | App\Http\Controllers\API\PostImageController@show                         |
-| PATCH     | api/posts/{post}/image/{image?}                 | api.posts.relation.image.update        | App\Http\Controllers\API\PostImageController@update                       |
-| PUT       | api/posts/{post}/image/{image?}                 | api.posts.relation.image.update        | App\Http\Controllers\API\PostImageController@update                       |
-| DELETE    | api/posts/{post}/image/{image?}                 | api.posts.relation.image.destroy       | App\Http\Controllers\API\PostImageController@destroy                      |
+| GET|HEAD  | api/posts/{post}/image/{image}                  | api.posts.relation.image.show          | App\Http\Controllers\API\PostImageController@show                         |
+| PATCH     | api/posts/{post}/image/{image}                  | api.posts.relation.image.update        | App\Http\Controllers\API\PostImageController@update                       |
+| PUT       | api/posts/{post}/image/{image}                  | api.posts.relation.image.update        | App\Http\Controllers\API\PostImageController@update                       |
+| DELETE    | api/posts/{post}/image/{image}                  | api.posts.relation.image.destroy       | App\Http\Controllers\API\PostImageController@destroy                      |
 ```
 
 ## morphMany
@@ -219,15 +230,13 @@ Orion::morphManyResource('posts', 'comments', 'API\PostCommentsController');
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
 | GET|HEAD  | api/posts/{post}/comments                       | api.posts.relation.comments.index      | App\Http\Controllers\API\PostCommentsController@index                     |
 | POST      | api/posts/{post}/comments                       | api.posts.relation.comments.store      | App\Http\Controllers\API\PostCommentsController@store                     |
-| GET|HEAD  | api/posts/{post}/comments/{comments?}           | api.posts.relation.comments.show       | App\Http\Controllers\API\PostCommentsController@show                      |
-| PATCH     | api/posts/{post}/comments/{comments?}           | api.posts.relation.comments.update     | App\Http\Controllers\API\PostCommentsController@update                    |
-| PUT       | api/posts/{post}/comments/{comments?}           | api.posts.relation.comments.update     | App\Http\Controllers\API\PostCommentsController@update                    |
-| DELETE    | api/posts/{post}/comments/{comments?}           | api.posts.relation.comments.destroy    | App\Http\Controllers\API\PostCommentsController@destroy                   |
+| GET|HEAD  | api/posts/{post}/comments/{comment}             | api.posts.relation.comments.show       | App\Http\Controllers\API\PostCommentsController@show                      |
+| PATCH     | api/posts/{post}/comments/{comment}             | api.posts.relation.comments.update     | App\Http\Controllers\API\PostCommentsController@update                    |
+| PUT       | api/posts/{post}/comments/{comment}             | api.posts.relation.comments.update     | App\Http\Controllers\API\PostCommentsController@update                    |
+| DELETE    | api/posts/{post}/comments/{comment}             | api.posts.relation.comments.destroy    | App\Http\Controllers\API\PostCommentsController@destroy                   |
 | POST      | api/posts/{post}/comments/associate             | api.posts.relation.comments.associate  | App\Http\Controllers\API\PostCommentsController@associate                 |
 | DELETE    | api/posts/{post}/comments/{comments}/dissociate | api.posts.relation.comments.dissociate | App\Http\Controllers\API\PostCommentsController@dissociate                |
 ```
-
-Inverse?
 
 ## morphToMany
 
@@ -243,10 +252,10 @@ Orion::morphToManyResource('posts', 'tags', 'API\PostTagsController');
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
 | GET|HEAD  | api/posts/{post}/tags                           | api.posts.relation.tags.index          | App\Http\Controllers\API\PostTagsController@index                         |
 | POST      | api/posts/{post}/tags                           | api.posts.relation.tags.store          | App\Http\Controllers\API\PostTagsController@store                         |
-| GET|HEAD  | api/posts/{post}/tags/{tags?}                   | api.posts.relation.tags.show           | App\Http\Controllers\API\PostTagsController@show                          |
-| PATCH     | api/posts/{post}/tags/{tags?}                   | api.posts.relation.tags.update         | App\Http\Controllers\API\PostTagsController@update                        |
-| PUT       | api/posts/{post}/tags/{tags?}                   | api.posts.relation.tags.update         | App\Http\Controllers\API\PostTagsController@update                        |
-| DELETE    | api/posts/{post}/tags/{tags?}                   | api.posts.relation.tags.destroy        | App\Http\Controllers\API\PostTagsController@destroy                       |
+| GET|HEAD  | api/posts/{post}/tags/{tag}                     | api.posts.relation.tags.show           | App\Http\Controllers\API\PostTagsController@show                          |
+| PATCH     | api/posts/{post}/tags/{tag}                     | api.posts.relation.tags.update         | App\Http\Controllers\API\PostTagsController@update                        |
+| PUT       | api/posts/{post}/tags/{tag}                     | api.posts.relation.tags.update         | App\Http\Controllers\API\PostTagsController@update                        |
+| DELETE    | api/posts/{post}/tags/{tag}                     | api.posts.relation.tags.destroy        | App\Http\Controllers\API\PostTagsController@destroy                       |
 | POST      | api/posts/{post}/tags/attach                    | api.posts.relation.tags.attach         | App\Http\Controllers\API\PostTagsController@attach                        |
 | DELETE    | api/posts/{post}/tags/detach                    | api.posts.relation.tags.detach         | App\Http\Controllers\API\PostTagsController@detach                        |
 | PATCH     | api/posts/{post}/tags/sync                      | api.posts.relation.tags.sync           | App\Http\Controllers\API\PostTagsController@sync                          |
