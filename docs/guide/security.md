@@ -61,10 +61,8 @@ class MessagesController extends APIController
 The request class is then binded using Laravel [Service Container](https://laravel.com/docs/master/container) and used in `store` and `update` methods to validate request data the same way as if you would explicitly set it in method signature:
 
 ```php
-
 public function store(CustomMessageRequest $request)
 {
     ...
 }
-
 ```

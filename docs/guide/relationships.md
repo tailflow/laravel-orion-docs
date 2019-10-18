@@ -111,8 +111,34 @@ Orion::hasManyResource('users', 'posts' , 'API\UserPostsController');
 | PUT       | api/users/{user}/posts/{post}                   | api.users.relation.posts.update        | App\Http\Controllers\API\UserPostsController@update                       |
 | DELETE    | api/users/{user}/posts/{post}                   | api.users.relation.posts.destroy       | App\Http\Controllers\API\UserPostsController@destroy                      |
 | POST      | api/users/{user}/posts/associate                | api.users.relation.posts.associate     | App\Http\Controllers\API\UserPostsController@associate                    |
-| DELETE    | api/users/{user}/posts/{post}/dissociate       | api.users.relation.posts.dissociate    | App\Http\Controllers\API\UserPostsController@dissociate                   |
+| DELETE    | api/users/{user}/posts/{post}/dissociate        | api.users.relation.posts.dissociate    | App\Http\Controllers\API\UserPostsController@dissociate                   |
 ```
+
+### Associating resources
+
+The `hasMany` relation resource provides `associate` endpoint to associate relation resource with the main resource.
+
+Request payload to the endpoint has only one field - `related_id`. In our example, `related_id` would be ID of a post to be associated with user.
+
+**Endpoint:**
+`(POST) api/users/{user}/posts/associate`
+
+**Request payload:**
+
+```json
+{
+    "related_id" : 5
+}
+```
+
+### Dissociating resources
+
+The `hasMany` relation resource also provides `dissociate` endpoint to dissociate relation resource from the main resource.
+
+There is no payload in request for this endpoint, however notice the `{post}` route parameter - this would be ID of a post to be dissociated from user.
+
+**Endpoint:**
+`(DELETE) api/users/{user}/posts/{post}/dissociate`
 
 ## belongsTo
 
@@ -154,8 +180,125 @@ Orion::belongsToManyResource('users', 'roles' , 'API\UserRolesController');
 | DELETE    | api/users/{user}/roles/detach                   | api.users.relation.roles.detach        | App\Http\Controllers\API\UserRolesController@detach                       |
 | PATCH     | api/users/{user}/roles/sync                     | api.users.relation.roles.sync          | App\Http\Controllers\API\UserRolesController@sync                         |
 | PATCH     | api/users/{user}/roles/toggle                   | api.users.relation.roles.toggle        | App\Http\Controllers\API\UserRolesController@toggle                       |
-| PATCH     | api/users/{user}/roles/{role}/pivot            | api.users.relation.roles.pivot         | App\Http\Controllers\API\UserRolesController@updatePivot                  |
+| PATCH     | api/users/{user}/roles/{role}/pivot             | api.users.relation.roles.pivot         | App\Http\Controllers\API\UserRolesController@updatePivot                  |
 ```
+
+### Attaching resources
+
+The `belongsToMany` relation resource provides `attach` endpoint to attach one or multiple relation resources to the main resource.
+
+Request payload consist of required `resources` and optional `duplicates` fields. Note, that `duplicates` field can also be provided as query parameter.
+
+The `resources` field might be an array or an object. If it is an array, then array items would be IDs of related resources that you would like to attach. If it is an object, then its keys would be IDs of related resources and values - objects containing pivot table fields to be set upon attaching the related resource.
+
+By default `duplicates` parameter is `false`. If set to `true`, attaching the same related resource multiple times would result in duplicated entries in pivot table.
+
+**Endpoint:**
+`(POST) api/users/{user}/roles/attach`
+
+**Request payload (array version):**
+
+```json
+{
+    "resources" : [3,4,7]
+}
+```
+
+**Request payload (object version):**
+
+```json
+{
+    "resources" : {
+        "3" : {
+            "example_pivot_field" : "example 3",
+            ...
+        },
+        "4" : {
+            "example_pivot_field" : "example 4",
+            ...
+        },
+        "7" : {
+            "example_pivot_field" : "example 7",
+            ...
+        }
+    }
+}
+```
+
+### Detaching resources
+
+The `belongsToMany` relation resource provides `detach` endpoint to detach one or multiple relation resources to the main resource.
+
+Request payload consist of only one field `resources`.
+
+Similar to the `attach` endpoint, `resources` field might be an array or an object. By providing support for object representation of `resources` field in this method, it makes it easier for the frontend to attach/detach related resources in a standardized way. You can also optionally store additional data in these objects that can be used in `beforeDetach` or `afterDetach` hooks.
+
+**Endpoint:**
+`(DELETE) api/users/{user}/roles/detach`
+
+**Request payload (array version):**
+
+```json
+{
+    "resources" : [3,4,7]
+}
+```
+
+**Request payload (object version):**
+
+```json
+{
+    "resources" : {
+        "3" : {},
+        "4" : {
+            "some_field" : "some value",
+            ...
+        },
+        "7" : {},
+    }
+}
+```
+
+### Syncing resources
+
+The `belongsToMany` relation resource provides `sync` endpoint to sync one or multiple relation resources on the main resource.
+
+Request payload consist of required `resources` and optional `detaching` fields. Note, that `detaching` field can also be provided as query parameter.
+
+The `resources` field might be an array or an object. If it is an array, then array items would be IDs of related resources that you would like to sync. If it is an object, then its keys would be IDs of related resources and values - objects containing pivot table fields to be set upon syncing the related resource.
+
+By default `detaching` parameter is `true`. If set to `false`, related resources that are missing in the payload, but preset in pivot table won't be detached.
+
+**Endpoint:**
+`(PATCH) api/users/{user}/roles/sync`
+
+**Request payload (array version):**
+
+```json
+{
+    "resources" : [3,4]
+}
+```
+
+**Request payload (object version):**
+
+```json
+{
+    "resources" : {
+        "3" : {
+            "example_pivot_field" : "updated xample 3",
+            ...
+        },
+        "4" : {
+            "example_pivot_field" : "updated example 4",
+            ...
+        },
+    }
+}
+```
+
+### Toggling resources
+### Updating pivot
 
 ## hasOneThrough
 
@@ -194,8 +337,34 @@ Orion::hasManyThroughResource('users', 'comments' , 'API\UserCommentsController'
 | PUT       | api/users/{user}/comments/{comment}             | api.users.relation.comments.update     | App\Http\Controllers\API\UserCommentsController@update                    |
 | DELETE    | api/users/{user}/comments/{comment}             | api.users.relation.comments.destroy    | App\Http\Controllers\API\UserCommentsController@destroy                   |
 | POST      | api/users/{user}/comments/associate             | api.users.relation.comments.associate  | App\Http\Controllers\API\UserCommentsController@associate                 |
-| DELETE    | api/users/{user}/comments/{comment}/dissociate | api.users.relation.comments.dissociate | App\Http\Controllers\API\UserCommentsController@dissociate                |
+| DELETE    | api/users/{user}/comments/{comment}/dissociate  | api.users.relation.comments.dissociate | App\Http\Controllers\API\UserCommentsController@dissociate                |
 ```
+
+### Associating resources
+
+The `hasManyThrough` relation resource provides `associate` endpoint to associate relation resource with the main resource.
+
+Request payload to the endpoint has only one field - `related_id`. In our example, `related_id` would be ID of a comment to be associated with user.
+
+**Endpoint:**
+`(POST) api/users/{user}/comments/associate`
+
+**Request payload:**
+
+```json
+{
+    "related_id" : 3
+}
+```
+
+### Dissociating resources
+
+The `hasManyThrough` relation resource also provides `dissociate` endpoint to dissociate relation resource from the main resource.
+
+There is no payload in request for this endpoint, however notice the `{comment}` route parameter - this would be ID of a comment to be dissociated from user.
+
+**Endpoint:**
+`(DELETE) api/users/{user}/comments/{comment}/dissociate`
 
 ## morphOne
 
@@ -235,8 +404,34 @@ Orion::morphManyResource('posts', 'comments', 'API\PostCommentsController');
 | PUT       | api/posts/{post}/comments/{comment}             | api.posts.relation.comments.update     | App\Http\Controllers\API\PostCommentsController@update                    |
 | DELETE    | api/posts/{post}/comments/{comment}             | api.posts.relation.comments.destroy    | App\Http\Controllers\API\PostCommentsController@destroy                   |
 | POST      | api/posts/{post}/comments/associate             | api.posts.relation.comments.associate  | App\Http\Controllers\API\PostCommentsController@associate                 |
-| DELETE    | api/posts/{post}/comments/{comment}/dissociate | api.posts.relation.comments.dissociate | App\Http\Controllers\API\PostCommentsController@dissociate                |
+| DELETE    | api/posts/{post}/comments/{comment}/dissociate  | api.posts.relation.comments.dissociate | App\Http\Controllers\API\PostCommentsController@dissociate                |
 ```
+
+### Associating resources
+
+The `morphMany` relation resource provides `associate` endpoint to associate relation resource with the main resource.
+
+Request payload to the endpoint has only one field - `related_id`. In our example, `related_id` would be ID of a comment to be associated with post.
+
+**Endpoint:**
+`(POST) api/posts/{post}/comments/associate`
+
+**Request payload:**
+
+```json
+{
+    "related_id" : 8
+}
+```
+
+### Dissociating resources
+
+The `morphMany` relation resource also provides `dissociate` endpoint to dissociate relation resource from the main resource.
+
+There is no payload in request for this endpoint, however notice the `{comment}` route parameter - this would be ID of a comment to be dissociated from post.
+
+**Endpoint:**
+`(DELETE) api/posts/{post}/comments/{comment}/dissociate`
 
 ## morphToMany
 
@@ -260,5 +455,119 @@ Orion::morphToManyResource('posts', 'tags', 'API\PostTagsController');
 | DELETE    | api/posts/{post}/tags/detach                    | api.posts.relation.tags.detach         | App\Http\Controllers\API\PostTagsController@detach                        |
 | PATCH     | api/posts/{post}/tags/sync                      | api.posts.relation.tags.sync           | App\Http\Controllers\API\PostTagsController@sync                          |
 | PATCH     | api/posts/{post}/tags/toggle                    | api.posts.relation.tags.toggle         | App\Http\Controllers\API\PostTagsController@toggle                        |
-| PATCH     | api/posts/{post}/tags/{tag}/pivot              | api.posts.relation.tags.pivot          | App\Http\Controllers\API\PostTagsController@updatePivot                   |
+| PATCH     | api/posts/{post}/tags/{tag}/pivot               | api.posts.relation.tags.pivot          | App\Http\Controllers\API\PostTagsController@updatePivot                   |
+```
+
+### Attaching resources
+
+The `morphToMany` relation resource provides `attach` endpoint to attach one or multiple relation resources to the main resource.
+
+Request payload consist of required `resources` and optional `duplicates` fields. Note, that `duplicates` field can also be provided as query parameter.
+
+The `resources` field might be an array or an object. If it is an array, then array items would be IDs of related resources that you would like to attach. If it is an object, then its keys would be IDs of related resources and values - objects containing pivot table fields to be set upon attaching the related resource.
+
+By default `duplicates` parameter is `false`. If set to `true`, attaching the same related resource multiple times would result in duplicated entries in pivot table.
+
+**Endpoint:**
+`(POST) api/posts/{post}/tags/attach`
+
+**Request payload (array version):**
+
+```json
+{
+    "resources" : [3,4,7]
+}
+```
+
+**Request payload (object version):**
+
+```json
+{
+    "resources" : {
+        "3" : {
+            "example_pivot_field" : "example 3",
+            ...
+        },
+        "4" : {
+            "example_pivot_field" : "example 4",
+            ...
+        },
+        "7" : {
+            "example_pivot_field" : "example 7",
+            ...
+        }
+    }
+}
+```
+
+### Detaching resources
+
+The `morphToMany` relation resource provides `detach` endpoint to detach one or multiple relation resources to the main resource.
+
+Request payload consist of only one field `resources`.
+
+Similar to the `attach` endpoint, `resources` field might be an array or an object. By providing support for object representation of `resources` field in this method, it makes it easier for the frontend to attach/detach related resources in a standardized way. You can also optionally store additional data in these objects that can be used in `beforeDetach` or `afterDetach` hooks.
+
+**Endpoint:**
+`(DELETE) api/posts/{post}/tags/detach`
+
+**Request payload (array version):**
+
+```json
+{
+    "resources" : [3,4,7]
+}
+```
+
+**Request payload (object version):**
+
+```json
+{
+    "resources" : {
+        "3" : {},
+        "4" : {
+            "some_field" : "some value",
+            ...
+        },
+        "7" : {},
+    }
+}
+```
+
+### Syncing resources
+
+The `morphToMany` relation resource provides `sync` endpoint to sync one or multiple relation resources on the main resource.
+
+Request payload consist of required `resources` and optional `detaching` fields. Note, that `detaching` field can also be provided as query parameter.
+
+The `resources` field might be an array or an object. If it is an array, then array items would be IDs of related resources that you would like to sync. If it is an object, then its keys would be IDs of related resources and values - objects containing pivot table fields to be set upon syncing the related resource.
+
+By default `detaching` parameter is `true`. If set to `false`, related resources that are missing in the payload, but preset in pivot table won't be detached.
+
+**Endpoint:**
+`(PATCH) api/posts/{post}/tags/sync`
+
+**Request payload (array version):**
+
+```json
+{
+    "resources" : [3,4]
+}
+```
+
+**Request payload (object version):**
+
+```json
+{
+    "resources" : {
+        "3" : {
+            "example_pivot_field" : "updated xample 3",
+            ...
+        },
+        "4" : {
+            "example_pivot_field" : "updated example 4",
+            ...
+        },
+    }
+}
 ```
