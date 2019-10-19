@@ -28,6 +28,14 @@ class PostCommentsController extends RelationController
 
 At this point, you do not need to worry about different relationship types - controllers are defined in the same way for all types of the relationships.
 
+### Fillable pivot fields and casting
+
+Hovewer, if you are defining the controller for `belongsToMany` or `morphToMany` relation type and have additional fields on pivot table, there are two additional properties to note - `protected $pivotFillable` and `protected $pivotJson`.
+
+The `$pivotFillable` property needs to contain the list of pivot table fields that can be updated via `attach`, `sync`, `toggle` and `updatePivot` endpoints.
+
+The `$pivotJson` property should contain the list of json fields on the pivot table that you would like to automatically cast to/from array. If you have defined `$casts` property on the related [Pivot model](https://laravel.com/docs/master/eloquent-relationships#defining-custom-intermediate-table-models), then you can skip it.
+
 ::: warning KEY TAKEAWAYS
 
 * Model relationship controllers always extend `Laralord\Orion\Http\Controllers\RelationController`
@@ -182,6 +190,12 @@ Orion::belongsToManyResource('users', 'roles' , 'API\UserRolesController');
 | PATCH     | api/users/{user}/roles/toggle                   | api.users.relation.roles.toggle        | App\Http\Controllers\API\UserRolesController@toggle                       |
 | PATCH     | api/users/{user}/roles/{role}/pivot             | api.users.relation.roles.pivot         | App\Http\Controllers\API\UserRolesController@updatePivot                  |
 ```
+
+:::warning ATTENTION
+
+Do not forget to define fillable pivot fields as described in [Fillable pivot fields and casting](./relationships.html#setting-up-controller) section, if you have additional fields on pivot table, otherwise `attach`, `sync`, `toggle` and `updatePivot` endpoints may not work as expected for these fields.
+
+:::
 
 ### Attaching
 
@@ -509,6 +523,12 @@ Orion::morphToManyResource('posts', 'tags', 'API\PostTagsController');
 | PATCH     | api/posts/{post}/tags/toggle                    | api.posts.relation.tags.toggle         | App\Http\Controllers\API\PostTagsController@toggle                        |
 | PATCH     | api/posts/{post}/tags/{tag}/pivot               | api.posts.relation.tags.pivot          | App\Http\Controllers\API\PostTagsController@updatePivot                   |
 ```
+
+:::warning ATTENTION
+
+Do not forget to define fillable pivot fields as described in [Fillable pivot fields and casting](./relationships.html#setting-up-controller) section, if you have additional fields on pivot table, otherwise `attach`, `sync`, `toggle` and `updatePivot` endpoints may not work as expected for these fields.
+
+:::
 
 ### Attaching
 
