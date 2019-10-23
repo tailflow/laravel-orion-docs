@@ -94,10 +94,10 @@ Orion::hasOneResource('profiles', 'image' , 'API\ProfileImageController');
 | Method    | URI                                             | Name                                   | Action                                                                    |
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
 | POST      | api/profiles/{profile}/image                    | api.profiles.relation.image.store      | App\Http\Controllers\API\ProfileImageController@store                     |
-| GET|HEAD  | api/profiles/{profile}/image/{image}            | api.profiles.relation.image.show       | App\Http\Controllers\API\ProfileImageController@show                      |
-| PATCH     | api/profiles/{profile}/image/{image}            | api.profiles.relation.image.update     | App\Http\Controllers\API\ProfileImageController@update                    |
-| PUT       | api/profiles/{profile}/image/{image}            | api.profiles.relation.image.update     | App\Http\Controllers\API\ProfileImageController@update                    |
-| DELETE    | api/profiles/{profile}/image/{image}            | api.profiles.relation.image.destroy    | App\Http\Controllers\API\ProfileImageController@destroy                   |
+| GET|HEAD  | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.show       | App\Http\Controllers\API\ProfileImageController@show                      |
+| PATCH     | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.update     | App\Http\Controllers\API\ProfileImageController@update                    |
+| PUT       | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.update     | App\Http\Controllers\API\ProfileImageController@update                    |
+| DELETE    | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.destroy    | App\Http\Controllers\API\ProfileImageController@destroy                   |
 ```
 
 ## hasMany
@@ -160,10 +160,10 @@ Orion::belongsToResource('posts', 'user' , 'API\PostUserController');
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
 | Method    | URI                                             | Name                                   | Action                                                                    |
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
-| GET|HEAD  | api/posts/{post}/user/{user}                    | api.posts.relation.user.show           | App\Http\Controllers\API\PostUserController@show                          |
-| PATCH     | api/posts/{post}/user/{user}                    | api.posts.relation.user.update         | App\Http\Controllers\API\PostUserController@update                        |
-| PUT       | api/posts/{post}/user/{user}                    | api.posts.relation.user.update         | App\Http\Controllers\API\PostUserController@update                        |
-| DELETE    | api/posts/{post}/user/{user}                    | api.posts.relation.user.destroy        | App\Http\Controllers\API\PostUserController@destroy                       |
+| GET|HEAD  | api/posts/{post}/user/{user?}                   | api.posts.relation.user.show           | App\Http\Controllers\API\PostUserController@show                          |
+| PATCH     | api/posts/{post}/user/{user?}                   | api.posts.relation.user.update         | App\Http\Controllers\API\PostUserController@update                        |
+| PUT       | api/posts/{post}/user/{user?}                   | api.posts.relation.user.update         | App\Http\Controllers\API\PostUserController@update                        |
+| DELETE    | api/posts/{post}/user/{user?}                   | api.posts.relation.user.destroy        | App\Http\Controllers\API\PostUserController@destroy                       |
 ```
 
 ## belongsToMany
@@ -379,10 +379,10 @@ Orion::hasOneThroughResource('posts', 'meta' , 'API\PostMetaController');
 | Method    | URI                                             | Name                                   | Action                                                                    |
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
 | POST      | api/posts/{post}/meta                           | api.posts.relation.meta.store          | App\Http\Controllers\API\PostMetaController@store                         |
-| GET|HEAD  | api/posts/{post}/meta/{meta}                    | api.posts.relation.meta.show           | App\Http\Controllers\API\PostMetaController@show                          |
-| PATCH     | api/posts/{post}/meta/{meta}                    | api.posts.relation.meta.update         | App\Http\Controllers\API\PostMetaController@update                        |
-| PUT       | api/posts/{post}/meta/{meta}                    | api.posts.relation.meta.update         | App\Http\Controllers\API\PostMetaController@update                        |
-| DELETE    | api/posts/{post}/meta/{meta}                    | api.posts.relation.meta.destroy        | App\Http\Controllers\API\PostMetaController@destroy                       |
+| GET|HEAD  | api/posts/{post}/meta/{meta?}                   | api.posts.relation.meta.show           | App\Http\Controllers\API\PostMetaController@show                          |
+| PATCH     | api/posts/{post}/meta/{meta?}                   | api.posts.relation.meta.update         | App\Http\Controllers\API\PostMetaController@update                        |
+| PUT       | api/posts/{post}/meta/{meta?}                   | api.posts.relation.meta.update         | App\Http\Controllers\API\PostMetaController@update                        |
+| DELETE    | api/posts/{post}/meta/{meta?}                   | api.posts.relation.meta.destroy        | App\Http\Controllers\API\PostMetaController@destroy                       |
 ```
 
 ## hasManyThrough
@@ -445,10 +445,10 @@ Orion::morphOneResource('posts', 'image', 'API\PostImageController');
 | Method    | URI                                             | Name                                   | Action                                                                    |
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
 | POST      | api/posts/{post}/image                          | api.posts.relation.image.store         | App\Http\Controllers\API\PostImageController@store                        |
-| GET|HEAD  | api/posts/{post}/image/{image}                  | api.posts.relation.image.show          | App\Http\Controllers\API\PostImageController@show                         |
-| PATCH     | api/posts/{post}/image/{image}                  | api.posts.relation.image.update        | App\Http\Controllers\API\PostImageController@update                       |
-| PUT       | api/posts/{post}/image/{image}                  | api.posts.relation.image.update        | App\Http\Controllers\API\PostImageController@update                       |
-| DELETE    | api/posts/{post}/image/{image}                  | api.posts.relation.image.destroy       | App\Http\Controllers\API\PostImageController@destroy                      |
+| GET|HEAD  | api/posts/{post}/image/{image?}                 | api.posts.relation.image.show          | App\Http\Controllers\API\PostImageController@show                         |
+| PATCH     | api/posts/{post}/image/{image?}                 | api.posts.relation.image.update        | App\Http\Controllers\API\PostImageController@update                       |
+| PUT       | api/posts/{post}/image/{image?}                 | api.posts.relation.image.update        | App\Http\Controllers\API\PostImageController@update                       |
+| DELETE    | api/posts/{post}/image/{image?}                 | api.posts.relation.image.destroy       | App\Http\Controllers\API\PostImageController@destroy                      |
 ```
 
 ## morphMany
