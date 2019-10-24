@@ -66,7 +66,7 @@ use Illuminate\Support\Facades\Route;
 use Laralord\Orion\Orion;
 
 Route::group(['as' => 'api.'], function() {
-    Orion::resource('posts', 'API\PostsController');
+    Orion::resource('posts', 'API\PostsController', ['softDeletes' => true]);
     Orion::morphToManyResource('posts', 'tags' , 'API\PostTagsController');
 });
 
@@ -83,6 +83,7 @@ Route::group(['as' => 'api.'], function() {
 |        | GET|HEAD  | api/posts/{post}                                | api.posts.show                         | App\Http\Controllers\API\PostsController@show                             | api                                             |
 |        | PUT|PATCH | api/posts/{post}                                | api.posts.update                       | App\Http\Controllers\API\PostsController@update                           | api                                             |
 |        | DELETE    | api/posts/{post}                                | api.posts.destroy                      | App\Http\Controllers\API\PostsController@destroy                          | api                                             |
+|        | POST      | api/posts/{post}/restore                        | api.posts.restore                      | App\Http\Controllers\API\PostsController@restore                          | api                                             |
 |        | GET|HEAD  | api/posts/{post}/tags                           | api.posts.relation.tags.index          | App\Http\Controllers\API\PostTagsController@index                         | api                                             |
 |        | POST      | api/posts/{post}/tags                           | api.posts.relation.tags.store          | App\Http\Controllers\API\PostTagsController@store                         | api                                             |
 |        | GET|HEAD  | api/posts/{post}/tags/{tag}                     | api.posts.relation.tags.show           | App\Http\Controllers\API\PostTagsController@show                          | api                                             |

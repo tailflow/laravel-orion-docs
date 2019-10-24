@@ -85,5 +85,5 @@ This will introduce `restore` endpoint. To learn how to permanently delete a res
 | Domain | Method    | URI                                             | Name                                   | Action                                                                    | Middleware                                      |
 +--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
 ...
-|        | POST      | api/posts/{post}                                | api.posts.restore                      | App\Http\Controllers\API\PostsController@restore                          | api                                             |
+|        | POST      | api/posts/{post}/restore                        | api.posts.restore                      | App\Http\Controllers\API\PostsController@restore                          | api                                             |
 ```
