@@ -140,3 +140,11 @@ Sometimes you may want to include relationships together with the returned resou
 * It is possible (and super convenient) to use nested attributes/relations (e.g. `user.name`)
 
 :::
+
+## Soft Deletes
+
+There are 3 query parameters available - `with_trashed`, `only_trashed`, and `force`.
+
+The first two allow you to include either all resources, even the deleted ones - `with_trashed` or only the deleted ones - `only_trashed`. These parameters are accepted on `index` endpoint of both [standard](./models.html#soft-deletes) and [relation](./relationships.html#soft-deletes) resources.
+
+The last, but not least, parameter `force` allows you to permanently delete a resource. The parameter is accepted on the `destroy` endpoint.

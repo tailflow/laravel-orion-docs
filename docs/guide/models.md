@@ -59,3 +59,31 @@ Essentially, `Orion::resource` method is the same as Laravel's default `Route::a
 |        | PUT|PATCH | api/posts/{post}                                | api.posts.update                       | App\Http\Controllers\API\PostsController@update                           | api                                             |
 |        | DELETE    | api/posts/{post}                                | api.posts.destroy                      | App\Http\Controllers\API\PostsController@destroy                          | api                                             |
 ```
+
+### Soft Deletes
+
+If your model uses `SoftDeletes` trait and you would like to expose the same functionality via API, add `'softDeletes' => true` to the options array in the last parameter of the route registration method.
+
+```php
+<?php
+
+use Illuminate\Support\Facades\Route;
+use Laralord\Orion\Orion;
+
+Route::group(['as' => 'api.'], function() {
+    ...
+    Orion::resource('posts', 'API\PostsController', ['softDeletes' => true]);
+    ...
+});
+
+```
+
+This will introduce `restore` endpoint. To learn how to permanently delete a resource via API (force delete), take a look at the related [Query Parameters](./query-parameters.html#soft-deletes) section.
+
+```bash
++--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
+| Domain | Method    | URI                                             | Name                                   | Action                                                                    | Middleware                                      |
++--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
+...
+|        | POST      | api/posts/{post}                                | api.posts.restore                      | App\Http\Controllers\API\PostsController@restore                          | api                                             |
+```

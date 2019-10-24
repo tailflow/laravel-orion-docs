@@ -81,6 +81,35 @@ Route::group(['as' => 'api.'], function() {
 
 ```
 
+### Soft Deletes
+
+If your relation model uses `SoftDeletes` trait and you would like to expose the same functionality via API, add `'softDeletes' => true` to the options array in the last parameter of the route registration method.
+
+```php
+<?php
+
+use Illuminate\Support\Facades\Route;
+use Laralord\Orion\Orion;
+
+Route::group(['as' => 'api.'], function() {
+    ...
+    Orion::hasManyResource('users', 'posts', 'API\UserPostsController', ['softDeletes' => true]);
+    ...
+});
+
+```
+
+This will introduce `restore` endpoint. To learn how to permanently delete a resource via API (force delete), take a look at the related [Query Parameters](./query-parameters.html#soft-deletes) section.
+
+```bash
++--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
+| Domain | Method    | URI                                             | Name                                   | Action                                                                    | Middleware                                      |
++--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
+...
+|        | POST      | api/users/{user}/posts/{post}                   | api.users.relation.posts.restore       | App\Http\Controllers\API\UserPostsController@restore                      | api                                             |
+```
+
+
 ## hasOne
 
 ```php
@@ -99,6 +128,10 @@ Orion::hasOneResource('profiles', 'image' , 'API\ProfileImageController');
 | PUT       | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.update     | App\Http\Controllers\API\ProfileImageController@update                    |
 | DELETE    | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.destroy    | App\Http\Controllers\API\ProfileImageController@destroy                   |
 ```
+
+:::tip TIP
+Notice that the last parameter is marked as optional. Because it's a one-to-one relation, you can access the endpoint without providing related id - Laravel Orion will take care of it :slightly_smiling_face:. `hasOe`, `belongsTo`, `hasOneThrough` and `morphOne` relations do not require the related.
+:::
 
 ## hasMany
 
