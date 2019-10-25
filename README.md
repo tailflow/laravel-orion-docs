@@ -1,9 +1,9 @@
 <p align="center">
-    <img src="https://res.cloudinary.com/dudxt4lp6/image/upload/v1572018972/logo_kqef3x.svg" width="400">
+    <img src="https://res.cloudinary.com/dudxt4lp6/image/upload/v1572018972/logo_kqef3x.svg" width="200">
 </p>
 
 <p align="center">
-[![Build Status](https://travis-ci.org/laravel-orion/docs.svg?branch=master)](https://travis-ci.org/laravel-orion/docs)
+<a href="https://travis-ci.org/laravel-orion/docs"><img src="https://travis-ci.org/laravel-orion/docs.svg" alt="Build Status"></a>
 </p>
 
 ## Introduction
