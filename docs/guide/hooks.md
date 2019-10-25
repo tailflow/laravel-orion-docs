@@ -45,6 +45,8 @@ class PostsController extends Controller
 * afterSave - executed after model is saved, but before `afterStore` and `afterUpdate`.
 * beforeDestroy - executed before retrieving a model and deleting it.
 * afterDestroy - executed after deleting a model, but before building response.
+* beforeRestore - executed before retrieving a model and restoring it.
+* afterRestore - executed after restoring a model, but before building response.
 
 ## On relationship controllers
 
