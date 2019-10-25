@@ -1,4 +1,5 @@
 module.exports = {
+    base: '/docs/',
     title: 'Laravel Orion',
     description: 'The easiest way to create REST API with Laravel',
     themeConfig: {
