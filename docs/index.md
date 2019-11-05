@@ -57,6 +57,10 @@ class UserPostsController extends RelationController
 }
 ```
 
+::: warning ATTENTION
+Make sure to have [policy](https://laravel.com/docs/master/authorization#creating-policies) created and registered for the model you are exposing via the API or consider using `DisableAuthorization` trait (only for local testing) to avoid getting 403 error, if the policy is not registered or incorrect.
+:::
+
 2. Register routes
 
 ```php

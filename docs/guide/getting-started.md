@@ -51,6 +51,10 @@ class PostsController extends Controller
 By default Laravel is not shipped with `API` folder in `app/Http/Controllers`, but it is recommended to create one and store all API controllers there to keep the code organized.
 :::
 
+::: warning ATTENTION
+Make sure to have [policy](https://laravel.com/docs/master/authorization#creating-policies) created and registered for the model you are exposing via the API or consider using `DisableAuthorization` trait (only for local testing) to avoid getting 403 error, if the policy is not registered or incorrect.
+:::
+
 3. Finally, register the route in `api.php` by calling `Orion::resource`
 
 ```php
