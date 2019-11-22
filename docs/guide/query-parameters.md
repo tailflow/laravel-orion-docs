@@ -23,7 +23,7 @@ class PostsController extends Controller
     */
     protected function filterableBy()
     {
-        return ['id', 'title', 'user.id'];
+        return ['id', 'title', 'user~id'];
     }
 
     ...
@@ -32,11 +32,11 @@ class PostsController extends Controller
 
 To filter results based on one or several attributes, url needs to contain attribute names and values as query parameters.
 
-Note `user.id` - using the dot notation you can specify fields on relations.
+Note `user~id` - using the ~ notation you can specify fields on relations.
 
 **Pattern:** `https://<app url>/api/<resource>?<attribute>=<value>...`
 
-**Example:** `https://<app url>/api/posts?title=ExactMatch&user.id=7`
+**Example:** `https://<app url>/api/posts?title=ExactMatch&user~id=7`
 
 ## Sorting
 
@@ -57,7 +57,7 @@ class PostsController extends Controller
      */
     protected function sortableBy()
     {
-         return ['id', 'title', 'created_at', 'user.name'];
+         return ['id', 'title', 'created_at', 'user~name'];
     }
 
     ...
@@ -89,7 +89,7 @@ class PostsController extends Controller
      */
     protected function searchableBy()
     {
-        return ['title', 'description', 'user.name'];
+        return ['title', 'description', 'user~name'];
     }
 
     ...
@@ -137,7 +137,7 @@ Sometimes you may want to include relationships together with the returned resou
 ::: warning KEY TAKEAWAYS
 
 * Only attributes defined in `filterableBy`, `sortableBy`, `searchableBy` and relations in `includes` can be used in query parameters
-* It is possible (and super convenient) to use nested attributes/relations (e.g. `user.name`)
+* It is possible (and super convenient) to use nested attributes/relations (e.g. `user~name`)
 
 :::
 
