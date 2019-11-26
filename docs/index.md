@@ -40,20 +40,20 @@ class PostsController extends Controller
 
 namespace App\Http\Controllers\API;
 
-use App\Models\User;
+use App\Models\Post;
 use Laralord\Orion\Http\Controllers\RelationController;
 
-class UserPostsController extends RelationController
+class PostTagsController extends RelationController
 {
     /**
      * Fully-qualified model class name
      */
-    protected static $model = User::class; // or "App\Models\User"
+    protected static $model = Post::class; // or "App\Models\Post"
 
     /**
     * Name of the relationship as it is defined on the User model
     */
-    protected static $relation = 'posts';
+    protected static $relation = 'tags';
 }
 ```
 
