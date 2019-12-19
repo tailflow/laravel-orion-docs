@@ -36,5 +36,5 @@ class MessagesController extends APIController
 ```
 
 ::: tip TIP
-There is a handy `toArrayWithMerge` method available on both `Resource` and `ResourceCollection` classes under `Laralord\Orion\Http\Resources` namespace - take a look there :wink:
+There is a handy `toArrayWithMerge` method available on both `Resource` and `CollectionResource` classes under `Laralord\Orion\Http\Resources` namespace - take a look there :wink:
 :::
