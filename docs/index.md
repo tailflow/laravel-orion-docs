@@ -2,7 +2,7 @@
 home: true
 heroImage: /logo.png
 heroText: Laravel Orion
-tagline: The easiest way to create REST API with Laravel
+tagline: The simplest way to create REST API with Laravel
 actionText: Get Started →
 actionLink: /guide/
 features:

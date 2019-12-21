@@ -1,7 +1,7 @@
 module.exports = {
     base: '/docs/',
     title: 'Laravel Orion',
-    description: 'The easiest way to create REST API with Laravel',
+    description: 'The simplest way to create REST API with Laravel',
     head: [
         ['link', { rel: "shortcut icon", href: "/favicon.ico" }],
     ],
