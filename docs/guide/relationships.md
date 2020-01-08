@@ -146,6 +146,7 @@ Orion::hasManyResource('users', 'posts' , 'API\UserPostsController');
 | Method    | URI                                             | Name                                   | Action                                                                    |
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
 | GET|HEAD  | api/users/{user}/posts                          | api.users.relation.posts.index         | App\Http\Controllers\API\UserPostsController@index                        |
+| POST      | api/users/{user}/posts/search                   | api.users.relation.posts.search        | App\Http\Controllers\API\UserPostsController@index                        |
 | POST      | api/users/{user}/posts                          | api.users.relation.posts.store         | App\Http\Controllers\API\UserPostsController@store                        |
 | GET|HEAD  | api/users/{user}/posts/{post}                   | api.users.relation.posts.show          | App\Http\Controllers\API\UserPostsController@show                         |
 | PATCH     | api/users/{user}/posts/{post}                   | api.users.relation.posts.update        | App\Http\Controllers\API\UserPostsController@update                       |
@@ -212,6 +213,7 @@ Orion::belongsToManyResource('users', 'roles' , 'API\UserRolesController');
 | Method    | URI                                             | Name                                   | Action                                                                    |
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
 | GET|HEAD  | api/users/{user}/roles                          | api.users.relation.roles.index         | App\Http\Controllers\API\UserRolesController@index                        |
+| POST      | api/users/{user}/roles/search                   | api.users.relation.roles.search        | App\Http\Controllers\API\UserRolesController@index                        |
 | POST      | api/users/{user}/roles                          | api.users.relation.roles.store         | App\Http\Controllers\API\UserRolesController@store                        |
 | GET|HEAD  | api/users/{user}/roles/{role}                   | api.users.relation.roles.show          | App\Http\Controllers\API\UserRolesController@show                         |
 | PATCH     | api/users/{user}/roles/{role}                   | api.users.relation.roles.update        | App\Http\Controllers\API\UserRolesController@update                       |
@@ -431,6 +433,7 @@ Orion::hasManyThroughResource('users', 'comments' , 'API\UserCommentsController'
 | Method    | URI                                             | Name                                   | Action                                                                    |
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
 | GET|HEAD  | api/users/{user}/comments                       | api.users.relation.comments.index      | App\Http\Controllers\API\UserCommentsController@index                     |
+| POST      | api/users/{user}/comments/search                | api.users.relation.comments.search     | App\Http\Controllers\API\UserCommentsController@index                     |
 | GET|HEAD  | api/users/{user}/comments/{comment}             | api.users.relation.comments.show       | App\Http\Controllers\API\UserCommentsController@show                      |
 | PATCH     | api/users/{user}/comments/{comment}             | api.users.relation.comments.update     | App\Http\Controllers\API\UserCommentsController@update                    |
 | PUT       | api/users/{user}/comments/{comment}             | api.users.relation.comments.update     | App\Http\Controllers\API\UserCommentsController@update                    |
@@ -497,6 +500,7 @@ Orion::morphManyResource('posts', 'comments', 'API\PostCommentsController');
 | Method    | URI                                             | Name                                   | Action                                                                    |
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
 | GET|HEAD  | api/posts/{post}/comments                       | api.posts.relation.comments.index      | App\Http\Controllers\API\PostCommentsController@index                     |
+| POST      | api/posts/{post}/comments/search                | api.posts.relation.comments.search     | App\Http\Controllers\API\PostCommentsController@index                     |
 | POST      | api/posts/{post}/comments                       | api.posts.relation.comments.store      | App\Http\Controllers\API\PostCommentsController@store                     |
 | GET|HEAD  | api/posts/{post}/comments/{comment}             | api.posts.relation.comments.show       | App\Http\Controllers\API\PostCommentsController@show                      |
 | PATCH     | api/posts/{post}/comments/{comment}             | api.posts.relation.comments.update     | App\Http\Controllers\API\PostCommentsController@update                    |
@@ -545,6 +549,7 @@ Orion::morphToManyResource('posts', 'tags', 'API\PostTagsController');
 | Method    | URI                                             | Name                                   | Action                                                                    |
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
 | GET|HEAD  | api/posts/{post}/tags                           | api.posts.relation.tags.index          | App\Http\Controllers\API\PostTagsController@index                         |
+| POST      | api/posts/{post}/tags/search                    | api.posts.relation.tags.search         | App\Http\Controllers\API\PostTagsController@index                         |
 | POST      | api/posts/{post}/tags                           | api.posts.relation.tags.store          | App\Http\Controllers\API\PostTagsController@store                         |
 | GET|HEAD  | api/posts/{post}/tags/{tag}                     | api.posts.relation.tags.show           | App\Http\Controllers\API\PostTagsController@show                          |
 | PATCH     | api/posts/{post}/tags/{tag}                     | api.posts.relation.tags.update         | App\Http\Controllers\API\PostTagsController@update                        |

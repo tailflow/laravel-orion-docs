@@ -25,6 +25,7 @@ module.exports = {
                         'models',
                         'relationships',
                         'hooks',
+                        'search',
                         'query-parameters',
                         'security',
                         'responses'
