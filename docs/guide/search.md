@@ -1,34 +1,33 @@
 # Search
 
-Laravel Orion allows consumers of your API to use query parameters for filtering, sorting, searching of resources as well as including other related resources (defined as relations on a particular model) together in response.
+Laravel Orion provides comprehensive search capabilities for your API endpoints with sorting, filtering and keyword search.
 
-But first, allowed set of attributes and relations to be used in query parameters needs to be defined in controller.
-
-## Sorting
-
-```php
-
-namespace App\Http\Controllers\API;
-
-use Laralord\Orion\Http\Controllers\Controller;
-
-class PostsController extends Controller
-{
-    ...
-
-    /**
-     * The attributes that are used for sorting.
-     *
-     * @return array
-     */
-    protected function sortableBy()
-    {
-         return ['id', 'title', 'created_at', 'user.name'];
-    }
-
-    ...
+```json
+// (POST) https://myapp.com/api/posts/search
+{ 
+    "scopes" : [
+        {"name" : "active"},
+        {"name" : "whereCategory", "parameters" : ["my-category"]}
+    ],
+    "filters" : [
+        {"field" : "created_at", "operator" : ">=", "value" : "2020-01-01"},
+        {"type" : "or", "field" : "meta.source_id", "operator" : "in", "value" : [1,2,3]}
+    ],
+     "search" : {
+        "value" : "Example post"
+    },
+    "sort" : [
+        {"field" : "name", "direction" : "asc"},
+        {"field" : "meta.priority", "direction" : "desc"}
+    ]
 }
 ```
+
+::: warning NOTE
+
+Order in which query constraints are be applied does **not** depend on the order of properties in the payload. It is always defined as follows: `scopes` -> `filters` -> `search` -> `sort`.
+
+:::
 
 ## Filtering
 
@@ -36,7 +35,7 @@ class PostsController extends Controller
 
 namespace App\Http\Controllers\API;
 
-use Laralord\Orion\Http\Controllers\Controller;
+use Orion\Http\Controllers\Controller;
 
 class PostsController extends Controller
 {
@@ -66,7 +65,7 @@ Note `user.id` - using the ~ notation you can specify fields on relations.
 
 namespace App\Http\Controllers\API;
 
-use Laralord\Orion\Http\Controllers\Controller;
+use Orion\Http\Controllers\Controller;
 
 class PostsController extends Controller
 {
@@ -87,3 +86,29 @@ class PostsController extends Controller
 ```
 
 To search across resources, url needs to contain `q` query parameter. API will search in ALL of the defined in `searchableBy` method attributes.
+
+## Sorting
+
+```php
+
+namespace App\Http\Controllers\API;
+
+use Orion\Http\Controllers\Controller;
+
+class PostsController extends Controller
+{
+    ...
+
+    /**
+     * The attributes that are used for sorting.
+     *
+     * @return array
+     */
+    protected function sortableBy()
+    {
+         return ['id', 'title', 'created_at', 'user.name'];
+    }
+
+    ...
+}
+```
