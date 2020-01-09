@@ -10,7 +10,7 @@ Defining model relationship controller is very similar to defining model control
 namespace App\Http\Controllers\API;
 
 use App\Models\Post;
-use Laralord\Orion\Http\Controllers\RelationController;
+use Orion\Http\Controllers\RelationController;
 
 class PostCommentsController extends RelationController
 {
@@ -38,7 +38,7 @@ The `$pivotJson` property should contain the list of json fields on the pivot ta
 
 ::: warning KEY TAKEAWAYS
 
-* Model relationship controllers always extend `Laralord\Orion\Http\Controllers\RelationController`
+* Model relationship controllers always extend `Orion\Http\Controllers\RelationController`
 * `$model` property is set to a fully qualified model class name
 * `$relation` property is set to the exact relationship name as it is defined on the model
 
@@ -52,7 +52,7 @@ Routes, unlike controllers, are defined in a different way for each relationship
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Laralord\Orion\Orion;
+use Orion\Facades\Orion;
 
 Route::group(['as' => 'api.'], function() {
     ...
@@ -71,7 +71,7 @@ Alternatively, you can register routes using `Orion::resourceRelation` method an
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Laralord\Orion\Orion;
+use Orion\Facades\Orion;
 
 Route::group(['as' => 'api.'], function() {
     ...
@@ -89,7 +89,7 @@ If your relation model uses `SoftDeletes` trait and you would like to expose the
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Laralord\Orion\Orion;
+use Orion\Facades\Orion;
 
 Route::group(['as' => 'api.'], function() {
     ...

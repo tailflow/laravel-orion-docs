@@ -10,7 +10,7 @@ To expose a model through API, first you need to create a controller for it. As 
 namespace App\Http\Controllers\API;
 
 use App\Models\Post;
-use Laralord\Orion\Http\Controllers\Controller;
+use Orion\Http\Controllers\Controller;
 
 class PostsController extends Controller
 {
@@ -23,7 +23,7 @@ class PostsController extends Controller
 
 ::: warning KEY TAKEAWAYS
 
-* Model controllers always extend `Laralord\Orion\Http\Controllers\Controller`
+* Model controllers always extend `Orion\Http\Controllers\Controller`
 * `$model` property is set to a fully qualified model class name
 
 :::
@@ -36,7 +36,7 @@ Once controller is created, it is the time to register routes.
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Laralord\Orion\Orion;
+use Orion\Facades\Orion;
 
 Route::group(['as' => 'api.'], function() {
     ...
@@ -69,7 +69,7 @@ If your model uses `SoftDeletes` trait and you would like to expose the same fun
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Laralord\Orion\Orion;
+use Orion\Facades\Orion;
 
 Route::group(['as' => 'api.'], function() {
     ...

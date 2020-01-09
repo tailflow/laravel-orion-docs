@@ -10,7 +10,7 @@ But first, allowed set of relations to be used in query parameters needs to be d
 
 namespace App\Http\Controllers\API;
 
-use Laralord\Orion\Http\Controllers\Controller;
+use Orion\Http\Controllers\Controller;
 
 class PostsController extends Controller
 {

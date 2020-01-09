@@ -10,8 +10,8 @@ Here is a common use case: imagine you have an API controller for blog posts and
 namespace App\Http\Controllers\API;
 
 use App\Models\Post;
-use Laralord\Orion\Http\Requests\Request;
-use Laralord\Orion\Http\Controllers\Controller;
+use Orion\Http\Requests\Request;
+use Orion\Http\Controllers\Controller;
 
 class PostsController extends Controller
 {

@@ -14,14 +14,14 @@ Let's assume you have a model `Post` that represents a blog post and you would l
 
 With Laravel Orion it can be acomplished in 3 simple steps:
 
-1. Create `PostsController` and extend it from `Laralord\Orion\Http\Controllers\Controller`
+1. Create `PostsController` and extend it from `Orion\Http\Controllers\Controller`
 
 ```php
 <?php
 
 namespace App\Http\Controllers\API;
 
-use Laralord\Orion\Http\Controllers\Controller;
+use Orion\Http\Controllers\Controller;
 
 class PostsController extends Controller
 {
@@ -36,7 +36,7 @@ class PostsController extends Controller
 
 namespace App\Http\Controllers\API;
 
-use Laralord\Orion\Http\Controllers\Controller;
+use Orion\Http\Controllers\Controller;
 
 class PostsController extends Controller
 {
@@ -61,7 +61,7 @@ Make sure to have [policy](https://laravel.com/docs/master/authorization#creatin
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Laralord\Orion\Orion;
+use Orion\Facades\Orion;
 
 Route::group(['as' => 'api.'], function() {
     Orion::resource('posts', 'API\PostsController');

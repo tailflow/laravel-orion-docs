@@ -24,7 +24,7 @@ footer: MIT Licensed | Copyright © 2019-present Aleksei Zarubin
 
 namespace App\Http\Controllers\API;
 
-use Laralord\Orion\Http\Controllers\Controller;
+use Orion\Http\Controllers\Controller;
 
 class PostsController extends Controller
 {
@@ -41,7 +41,7 @@ class PostsController extends Controller
 namespace App\Http\Controllers\API;
 
 use App\Models\Post;
-use Laralord\Orion\Http\Controllers\RelationController;
+use Orion\Http\Controllers\RelationController;
 
 class PostTagsController extends RelationController
 {
@@ -67,7 +67,7 @@ Make sure to have [policy](https://laravel.com/docs/master/authorization#creatin
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Laralord\Orion\Orion;
+use Orion\Facades\Orion;
 
 Route::group(['as' => 'api.'], function() {
     Orion::resource('posts', 'API\PostsController', ['softDeletes' => true]);
