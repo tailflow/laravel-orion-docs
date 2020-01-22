@@ -23,7 +23,7 @@ class PostsController extends Controller
     */
     protected function includes()
     {
-        return ['user'];
+        return ['user', 'meta'];
     }
 
     ...
@@ -32,14 +32,28 @@ class PostsController extends Controller
 
 Sometimes you may want to include relationships together with the returned resources. To do that, url needs to contain `include` query parameter with a comma separated list of relations.
 
-**Pattern:** `https://<app url>/api/<resource>?include=<relation a>,<relation b>...`
-
-**Example:** `https://<app url>/api/posts?include=user`
+```bash
+(GET) https://myapp.com/api/posts?include=user,meta
+```
 
 ## Soft Deletes
 
-There are 3 query parameters available - `with_trashed`, `only_trashed`, and `force`.
+### Returning trashed resources
 
-The first two allow you to include either all resources, even the deleted ones - `with_trashed` or only the deleted ones - `only_trashed`. These parameters are accepted on `index` and `search` endpoints of both [standard](./models.html#soft-deletes) and [relation](./relationships.html#soft-deletes) resources.
+The `with_trashed` query parameter allows you to return all resources, even the deleted ones.
 
-The last, but not least, parameter `force` allows you to permanently delete a resource. The parameter is accepted on the `destroy` endpoint.
+The `only_trashed` query parameters instructs the API to return only soft deleted resources.
+
+These parameters are accepted on `index`, `search`, and `show` endpoints of both [standard](./models.html#soft-deletes) and [relation](./relationships.html#soft-deletes) resources.
+
+```bash
+(GET) https://myapp.com/api/posts?with_trashed
+```
+
+### Force deleting
+
+The last, but not least, `force` query parameter allows you to permanently delete a resource. The parameter is accepted on the `destroy` endpoint of both [standard](./models.html#soft-deletes) and [relation](./relationships.html#soft-deletes) resources.
+
+```bash
+(DELETE) https://myapp.com/api/posts/5?force
+```

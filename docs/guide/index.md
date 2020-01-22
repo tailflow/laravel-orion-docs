@@ -15,6 +15,6 @@ And, as a bonus, by using query parameters you can include relations, filter, so
 * REST API for [models](./models.html) and [relationships](./relationships.html)
 * Comprehensive set of endpoint [hooks](./hooks.html)
 * Advanced searching capabilities with [sorting](./search.html#sorting), [filtering](./search.html#filtering), and [keyword search](./search.html#keyword-search).
-* [Relations inclusion](./query-parameters.html#including-relations) and [soft deletes](./query-parameters.html#isoft-deletes) via query parameters
+* [Relations inclusion](./query-parameters.html#including-relations) and [soft deletes](./query-parameters.html#soft-deletes) via query parameters
 * Straightforward [authorization](./security.html#authorization) and [validation](./security.html#validation)
 * [Responses](./responses.html) transformation via API resources.

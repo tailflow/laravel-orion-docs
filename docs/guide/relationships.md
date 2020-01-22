@@ -130,7 +130,9 @@ Orion::hasOneResource('profiles', 'image' , 'API\ProfileImageController');
 ```
 
 :::tip TIP
-Notice that the last parameter is marked as optional. Because it's a one-to-one relation, you can access the endpoint without providing related id - Laravel Orion will take care of it :slightly_smiling_face:. `hasOe`, `belongsTo`, `hasOneThrough` and `morphOne` relations do not require the related.
+Notice that the last parameter is marked as optional. Because it's a one-to-one relation, you can access the endpoint without providing related id - Laravel Orion will take care of it :slightly_smiling_face:
+
+`hasOne`, `belongsTo`, `hasOneThrough` and `morphOne` relations do not require the related resource id.
 :::
 
 ## hasMany
