@@ -51,7 +51,7 @@ class PostTagsController extends RelationController
     protected static $model = Post::class; // or "App\Models\Post"
 
     /**
-    * Name of the relationship as it is defined on the User model
+    * Name of the relationship as it is defined on the Post model
     */
     protected static $relation = 'tags';
 }

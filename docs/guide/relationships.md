@@ -162,7 +162,7 @@ Orion::hasManyResource('users', 'posts' , 'API\UserPostsController');
 
 The `hasMany` relation resource provides `associate` endpoint to associate relation resource with the main resource.
 
-Request payload to the endpoint has only one field - `related_id`. In our example, `related_id` would be ID of a post to be associated with user.
+Request payload to the endpoint has only one field - `related_key`. In our example, `related_key` would be ID of a post to be associated with user.
 
 **Endpoint:**
 `(POST) api/users/{user}/posts/associate`
@@ -171,7 +171,7 @@ Request payload to the endpoint has only one field - `related_id`. In our exampl
 
 ```json
 {
-    "related_id" : 5
+    "related_key" : 5
 }
 ```
 
@@ -448,7 +448,7 @@ Orion::hasManyThroughResource('users', 'comments' , 'API\UserCommentsController'
 
 The `hasManyThrough` relation resource provides `associate` endpoint to associate relation resource with the main resource.
 
-Request payload to the endpoint has only one field - `related_id`. In our example, `related_id` would be ID of a comment to be associated with user.
+Request payload to the endpoint has only one field - `related_key`. In our example, `related_key` would be ID of a comment to be associated with user.
 
 **Endpoint:**
 `(POST) api/users/{user}/comments/associate`
@@ -457,7 +457,7 @@ Request payload to the endpoint has only one field - `related_id`. In our exampl
 
 ```json
 {
-    "related_id" : 3
+    "related_key" : 3
 }
 ```
 
@@ -516,7 +516,7 @@ Orion::morphManyResource('posts', 'comments', 'API\PostCommentsController');
 
 The `morphMany` relation resource provides `associate` endpoint to associate relation resource with the main resource.
 
-Request payload to the endpoint has only one field - `related_id`. In our example, `related_id` would be ID of a comment to be associated with post.
+Request payload to the endpoint has only one field - `related_key`. In our example, `related_key` would be ID of a comment to be associated with post.
 
 **Endpoint:**
 `(POST) api/posts/{post}/comments/associate`
@@ -525,7 +525,7 @@ Request payload to the endpoint has only one field - `related_id`. In our exampl
 
 ```json
 {
-    "related_id" : 8
+    "related_key" : 8
 }
 ```
 
