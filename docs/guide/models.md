@@ -17,7 +17,7 @@ class PostsController extends Controller
     /**
      * Fully-qualified model class name
      */
-    protected static $model = Post::class; // or "App\Models\Post"
+    protected $model = Post::class; // or "App\Models\Post"
 }
 ```
 

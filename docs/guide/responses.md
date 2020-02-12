@@ -6,7 +6,7 @@ To allow these classes to be resolved automatically, they should follow the patt
 
 For example, if you have `App\Models\Message` model, the related resource class would be `App\Http\Resources\MessageResource` or `App\Http\Resources\MessageCollectionResource`.
 
-If resource class names in your app do not follow this naming convention or if you just would like to be more explicit, set `protected static $resource` or `protected static $collectionResource` property on controller to a fully-qualified resource class name.
+If resource class names in your app do not follow this naming convention or if you just would like to be more explicit, set `protected $resource` or `protected $collectionResource` property on controller to a fully-qualified resource class name.
 
 ```php
 
@@ -21,17 +21,17 @@ class MessagesController extends APIController
     /**
      * @var string|null $model
      */
-    protected static $model = Message::class;
+    protected $model = Message::class;
 
     /**
     * @var string|null $resource
     */
-    protected static $resource = CustomMessageResource::class;
+    protected $resource = CustomMessageResource::class;
 
      /**
     * @var string|null $collectionResource
     */
-    protected static $collectionResource = CustomMessageCollectionResource::class;
+    protected $collectionResource = CustomMessageCollectionResource::class;
 }
 ```
 

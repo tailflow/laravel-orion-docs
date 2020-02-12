@@ -31,7 +31,7 @@ class PostsController extends Controller
     /**
      * Fully-qualified model class name
      */
-    protected static $model = Post::class; // or "App\Models\Post"
+    protected $model = Post::class; // or "App\Models\Post"
 }
 ```
 
@@ -48,12 +48,12 @@ class PostTagsController extends RelationController
     /**
      * Fully-qualified model class name
      */
-    protected static $model = Post::class; // or "App\Models\Post"
+    protected $model = Post::class; // or "App\Models\Post"
 
     /**
     * Name of the relationship as it is defined on the Post model
     */
-    protected static $relation = 'tags';
+    protected $relation = 'tags';
 }
 ```
 

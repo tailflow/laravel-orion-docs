@@ -24,7 +24,7 @@ class PostsController extends APIController
     /**
      * @var string|null $model
      */
-    protected static $model = Post::class;
+    protected $model = Post::class;
 }
 ```
 
@@ -35,7 +35,7 @@ To validate incoming requests data to `store` and `update` endpoints, Laravel Or
 
 For example, if you have `App\Models\Message` model, the related request class would be `App\Http\Requests\MessageRequest`.
 
-If request class names in your app do not follow this naming convention or if you just would like to be more explicit, set `protected static $request` property on controller to a fully-qualified request class name.
+If request class names in your app do not follow this naming convention or if you just would like to be more explicit, set `protected $request` property on controller to a fully-qualified request class name.
 
 ```php
 
@@ -49,12 +49,12 @@ class MessagesController extends APIController
     /**
      * @var string|null $model
      */
-    protected static $model = Message::class;
+    protected $model = Message::class;
 
     /**
     * @var string|null $request
     */
-    protected static $request = CustomMessageRequest::class;
+    protected $request = CustomMessageRequest::class;
 }
 ```
 

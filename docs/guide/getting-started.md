@@ -29,7 +29,7 @@ class PostsController extends Controller
 }
 ```
 
-2. Then define `protected static $model` property and set it to the fully-qualified model class name. The complete controller should look like this
+2. Then define `protected $model` property and set it to the fully-qualified model class name. The complete controller should look like this
 
 ```php
 <?php
@@ -43,7 +43,7 @@ class PostsController extends Controller
     /**
      * Fully-qualified model class name
      */
-    protected static $model = Post::class; // or "App\Models\Post"
+    protected $model = Post::class; // or "App\Models\Post"
 }
 ```
 
