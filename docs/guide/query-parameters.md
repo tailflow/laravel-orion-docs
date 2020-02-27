@@ -47,7 +47,7 @@ The `only_trashed` query parameters instructs the API to return only soft delete
 These parameters are accepted on `index`, `search`, and `show` endpoints of both [standard](./models.html#soft-deletes) and [relation](./relationships.html#soft-deletes) resources.
 
 ```bash
-(GET) https://myapp.com/api/posts?with_trashed
+(GET) https://myapp.com/api/posts?with_trashed=true
 ```
 
 ### Force deleting
@@ -55,5 +55,5 @@ These parameters are accepted on `index`, `search`, and `show` endpoints of both
 The last, but not least, `force` query parameter allows you to permanently delete a resource. The parameter is accepted on the `destroy` endpoint of both [standard](./models.html#soft-deletes) and [relation](./relationships.html#soft-deletes) resources.
 
 ```bash
-(DELETE) https://myapp.com/api/posts/5?force
+(DELETE) https://myapp.com/api/posts/5?force=true
 ```

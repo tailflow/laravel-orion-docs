@@ -5,12 +5,12 @@
 Laravel Orion can be installed into a new or existing project, simply by adding a composer dependency:
 
 ```bash
-composer require laralord/laravel-orion
+composer require laravel-orion/laravel-orion
 ```
 
 ## Simple CRUD
 
-Let's assume you have a model `Post` that represents a blog post and you would like to manage it via REST API. 
+Let's assume you have a model `Post` that represents a blog post and you would like to manage it via REST API.
 
 With Laravel Orion it can be acomplished in 3 simple steps:
 
@@ -69,7 +69,7 @@ Route::group(['as' => 'api.'], function() {
 
 ```
 
-Done :tada: Now you can create, list, view, update, and delete blog posts via REST API. Try to create a post via `(POST) https://<your app url>/api/posts` endpoint :wink:
+Done :tada: Now you can create, list, search, view, update, and delete blog posts via REST API. Try to create a post via `(POST) https://<your app url>/api/posts` endpoint :wink:
 
 You can also take a look at all available endpoints by running `php artisan route:list` command
 

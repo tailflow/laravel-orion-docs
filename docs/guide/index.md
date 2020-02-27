@@ -8,7 +8,7 @@ You create a controller, associate it with Eloquent model you would like to mana
 
 But it does not end here. Define relationship controllers, and it will allow your API consumers to manage all types of relations. Yes, all, which means `associate`/`dissociate`, `attach`/`detach`, `sync`, `toggle`, `updatePivot` as well as CRUD operations are available via a standardized REST API.
 
-And, as a bonus, by using query parameters you can include relations, filter, sort and search across data - all with just a few lines of code.
+And, as a bonus, `search` endpoint on both model and relationship controllers allows applying all sorts of query constraints to retrieve the desired results.
 
 ## Features
 
