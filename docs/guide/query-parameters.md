@@ -2,9 +2,9 @@
 
 Laravel Orion allows consumers of your API to use query parameters for working with soft deletable models and including other related resources (defined as relations on a particular model) together in response.
 
-But first, allowed set of relations to be used in query parameters needs to be defined in controller.
-
 ## Including Relations
+
+Sometimes you may want to include relationships together with the returned resources. First, allowed set of relations to be used in query parameters needs to be defined on a controller:
 
 ```php
 
@@ -30,7 +30,7 @@ class PostsController extends Controller
 }
 ```
 
-Sometimes you may want to include relationships together with the returned resources. To do that, url needs to contain `include` query parameter with a comma separated list of relations.
+To instruct the API to return relations, url needs to contain `include` query parameter with a comma separated list of relations.
 
 ```bash
 (GET) https://myapp.com/api/posts?include=user,meta

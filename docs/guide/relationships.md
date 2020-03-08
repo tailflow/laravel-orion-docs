@@ -30,11 +30,11 @@ At this point, you do not need to worry about different relationship types - con
 
 ### Fillable pivot fields and casting
 
-Hovewer, if you are defining the controller for `belongsToMany` or `morphToMany` relation type and have additional fields on pivot table, there are two additional properties to note - `protected $pivotFillable` and `protected $pivotJson`.
+If you are defining the controller for `belongsToMany` or `morphToMany` relation type and have additional fields on pivot table, there are two additional properties to note - `protected $pivotFillable` and `protected $pivotJson`.
 
-The `$pivotFillable` property needs to contain the list of pivot table fields that can be updated via `attach`, `sync`, `toggle` and `updatePivot` endpoints.
+The `$pivotFillable` property needs to contain a list of pivot table fields that can be updated via `attach`, `sync`, `toggle` and `updatePivot` endpoints.
 
-The `$pivotJson` property should contain the list of json fields on the pivot table that you would like to automatically cast to/from array. If you have defined `$casts` property on the related [Pivot model](https://laravel.com/docs/master/eloquent-relationships#defining-custom-intermediate-table-models), then you can skip it.
+The `$pivotJson` property should contain a list of json fields on the pivot table that you would like to automatically cast to/from array. If you have defined `$casts` property on the related [Pivot model](https://laravel.com/docs/master/eloquent-relationships#defining-custom-intermediate-table-models), then you can skip it.
 
 ::: warning KEY TAKEAWAYS
 
@@ -175,7 +175,7 @@ Request payload to the endpoint has only one field - `related_key`. In our examp
 **Example request:**
 
 ```json
-// (POST) api/users/{user}/posts/associate
+// (POST) https://myapp.com/api/users/{user}/posts/associate
 {
     "related_key" : 5
 }
@@ -250,7 +250,7 @@ By default `duplicates` parameter is `false`. If set to `true`, attaching the sa
 **Example request (array version):**
 
 ```json
-// (POST) api/users/{user}/roles/attach
+// (POST) https://myapp.com/api/users/{user}/roles/attach
 {
     "resources" : [3,4,7]
 }
@@ -259,7 +259,7 @@ By default `duplicates` parameter is `false`. If set to `true`, attaching the sa
 **Example request (object version):**
 
 ```json
-// (POST) api/users/{user}/roles/attach
+// (POST) https://myapp.com/api/users/{user}/roles/attach
 {
     "resources" : {
         "3" : {
@@ -289,7 +289,7 @@ Similar to the `attach` endpoint, `resources` field might be an array or an obje
 **Example request (array version):**
 
 ```json
-// (DELETE) api/users/{user}/roles/detach
+// (DELETE) https://myapp.com/api/users/{user}/roles/detach
 {
     "resources" : [3,4,7]
 }
@@ -298,7 +298,7 @@ Similar to the `attach` endpoint, `resources` field might be an array or an obje
 **Example request (object version):**
 
 ```json
-// (DELETE) api/users/{user}/roles/detach
+// (DELETE) https://myapp.com/api/users/{user}/roles/detach
 {
     "resources" : {
         "3" : {},
@@ -324,7 +324,7 @@ By default `detaching` parameter is `true`. If set to `false`, related resources
 **Example request (array version):**
 
 ```json
-// (PATCH) api/users/{user}/roles/sync
+// (PATCH) https://myapp.com/api/users/{user}/roles/sync
 {
     "resources" : [3,4]
 }
@@ -333,7 +333,7 @@ By default `detaching` parameter is `true`. If set to `false`, related resources
 **Example request (object version):**
 
 ```json
-// (PATCH) api/users/{user}/roles/sync
+// (PATCH) https://myapp.com/api/users/{user}/roles/sync
 {
     "resources" : {
         "3" : {
@@ -357,7 +357,7 @@ Request payload consist of only one field `resources`. Same as the sync endpoint
 **Example request (array version):**
 
 ```json
-// (PATCH) api/users/{user}/roles/toggle
+// (PATCH) https://myapp.com/api/users/{user}/roles/toggle
 {
     "resources" : [3,4]
 }
@@ -366,7 +366,7 @@ Request payload consist of only one field `resources`. Same as the sync endpoint
 **Example request (object version):**
 
 ```json
-// (PATCH) api/users/{user}/roles/toggle
+// (PATCH) https://myapp.com/api/users/{user}/roles/toggle
 {
     "resources" : {
         "3" : {
@@ -390,7 +390,7 @@ Request payload consist of only one field `pivot`. Its properties are pivot tabl
 **Example request:**
 
 ```json
-// (PATCH) api/users/{user}/roles/{role}/pivot
+// (PATCH) https://myapp.com/api/users/{user}/roles/{role}/pivot
 {
     "pivot" : { // properties correspond to the columns in pivot table
         "example_pivot_field" : "updated value",
@@ -450,7 +450,7 @@ Request payload to the endpoint has only one field - `related_key`. In our examp
 **Example request:**
 
 ```json
-// (POST) api/users/{user}/comments/associate
+// (POST) https://myapp.com/api/users/{user}/comments/associate
 {
     "related_key" : 3
 }
@@ -513,7 +513,7 @@ Request payload to the endpoint has only one field - `related_key`. In our examp
 **Example request:**
 
 ```json
-// (POST) api/posts/{post}/comments/associate
+// (POST) https://myapp.com/api/posts/{post}/comments/associate
 {
     "related_key" : 8
 }
@@ -570,7 +570,7 @@ By default `duplicates` parameter is `false`. If set to `true`, attaching the sa
 **Example request (array version):**
 
 ```json
-// (POST) api/posts/{post}/tags/attach
+// (POST) https://myapp.com/api/posts/{post}/tags/attach
 {
     "resources" : [3,4,7]
 }
@@ -579,7 +579,7 @@ By default `duplicates` parameter is `false`. If set to `true`, attaching the sa
 **Example request (object version):**
 
 ```json
-// (POST) api/posts/{post}/tags/attach
+// (POST) https://myapp.com/api/posts/{post}/tags/attach
 {
     "resources" : {
         "3" : {
@@ -609,7 +609,7 @@ Similar to the `attach` endpoint, `resources` field might be an array or an obje
 **Example request (array version):**
 
 ```json
-// (DELETE) api/posts/{post}/tags/detach
+// (DELETE) https://myapp.com/api/posts/{post}/tags/detach
 {
     "resources" : [3,4,7]
 }
@@ -618,7 +618,7 @@ Similar to the `attach` endpoint, `resources` field might be an array or an obje
 **Example request (object version):**
 
 ```json
-// (DELETE) api/posts/{post}/tags/detach
+// (DELETE) https://myapp.com/api/posts/{post}/tags/detach
 {
     "resources" : {
         "3" : {},
@@ -644,7 +644,7 @@ By default `detaching` parameter is `true`. If set to `false`, related resources
 **Example request (array version):**
 
 ```json
-// (PATCH) api/posts/{post}/tags/sync
+// (PATCH) https://myapp.com/api/posts/{post}/tags/sync
 {
     "resources" : [3,4]
 }
@@ -653,7 +653,7 @@ By default `detaching` parameter is `true`. If set to `false`, related resources
 **Example request (object version):**
 
 ```json
-// (PATCH) api/posts/{post}/tags/sync
+// (PATCH) https://myapp.com/api/posts/{post}/tags/sync
 {
     "resources" : {
         "3" : {
@@ -677,7 +677,7 @@ Request payload consist of only one field `resources`. Same as the sync endpoint
 **Example request (array version):**
 
 ```json
-// (PATCH) api/posts/{post}/tags/toggle
+// (PATCH) https://myapp.com/api/posts/{post}/tags/toggle
 {
     "resources" : [3,4]
 }
@@ -686,7 +686,7 @@ Request payload consist of only one field `resources`. Same as the sync endpoint
 **Example request (object version):**
 
 ```json
-// (PATCH) api/posts/{post}/tags/toggle
+// (PATCH) https://myapp.com/api/posts/{post}/tags/toggle
 {
     "resources" : {
         "3" : {
@@ -710,7 +710,7 @@ Request payload consist of only one field `pivot`. Its properties are pivot tabl
 **Example request:**
 
 ```json
-// (PATCH) api/posts/{post}/tags/{tag}/pivot
+// (PATCH) https://myapp.com/api/posts/{post}/tags/{tag}/pivot
 {
     "pivot" : { // properties correspond to the columns in pivot table
         "example_pivot_field" : "updated value",

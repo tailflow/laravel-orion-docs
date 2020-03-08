@@ -19,22 +19,22 @@ use App\Http\Resources\CustomMessageCollectionResource;
 class MessagesController extends APIController
 {
     /**
-     * @var string|null $model
+     * @var string $model
      */
     protected $model = Message::class;
 
     /**
-    * @var string|null $resource
-    */
+     * @var string $resource
+     */
     protected $resource = CustomMessageResource::class;
 
-     /**
-    * @var string|null $collectionResource
-    */
+    /**
+     * @var string $collectionResource
+     */
     protected $collectionResource = CustomMessageCollectionResource::class;
 }
 ```
 
 ::: tip TIP
-There is a handy `toArrayWithMerge` method available on both `Resource` and `CollectionResource` classes under `Orion\Http\Resources` namespace - take a look there :wink:
+There is a handy `toArrayWithMerge` method available on both `Orion\Http\Resources\Resource` and `Orion\Http\Resources\CollectionResource` classes - take a look there :wink:
 :::

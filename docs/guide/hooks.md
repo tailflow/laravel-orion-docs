@@ -1,8 +1,8 @@
 # Hooks
 
-One of the powerful features of Laravel Orion is Hooks. It allows you to tap into a flow inside a particular (or multiple) endpoints without the need to override a method itself.
+One of the powerful features of Laravel Orion is Hooks. It allows you to tap into the flow inside a particular (or multiple) endpoints without the need to override a method itself.
 
-Here is a common use case: imagine you have an API controller for blog posts and whenever a blog post is created, it needs to be associated with the currently authenticated user. To accomplish that, simply add `beforeSave` hook and attach user to the post:
+Here is a common use case: imagine you have an API controller for blog posts and whenever a blog post is created, it needs to be associated with the currently authenticated user. To accomplish that, simply add `beforeSave` hook and associate user with the post:
 
 ```php
 <?php
@@ -50,16 +50,16 @@ class PostsController extends Controller
 
 ## On relationship controllers
 
-**All types:** same as model controllers, relation controllers have before and after hooks for CRUD operations.
+**All types:** relation controllers have before and after hooks for CRUD operations - same as model controllers.
 
-**One to many:**
+**One-to-many:**
 
 * beforeAssociate - executed after retrieving both models, but before associating a child model.
 * afterAssociate - executed after saving a relation model with associated child model id, but before building response.
 * beforeDissociate - executed after retrieving both models, but before dissociating a child model.
 * afterDissociate - executed after saving a relation model with associated child model id, but before building response.
 
-**Many to many:**
+**Many-to-many:**
 
 * beforeSync - executed before retrieving a relation model.
 * afterSync - executed after syncing related models, but before building response.

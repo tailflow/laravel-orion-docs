@@ -187,7 +187,7 @@ In the example above `user.name` is one of such attributes.
 
 ## Sorting
 
-Similar to the way fields are whitelisted for filters, they need to be specified for sorting as well: 
+Similar to the way fields are whitelisted for filters, they need to be specified for sorting as well:
 
 ```php
 
@@ -206,7 +206,7 @@ class PostsController extends Controller
      */
     protected function sortableBy()
     {
-         return ['id', 'title', 'created_at', 'user.name'];
+         return ['id', 'name', 'meta.priority'];
     }
 
     ...
