@@ -117,14 +117,28 @@ This will introduce `restore` endpoint. To learn how to permanently delete a res
 |        | POST      | api/users/{user}/posts/{post}/restore           | api.users.relation.posts.restore       | App\Http\Controllers\API\UserPostsController@restore                      | api                                             |
 ```
 
+## One to One
 
-## hasOne
+The following relationships are considered one-to-one relationships:
+- `hasOne`
+- `hasOneThrough`
+- `morphOne`
+- `belongsTo` (inverse of the `hasMany` relation)
+- `morphTo` (inverse of the `morphMany` relation)
+
+For one-to-one relationships, Laravel Orion provides 4 endpoints (basically endpoints for CRUD operations): `store`, `show`, `update`, `destroy`
+
+:::warning ATTENTION
+The `belongsTo` and `morphTo` relations are not provided with `store` endpoint.
+:::
+
+**Example route registration**
 
 ```php
 Orion::hasOneResource('profiles', 'image' , 'API\ProfileImageController');
 ```
 
-**Available endpoints**
+**Example available endpoints**
 
 ```bash
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
@@ -140,16 +154,25 @@ Orion::hasOneResource('profiles', 'image' , 'API\ProfileImageController');
 :::tip TIP
 Notice that the last parameter is marked as optional. Because it's a one-to-one relation, you can access the endpoint without providing related key - Laravel Orion will take care of it :slightly_smiling_face:
 
-`hasOne`, `belongsTo`, `hasOneThrough` and `morphOne` relations do not require the related resource key.
+`hasOne`, `hasOneThrough`, `morphOne`, `belongsTo`, and `morphTo` relations do not require the related resource key.
 :::
 
-## hasMany
+## One to Many
+
+The following relationships are considered one-to-many relationships:
+- `hasMany`
+- `hasManyThrough`
+- `morphMany`
+
+For one-to-many relationships, Laravel Orion provides 7 endpoints (endpoints for CRUD operations, searching, associating, and dissociating): `index`, `search`, `store`, `show`, `update`, `destroy`, `associate`, `dissociate`
+
+**Example route registration**
 
 ```php
 Orion::hasManyResource('users', 'posts' , 'API\UserPostsController');
 ```
 
-**Available endpoints**
+**Example available endpoints**
 
 ```bash
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
@@ -168,7 +191,7 @@ Orion::hasManyResource('users', 'posts' , 'API\UserPostsController');
 
 ### Associating
 
-The `hasMany` relation resource provides `associate` endpoint to associate relation resource with the main resource.
+One-to-many relation resource provides `associate` endpoint to associate relation model with a parent model.
 
 Request payload to the endpoint has only one field - `related_key`. In our example, `related_key` would be ID of a post to be associated with user.
 
@@ -183,35 +206,25 @@ Request payload to the endpoint has only one field - `related_key`. In our examp
 
 ### Dissociating
 
-The `hasMany` relation resource also provides `dissociate` endpoint to dissociate relation resource from the main resource.
+One-to-many relation resource also provides `dissociate` endpoint to dissociate relation model from its parent model.
 
 There is no payload in request for this endpoint, however notice the `{post}` route parameter in the example routes above - this would be ID of a post to be dissociated from a user.
 
-## belongsTo
+## Many to Many
 
-```php
-Orion::belongsToResource('posts', 'user' , 'API\PostUserController');
-```
+The following relationships are considered one-to-many relationships:
+- `belongsToMany`
+- `morphToMany`
 
-**Available endpoints**
+For many-to-many relationships, Laravel Orion provides 11 endpoints (endpoints for CRUD operations, searching, attaching, detaching, syncing, toggling, and updating pivot): `index`, `search`, `store`, `show`, `update`, `destroy`, `attach`, `detach`, `sync`, `toggle`, `pivot`
 
-```bash
-+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
-| Method    | URI                                             | Name                                   | Action                                                                    |
-+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
-| GET|HEAD  | api/posts/{post}/user/{user?}                   | api.posts.relation.user.show           | App\Http\Controllers\API\PostUserController@show                          |
-| PATCH     | api/posts/{post}/user/{user?}                   | api.posts.relation.user.update         | App\Http\Controllers\API\PostUserController@update                        |
-| PUT       | api/posts/{post}/user/{user?}                   | api.posts.relation.user.update         | App\Http\Controllers\API\PostUserController@update                        |
-| DELETE    | api/posts/{post}/user/{user?}                   | api.posts.relation.user.destroy        | App\Http\Controllers\API\PostUserController@destroy                       |
-```
-
-## belongsToMany
+**Example route registration**
 
 ```php
 Orion::belongsToManyResource('users', 'roles' , 'API\UserRolesController');
 ```
 
-**Available endpoints**
+**Example available endpoints**
 
 ```bash
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
@@ -239,13 +252,13 @@ Do not forget to define fillable pivot fields as described in [Fillable pivot fi
 
 ### Attaching
 
-The `belongsToMany` relation resource provides `attach` endpoint to attach one or multiple relation resources to the main resource. For details on how attaching/detaching of related models works in Laravel, take a look at [Attaching / Detaching](https://laravel.com/docs/master/eloquent-relationships#updating-many-to-many-relationships) section in Laravel Documenation.
+Many-to-many relation resource provides `attach` endpoint to attach one or multiple related models to another model. For details on how attaching/detaching of related models works in Laravel, take a look at [Attaching / Detaching](https://laravel.com/docs/master/eloquent-relationships#updating-many-to-many-relationships) section in Laravel Documenation.
 
 Request payload consist of required `resources` and optional `duplicates` fields. Note, that `duplicates` field can also be provided as query parameter.
 
-The `resources` field might be an array or an object. If it is an array, then array items would be IDs of related resources that you would like to attach. If it is an object, then its keys would be IDs of related resources and values - objects containing pivot table fields to be set upon attaching the related resource.
+The `resources` field might be an array or an object. If it is an array, then array items would be IDs of related models that you would like to attach. If it is an object, then its keys would be IDs of related models and values - objects containing pivot table fields to be set upon attaching the related model.
 
-By default `duplicates` parameter is `false`. If set to `true`, attaching the same related resource multiple times would result in duplicated entries in pivot table.
+By default `duplicates` parameter is `false`. If set to `true`, attaching the same related model multiple times would result in duplicated entries in pivot table.
 
 **Example request (array version):**
 
@@ -280,7 +293,7 @@ By default `duplicates` parameter is `false`. If set to `true`, attaching the sa
 
 ### Detaching
 
-The `belongsToMany` relation resource provides `detach` endpoint to detach one or multiple relation resources to the main resource.
+Many-to-many relation resource provides `detach` endpoint to detach one or multiple related models from the model they are attached to.
 
 Request payload consist of only one field `resources`.
 
@@ -313,13 +326,13 @@ Similar to the `attach` endpoint, `resources` field might be an array or an obje
 
 ### Syncing
 
-The `belongsToMany` relation resource provides `sync` endpoint to sync one or multiple relation resources on the main resource. For details on how syncing of related models works in Laravel, take a look at [Syncing Associations](https://laravel.com/docs/master/eloquent-relationships#updating-many-to-many-relationships) section in Laravel Documentation.
+Many-to-many relation resource provides `sync` endpoint to sync associations of one or multiple related models with another model. For details on how syncing of related models works in Laravel, take a look at [Syncing Associations](https://laravel.com/docs/master/eloquent-relationships#updating-many-to-many-relationships) section in Laravel Documentation.
 
 Request payload consist of required `resources` and optional `detaching` fields. Note, that `detaching` field can also be provided as query parameter.
 
-The `resources` field might be an array or an object. If it is an array, then array items would be IDs of related resources that you would like to sync. If it is an object, then its keys would be IDs of related resources and values - objects containing pivot table fields to be set upon syncing the related resource.
+The `resources` field might be an array or an object. If it is an array, then array items would be IDs of related models that you would like to sync. If it is an object, then its keys would be IDs of related models and values - objects containing pivot table fields to be set upon syncing the related model.
 
-By default `detaching` parameter is `true`. If set to `false`, related resources that are missing in the payload, but preset in pivot table won't be detached.
+By default `detaching` parameter is `true`. If set to `false`, related models that are missing in the payload, but preset in pivot table won't be detached.
 
 **Example request (array version):**
 
@@ -350,7 +363,7 @@ By default `detaching` parameter is `true`. If set to `false`, related resources
 
 ### Toggling
 
-The `belongsToMany` relation resource provides `toggle` endpoint to "toggle" the attachment status of one or multiple relation resources. For details on how "toggling" of related models works in Laravel, take a look at [Toggling Associations](https://laravel.com/docs/master/eloquent-relationships#updating-many-to-many-relationships) section in Laravel Documenation.
+Many-to-many relation resource provides `toggle` endpoint to "toggle" the attachment status of one or multiple related models. For details on how "toggling" of related models works in Laravel, take a look at [Toggling Associations](https://laravel.com/docs/master/eloquent-relationships#updating-many-to-many-relationships) section in Laravel Documenation.
 
 Request payload consist of only one field `resources`. Same as the sync endpoint, `resources` field might be an array or an object.
 
@@ -383,334 +396,14 @@ Request payload consist of only one field `resources`. Same as the sync endpoint
 
 ### Updating pivot
 
-The `belongsToMany` relation resource provides `pivot` endpoint to update pivot row of one relation resource. For details on how pivot row is updated, take a look at [Updating A Record On A Pivot Table](https://laravel.com/docs/master/eloquent-relationships) section in Laravel Documentation.
+Many-to-many relation resource provides `pivot` endpoint to update pivot row of one of the related models. For details on how pivot row is updated, take a look at [Updating A Record On A Pivot Table](https://laravel.com/docs/master/eloquent-relationships) section in Laravel Documentation.
 
-Request payload consist of only one field `pivot`. Its properties are pivot table fields that will be updated for the related resource.
+Request payload consist of only one field `pivot`. Its properties are pivot table fields that will be updated for the related model.
 
 **Example request:**
 
 ```json
 // (PATCH) https://myapp.com/api/users/{user}/roles/{role}/pivot
-{
-    "pivot" : { // properties correspond to the columns in pivot table
-        "example_pivot_field" : "updated value",
-        "another_pivot_field" : "new value"
-        ...
-    }
-}
-```
-
-## hasOneThrough
-
-```php
-Orion::hasOneThroughResource('posts', 'meta' , 'API\PostMetaController');
-```
-
-**Available endpoints**
-
-```bash
-+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
-| Method    | URI                                             | Name                                   | Action                                                                    |
-+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
-| POST      | api/posts/{post}/meta                           | api.posts.relation.meta.store          | App\Http\Controllers\API\PostMetaController@store                         |
-| GET|HEAD  | api/posts/{post}/meta/{meta?}                   | api.posts.relation.meta.show           | App\Http\Controllers\API\PostMetaController@show                          |
-| PATCH     | api/posts/{post}/meta/{meta?}                   | api.posts.relation.meta.update         | App\Http\Controllers\API\PostMetaController@update                        |
-| PUT       | api/posts/{post}/meta/{meta?}                   | api.posts.relation.meta.update         | App\Http\Controllers\API\PostMetaController@update                        |
-| DELETE    | api/posts/{post}/meta/{meta?}                   | api.posts.relation.meta.destroy        | App\Http\Controllers\API\PostMetaController@destroy                       |
-```
-
-## hasManyThrough
-
-```php
-Orion::hasManyThroughResource('users', 'comments' , 'API\UserCommentsController');
-```
-
-**Available endpoints**
-
-```bash
-+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
-| Method    | URI                                             | Name                                   | Action                                                                    |
-+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
-| GET|HEAD  | api/users/{user}/comments                       | api.users.relation.comments.index      | App\Http\Controllers\API\UserCommentsController@index                     |
-| POST      | api/users/{user}/comments/search                | api.users.relation.comments.search     | App\Http\Controllers\API\UserCommentsController@index                     |
-| GET|HEAD  | api/users/{user}/comments/{comment}             | api.users.relation.comments.show       | App\Http\Controllers\API\UserCommentsController@show                      |
-| PATCH     | api/users/{user}/comments/{comment}             | api.users.relation.comments.update     | App\Http\Controllers\API\UserCommentsController@update                    |
-| PUT       | api/users/{user}/comments/{comment}             | api.users.relation.comments.update     | App\Http\Controllers\API\UserCommentsController@update                    |
-| DELETE    | api/users/{user}/comments/{comment}             | api.users.relation.comments.destroy    | App\Http\Controllers\API\UserCommentsController@destroy                   |
-| POST      | api/users/{user}/comments/associate             | api.users.relation.comments.associate  | App\Http\Controllers\API\UserCommentsController@associate                 |
-| DELETE    | api/users/{user}/comments/{comment}/dissociate  | api.users.relation.comments.dissociate | App\Http\Controllers\API\UserCommentsController@dissociate                |
-```
-
-### Associating
-
-The `hasManyThrough` relation resource provides `associate` endpoint to associate relation resource with the main resource.
-
-Request payload to the endpoint has only one field - `related_key`. In our example, `related_key` would be ID of a comment to be associated with user.
-
-**Example request:**
-
-```json
-// (POST) https://myapp.com/api/users/{user}/comments/associate
-{
-    "related_key" : 3
-}
-```
-
-### Dissociating
-
-The `hasManyThrough` relation resource also provides `dissociate` endpoint to dissociate relation resource from the main resource.
-
-There is no payload in request for this endpoint, however notice the `{comment}` route parameter in the example routes above - this would be ID of a comment to be dissociated from user.
-
-## morphOne
-
-```php
-Orion::morphOneResource('posts', 'image', 'API\PostImageController');
-```
-
-**Available endpoints**
-
-```bash
-+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
-| Method    | URI                                             | Name                                   | Action                                                                    |
-+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
-| POST      | api/posts/{post}/image                          | api.posts.relation.image.store         | App\Http\Controllers\API\PostImageController@store                        |
-| GET|HEAD  | api/posts/{post}/image/{image?}                 | api.posts.relation.image.show          | App\Http\Controllers\API\PostImageController@show                         |
-| PATCH     | api/posts/{post}/image/{image?}                 | api.posts.relation.image.update        | App\Http\Controllers\API\PostImageController@update                       |
-| PUT       | api/posts/{post}/image/{image?}                 | api.posts.relation.image.update        | App\Http\Controllers\API\PostImageController@update                       |
-| DELETE    | api/posts/{post}/image/{image?}                 | api.posts.relation.image.destroy       | App\Http\Controllers\API\PostImageController@destroy                      |
-```
-
-## morphMany
-
-```php
-Orion::morphManyResource('posts', 'comments', 'API\PostCommentsController');
-```
-
-**Available endpoints**
-
-```bash
-+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
-| Method    | URI                                             | Name                                   | Action                                                                    |
-+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
-| GET|HEAD  | api/posts/{post}/comments                       | api.posts.relation.comments.index      | App\Http\Controllers\API\PostCommentsController@index                     |
-| POST      | api/posts/{post}/comments/search                | api.posts.relation.comments.search     | App\Http\Controllers\API\PostCommentsController@index                     |
-| POST      | api/posts/{post}/comments                       | api.posts.relation.comments.store      | App\Http\Controllers\API\PostCommentsController@store                     |
-| GET|HEAD  | api/posts/{post}/comments/{comment}             | api.posts.relation.comments.show       | App\Http\Controllers\API\PostCommentsController@show                      |
-| PATCH     | api/posts/{post}/comments/{comment}             | api.posts.relation.comments.update     | App\Http\Controllers\API\PostCommentsController@update                    |
-| PUT       | api/posts/{post}/comments/{comment}             | api.posts.relation.comments.update     | App\Http\Controllers\API\PostCommentsController@update                    |
-| DELETE    | api/posts/{post}/comments/{comment}             | api.posts.relation.comments.destroy    | App\Http\Controllers\API\PostCommentsController@destroy                   |
-| POST      | api/posts/{post}/comments/associate             | api.posts.relation.comments.associate  | App\Http\Controllers\API\PostCommentsController@associate                 |
-| DELETE    | api/posts/{post}/comments/{comment}/dissociate  | api.posts.relation.comments.dissociate | App\Http\Controllers\API\PostCommentsController@dissociate                |
-```
-
-### Associating
-
-The `morphMany` relation resource provides `associate` endpoint to associate relation resource with the main resource.
-
-Request payload to the endpoint has only one field - `related_key`. In our example, `related_key` would be ID of a comment to be associated with post.
-
-**Example request:**
-
-```json
-// (POST) https://myapp.com/api/posts/{post}/comments/associate
-{
-    "related_key" : 8
-}
-```
-
-### Dissociating
-
-The `morphMany` relation resource also provides `dissociate` endpoint to dissociate relation resource from the main resource.
-
-There is no payload in request for this endpoint, however notice the `{comment}` route parameter in the example routes above - this would be ID of a comment to be dissociated from post.
-
-## morphToMany
-
-```php
-Orion::morphToManyResource('posts', 'tags', 'API\PostTagsController');
-```
-
-**Available endpoints**
-
-```bash
-+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
-| Method    | URI                                             | Name                                   | Action                                                                    |
-+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
-| GET|HEAD  | api/posts/{post}/tags                           | api.posts.relation.tags.index          | App\Http\Controllers\API\PostTagsController@index                         |
-| POST      | api/posts/{post}/tags/search                    | api.posts.relation.tags.search         | App\Http\Controllers\API\PostTagsController@index                         |
-| POST      | api/posts/{post}/tags                           | api.posts.relation.tags.store          | App\Http\Controllers\API\PostTagsController@store                         |
-| GET|HEAD  | api/posts/{post}/tags/{tag}                     | api.posts.relation.tags.show           | App\Http\Controllers\API\PostTagsController@show                          |
-| PATCH     | api/posts/{post}/tags/{tag}                     | api.posts.relation.tags.update         | App\Http\Controllers\API\PostTagsController@update                        |
-| PUT       | api/posts/{post}/tags/{tag}                     | api.posts.relation.tags.update         | App\Http\Controllers\API\PostTagsController@update                        |
-| DELETE    | api/posts/{post}/tags/{tag}                     | api.posts.relation.tags.destroy        | App\Http\Controllers\API\PostTagsController@destroy                       |
-| POST      | api/posts/{post}/tags/attach                    | api.posts.relation.tags.attach         | App\Http\Controllers\API\PostTagsController@attach                        |
-| DELETE    | api/posts/{post}/tags/detach                    | api.posts.relation.tags.detach         | App\Http\Controllers\API\PostTagsController@detach                        |
-| PATCH     | api/posts/{post}/tags/sync                      | api.posts.relation.tags.sync           | App\Http\Controllers\API\PostTagsController@sync                          |
-| PATCH     | api/posts/{post}/tags/toggle                    | api.posts.relation.tags.toggle         | App\Http\Controllers\API\PostTagsController@toggle                        |
-| PATCH     | api/posts/{post}/tags/{tag}/pivot               | api.posts.relation.tags.pivot          | App\Http\Controllers\API\PostTagsController@updatePivot                   |
-```
-
-:::warning ATTENTION
-
-Do not forget to define fillable pivot fields as described in [Fillable pivot fields and casting](./relationships.html#setting-up-controller) section, if you have additional fields on pivot table, otherwise `attach`, `sync`, `toggle` and `updatePivot` endpoints may not work as expected for these fields.
-
-:::
-
-### Attaching
-
-The `morphToMany` relation resource provides `attach` endpoint to attach one or multiple relation resources to the main resource. For details on how attaching/detaching of related models works in Laravel, take a look at [Attaching / Detaching](https://laravel.com/docs/master/eloquent-relationships#updating-many-to-many-relationships) section in Laravel Documenation.
-
-Request payload consist of required `resources` and optional `duplicates` fields. Note, that `duplicates` field can also be provided as query parameter.
-
-The `resources` field might be an array or an object. If it is an array, then array items would be IDs of related resources that you would like to attach. If it is an object, then its keys would be IDs of related resources and values - objects containing pivot table fields to be set upon attaching the related resource.
-
-By default `duplicates` parameter is `false`. If set to `true`, attaching the same related resource multiple times would result in duplicated entries in pivot table.
-
-**Example request (array version):**
-
-```json
-// (POST) https://myapp.com/api/posts/{post}/tags/attach
-{
-    "resources" : [3,4,7]
-}
-```
-
-**Example request (object version):**
-
-```json
-// (POST) https://myapp.com/api/posts/{post}/tags/attach
-{
-    "resources" : {
-        "3" : {
-            "example_pivot_field" : "value A",
-            ...
-        },
-        "4" : {
-            "example_pivot_field" : "value B",
-            ...
-        },
-        "7" : {
-            "example_pivot_field" : "value C",
-            ...
-        }
-    }
-}
-```
-
-### Detaching
-
-The `morphToMany` relation resource provides `detach` endpoint to detach one or multiple relation resources to the main resource.
-
-Request payload consist of only one field `resources`.
-
-Similar to the `attach` endpoint, `resources` field might be an array or an object. By providing support for object representation of `resources` field in this method, it makes it easier for the frontend to attach/detach related resources in a standardized way. You can also optionally store additional data in these objects that can be used in `beforeDetach` or `afterDetach` hooks.
-
-**Example request (array version):**
-
-```json
-// (DELETE) https://myapp.com/api/posts/{post}/tags/detach
-{
-    "resources" : [3,4,7]
-}
-```
-
-**Example request (object version):**
-
-```json
-// (DELETE) https://myapp.com/api/posts/{post}/tags/detach
-{
-    "resources" : {
-        "3" : {},
-        "4" : {
-            "some_field" : "some value",
-            ...
-        },
-        "7" : {},
-    }
-}
-```
-
-### Syncing
-
-The `morphToMany` relation resource provides `sync` endpoint to sync one or multiple relation resources on the main resource. For details on how syncing of related models works in Laravel, take a look at [Syncing Associations](https://laravel.com/docs/master/eloquent-relationships#updating-many-to-many-relationships) section in Laravel Documentation.
-
-Request payload consist of required `resources` and optional `detaching` fields. Note, that `detaching` field can also be provided as query parameter.
-
-The `resources` field might be an array or an object. If it is an array, then array items would be IDs of related resources that you would like to sync. If it is an object, then its keys would be IDs of related resources and values - objects containing pivot table fields to be set upon syncing the related resource.
-
-By default `detaching` parameter is `true`. If set to `false`, related resources that are missing in the payload, but preset in pivot table won't be detached.
-
-**Example request (array version):**
-
-```json
-// (PATCH) https://myapp.com/api/posts/{post}/tags/sync
-{
-    "resources" : [3,4]
-}
-```
-
-**Example request (object version):**
-
-```json
-// (PATCH) https://myapp.com/api/posts/{post}/tags/sync
-{
-    "resources" : {
-        "3" : {
-            "example_pivot_field" : "value A",
-            ...
-        },
-        "4" : {
-            "example_pivot_field" : "value B",
-            ...
-        },
-    }
-}
-```
-
-### Toggling
-
-The `morphToMany` relation resource provides `toggle` endpoint to "toggle" the attachment status of one or multiple relation resources. For details on how "toggling" of related models works in Laravel, take a look at [Toggling Associations](https://laravel.com/docs/master/eloquent-relationships#updating-many-to-many-relationships) section in Laravel Documenation.
-
-Request payload consist of only one field `resources`. Same as the sync endpoint, `resources` field might be an array or an object.
-
-**Example request (array version):**
-
-```json
-// (PATCH) https://myapp.com/api/posts/{post}/tags/toggle
-{
-    "resources" : [3,4]
-}
-```
-
-**Example request (object version):**
-
-```json
-// (PATCH) https://myapp.com/api/posts/{post}/tags/toggle
-{
-    "resources" : {
-        "3" : {
-            "example_pivot_field" : "value A",
-            ...
-        },
-        "4" : {
-            "example_pivot_field" : "value B",
-            ...
-        },
-    }
-}
-```
-
-### Updating pivot
-
-The `morphToMany` relation resource provides `pivot` endpoint to update pivot row of one relation resource. For details on how pivot row is updated, take a look at [Updating A Record On A Pivot Table](https://laravel.com/docs/master/eloquent-relationships) section in Laravel Documentation.
-
-Request payload consist of only one field `pivot`. Its properties are pivot table fields that will be updated for the related resource.
-
-**Example request:**
-
-```json
-// (PATCH) https://myapp.com/api/posts/{post}/tags/{tag}/pivot
 {
     "pivot" : { // properties correspond to the columns in pivot table
         "example_pivot_field" : "updated value",

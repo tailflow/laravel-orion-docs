@@ -2,7 +2,7 @@
 
 ## Authentication
 
-Laravel Orion does not provide any authentication perks at the moment, assuming that developer is responsible for setting up the desired app's authentication capabilities. Hovewer, we recommend using [Laravel Passport](https://github.com/laravel/passport) or [Laravel Airlock](https://github.com/laravel/airlock) for this purpose.
+Laravel Orion does not provide any authentication perks at the moment, assuming that developer is responsible for setting up the desired app's authentication capabilities. Hovewer, we recommend using [Laravel Passport](https://github.com/laravel/passport) or [Laravel Sanctum](https://github.com/laravel/sanctum) for this purpose.
 
 ## Authorization
 
