@@ -64,7 +64,9 @@ Route::group(['as' => 'api.'], function() {
     Orion::hasManyThroughResource('users', 'comments' , 'API\UserCommentsController');
     Orion::morphOneResource('posts', 'image', 'API\PostImageController');
     Orion::morphManyResource('posts', 'comments', 'API\PostCommentsController');
+    Orion::morphToResource('images', 'post', 'API\ImagePostController');
     Orion::morphToManyResource('posts', 'tags', 'API\PostTagsController');
+    Orion::morphedByManyResource('tags', 'posts', 'API\TagsPostsController');
     ...
 });
 
@@ -212,7 +214,7 @@ There is no payload in request for this endpoint, however notice the `{post}` ro
 
 ## Many to Many
 
-The following relationships are considered one-to-many relationships:
+The following relationships are considered many-to-many relationships:
 - `belongsToMany`
 - `morphToMany`
 
