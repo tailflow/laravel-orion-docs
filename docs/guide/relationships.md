@@ -93,7 +93,7 @@ Route::group(['as' => 'api.'], function() {
 
 ### Soft Deletes
 
-If your relation model uses `SoftDeletes` trait and you would like to expose the same functionality via API, add `'softDeletes' => true` to the options array in the last parameter of the route registration method.
+If your relation model uses `SoftDeletes` trait and you would like to expose the same functionality via API, call `withSoftDeletes` method upon resource registration.
 
 ```php
 <?php
@@ -103,7 +103,7 @@ use Orion\Facades\Orion;
 
 Route::group(['as' => 'api.'], function() {
     ...
-    Orion::hasManyResource('users', 'posts', 'API\UserPostsController', ['softDeletes' => true]);
+    Orion::hasManyResource('users', 'posts', 'API\UserPostsController')->withSoftDeletes();
     ...
 });
 

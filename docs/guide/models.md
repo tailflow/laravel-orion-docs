@@ -63,7 +63,7 @@ Essentially, `Orion::resource` method is the same as Laravel's default `Route::a
 
 ### Soft Deletes
 
-If your model uses `SoftDeletes` trait and you would like to expose the same functionality via API, add `'softDeletes' => true` to the options array in the last parameter of the route registration method.
+If your model uses `SoftDeletes` trait and you would like to expose the same functionality via API, call `withSoftDeletes` method upon resource registration.
 
 ```php
 <?php
@@ -73,7 +73,7 @@ use Orion\Facades\Orion;
 
 Route::group(['as' => 'api.'], function() {
     ...
-    Orion::resource('posts', 'API\PostsController', ['softDeletes' => true]);
+    Orion::resource('posts', 'API\PostsController')->withSoftDeletes();
     ...
 });
 

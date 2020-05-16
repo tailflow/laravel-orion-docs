@@ -70,7 +70,7 @@ use Illuminate\Support\Facades\Route;
 use Orion\Facades\Orion;
 
 Route::group(['as' => 'api.'], function() {
-    Orion::resource('posts', 'API\PostsController', ['softDeletes' => true]);
+    Orion::resource('posts', 'API\PostsController')->withSoftDeletes();
     Orion::morphToManyResource('posts', 'tags' , 'API\PostTagsController');
 });
 
