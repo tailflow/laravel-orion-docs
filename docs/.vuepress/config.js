@@ -26,6 +26,7 @@ module.exports = {
                         'relationships',
                         'hooks',
                         'search',
+                        'batch-operations',
                         'query-parameters',
                         'security',
                         'responses'

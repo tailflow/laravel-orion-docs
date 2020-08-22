@@ -84,4 +84,7 @@ You can also take a look at all available endpoints by running `php artisan rout
 |        | GET|HEAD  | api/posts/{post}                                | api.posts.show                         | App\Http\Controllers\API\PostsController@show                             | api                                             |  
 |        | PUT|PATCH | api/posts/{post}                                | api.posts.update                       | App\Http\Controllers\API\PostsController@update                           | api                                             |
 |        | DELETE    | api/posts/{post}                                | api.posts.destroy                      | App\Http\Controllers\API\PostsController@destroy                          | api                                             |
+|        | POST      | api/posts/batch                                 | api.posts.batchStore                   | App\Http\Controllers\API\PostsController@batchStore                       | api                                             |
+|        | PATCH     | api/posts/batch                                 | api.posts.batchUpdate                  | App\Http\Controllers\API\PostsController@batchUpdate                      | api                                             |
+|        | DELETE    | api/posts/batch                                 | api.posts.batchDestroy                 | App\Http\Controllers\API\PostsController@batchDestroy                     | api                                             |
 ```

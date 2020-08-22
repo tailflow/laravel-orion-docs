@@ -48,6 +48,21 @@ class PostsController extends Controller
 * beforeRestore - executed before retrieving a model and restoring it.
 * afterRestore - executed after restoring a model, but before building response.
 
+**Batch hooks:**
+
+* beforeBatchStore - executed before creating new models.
+* afterBatchStore - executed after storing new models, but before building response.
+* beforeBatchUpdate - executed before retrieving models for updating.
+* afterBatchUpdate - executed after updating the models, but before building response.
+* beforeBatchDestroy - executed before retrieving models for deleting.
+* afterBatchDestroy - executed after deleting the models, but before building response.
+* beforeBatchRestore - executed before retrieving models for restoring.
+* afterBatchRestore - executed after restoring the models, but before building response.
+
+::: warning ATTENTION
+Related "before" and "after" hooks (e.g. `beforeStore`, `afterStore`) as well as `beforeSave` and `afterSave` are also executed for each model in batch operations.
+:::
+
 ## On relationship controllers
 
 **All types:** relation controllers have before and after hooks for CRUD operations - same as model controllers.

@@ -109,8 +109,12 @@ In this example, when request is made to `store` endpoint, both `title` and `sta
 
 #### Defining rules for relation methods
 
-You can also define rules for retlation specific endpoints: `associateRules`, `attachRules`, `detachRules`, `syncRules`, `toggleRules`, `updatePivotRules`.
+You can also define rules for relation specific endpoints: `associateRules`, `attachRules`, `detachRules`, `syncRules`, `toggleRules`, `updatePivotRules`.
 
 :::warning ATTENTION
 Rules specified in these methods are **NOT** merged with rules from `commonRules` method.
 :::
+
+#### Defining rules for batch operations
+
+You can also define rules for batch endpoints: `batchStore`, `batchUpdate`.

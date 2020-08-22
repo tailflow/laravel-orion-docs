@@ -72,25 +72,6 @@ Route::group(['as' => 'api.'], function() {
 
 ```
 
-While you need to call different methods, their signature is the same: resource name, relation name, and controller.
-
-Alternatively, you can register routes using `Orion::resourceRelation` method and a fully-qualified relationship class name.
-
-```php
-<?php
-
-use Illuminate\Support\Facades\Route;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Orion\Facades\Orion;
-
-Route::group(['as' => 'api.'], function() {
-    ...
-    Orion::resourceRelation('users', 'posts', 'API\UserPostsController', HasMany::class);
-    ...
-});
-
-```
-
 ### Soft Deletes
 
 If your relation model uses `SoftDeletes` trait and you would like to expose the same functionality via API, call `withSoftDeletes` method upon resource registration.
@@ -109,7 +90,7 @@ Route::group(['as' => 'api.'], function() {
 
 ```
 
-This will introduce `restore` endpoint. To learn how to permanently delete a resource via API (force delete), take a look at the related [Query Parameters](./query-parameters.html#soft-deletes) section.
+This will introduce `restore` and `batchRestore` endpoints. To learn how to permanently delete a resource via API (force delete), take a look at the related [Query Parameters](./query-parameters.html#soft-deletes) section.
 
 ```bash
 +--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
@@ -117,6 +98,7 @@ This will introduce `restore` endpoint. To learn how to permanently delete a res
 +--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
 ...
 |        | POST      | api/users/{user}/posts/{post}/restore           | api.users.relation.posts.restore       | App\Http\Controllers\API\UserPostsController@restore                      | api                                             |
+|        | POST      | api/users/{user}/posts/batch/restore            | api.users.relation.posts.batchRestore  | App\Http\Controllers\API\UserPostsController@batchRestore                 | api                                             |
 ```
 
 ## One to One
@@ -128,7 +110,7 @@ The following relationships are considered one-to-one relationships:
 - `belongsTo` (inverse of the `hasMany` relation)
 - `morphTo` (inverse of the `morphMany` relation)
 
-For one-to-one relationships, Laravel Orion provides 4 endpoints (basically endpoints for CRUD operations): `store`, `show`, `update`, `destroy`
+For one-to-one relationships, Laravel Orion provides 7 endpoints (basically endpoints for CRUD operations): `store`, `show`, `update`, `destroy`, `batchStore`, `batchUpdate`, `batchDestroy`
 
 :::warning ATTENTION
 The `belongsTo` and `morphTo` relations are not provided with `store` endpoint.
@@ -143,14 +125,16 @@ Orion::hasOneResource('profiles', 'image' , 'API\ProfileImageController');
 **Example available endpoints**
 
 ```bash
-+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
-| Method    | URI                                             | Name                                   | Action                                                                    |
-+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
-| POST      | api/profiles/{profile}/image                    | api.profiles.relation.image.store      | App\Http\Controllers\API\ProfileImageController@store                     |
-| GET|HEAD  | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.show       | App\Http\Controllers\API\ProfileImageController@show                      |
-| PATCH     | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.update     | App\Http\Controllers\API\ProfileImageController@update                    |
-| PUT       | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.update     | App\Http\Controllers\API\ProfileImageController@update                    |
-| DELETE    | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.destroy    | App\Http\Controllers\API\ProfileImageController@destroy                   |
++-----------+-------------------------------------------------+------------------------------------------+---------------------------------------------------------------------------+
+| Method    | URI                                             | Name                                     | Action                                                                    |
++-----------+-------------------------------------------------+------------------------------------------+---------------------------------------------------------------------------+
+| POST      | api/profiles/{profile}/image                    | api.profiles.relation.image.store        | App\Http\Controllers\API\ProfileImageController@store                     |
+| GET|HEAD  | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.show         | App\Http\Controllers\API\ProfileImageController@show                      |
+| PATCH|PUT | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.update       | App\Http\Controllers\API\ProfileImageController@update                    |
+| DELETE    | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.destroy      | App\Http\Controllers\API\ProfileImageController@destroy                   |
+| POST      | api/profiles/{profile}/image/batch              | api.profiles.relation.image.batchStore   | App\Http\Controllers\API\ProfileImageController@batchStore                |
+| PATCH     | api/profiles/{profile}/image/batch              | api.profiles.relation.image.batchUpdate  | App\Http\Controllers\API\ProfileImageController@batchUpdate               |
+| DELETE    | api/profiles/{profile}/image/batch              | api.profiles.relation.image.batchDestroy | App\Http\Controllers\API\ProfileImageController@batchDestroy              |
 ```
 
 :::tip TIP
@@ -166,7 +150,7 @@ The following relationships are considered one-to-many relationships:
 - `hasManyThrough`
 - `morphMany`
 
-For one-to-many relationships, Laravel Orion provides 7 endpoints (endpoints for CRUD operations, searching, associating, and dissociating): `index`, `search`, `store`, `show`, `update`, `destroy`, `associate`, `dissociate`
+For one-to-many relationships, Laravel Orion provides 11 endpoints (endpoints for CRUD operations, searching, associating, and dissociating): `index`, `search`, `store`, `show`, `update`, `destroy`, `associate`, `dissociate`, `batchStore`, `batchUpdate`, `batchDestroy`
 
 **Example route registration**
 
@@ -189,6 +173,9 @@ Orion::hasManyResource('users', 'posts' , 'API\UserPostsController');
 | DELETE    | api/users/{user}/posts/{post}                   | api.users.relation.posts.destroy       | App\Http\Controllers\API\UserPostsController@destroy                      |
 | POST      | api/users/{user}/posts/associate                | api.users.relation.posts.associate     | App\Http\Controllers\API\UserPostsController@associate                    |
 | DELETE    | api/users/{user}/posts/{post}/dissociate        | api.users.relation.posts.dissociate    | App\Http\Controllers\API\UserPostsController@dissociate                   |
+| POST      | api/users/{user}/posts/batch                    | api.users.relation.posts.batchStore    | App\Http\Controllers\API\UserPostsController@batchStore                   |
+| PATCH     | api/users/{user}/posts/batch                    | api.users.relation.posts.batchUpdate   | App\Http\Controllers\API\UserPostsController@batchUpdate                  |
+| DELETE    | api/users/{user}/posts/batch                    | api.users.relation.posts.batchDestroy  | App\Http\Controllers\API\UserPostsController@batchDestroy                 |
 ```
 
 ### Associating
@@ -218,7 +205,7 @@ The following relationships are considered many-to-many relationships:
 - `belongsToMany`
 - `morphToMany`
 
-For many-to-many relationships, Laravel Orion provides 11 endpoints (endpoints for CRUD operations, searching, attaching, detaching, syncing, toggling, and updating pivot): `index`, `search`, `store`, `show`, `update`, `destroy`, `attach`, `detach`, `sync`, `toggle`, `pivot`
+For many-to-many relationships, Laravel Orion provides 14 endpoints (endpoints for CRUD operations, searching, attaching, detaching, syncing, toggling, and updating pivot): `index`, `search`, `store`, `show`, `update`, `destroy`, `attach`, `detach`, `sync`, `toggle`, `pivot`,  `batchStore`, `batchUpdate`, `batchDestroy`
 
 **Example route registration**
 
@@ -244,6 +231,9 @@ Orion::belongsToManyResource('users', 'roles' , 'API\UserRolesController');
 | PATCH     | api/users/{user}/roles/sync                     | api.users.relation.roles.sync          | App\Http\Controllers\API\UserRolesController@sync                         |
 | PATCH     | api/users/{user}/roles/toggle                   | api.users.relation.roles.toggle        | App\Http\Controllers\API\UserRolesController@toggle                       |
 | PATCH     | api/users/{user}/roles/{role}/pivot             | api.users.relation.roles.pivot         | App\Http\Controllers\API\UserRolesController@updatePivot                  |
+| POST      | api/users/{user}/roles/batch                    | api.users.relation.roles.batchStore    | App\Http\Controllers\API\UserRolesController@batchStore                   |
+| PATCH     | api/users/{user}/roles/batch                    | api.users.relation.roles.batchUpdate   | App\Http\Controllers\API\UserRolesController@batchUpdate                  |
+| DELETE    | api/users/{user}/roles/batch                    | api.users.relation.roles.batchDestroy  | App\Http\Controllers\API\UserRolesController@batchDestroy                 |
 ```
 
 :::warning ATTENTION
