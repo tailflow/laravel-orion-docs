@@ -10,7 +10,7 @@ features:
   details: Fully featured REST API for your Eloquent models and relationships with the simplicity of Laravel as you love it.
 - title: Easy to use and learn
   details: Utilizes standard Laravel features such as Request classes, Policies and API Resources.
-- title: SDK out of box
+- title: SDK out of the box
   details: (coming soon...) TypesScript SDK
 footer: MIT Licensed | Copyright © 2019-present Aleksei Zarubin
 ---
