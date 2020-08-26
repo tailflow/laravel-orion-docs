@@ -21,6 +21,7 @@ With Laravel Orion it can be acomplished in 3 simple steps:
 
 namespace App\Http\Controllers\API;
 
+use App\Models\Post;
 use Orion\Http\Controllers\Controller;
 
 class PostsController extends Controller

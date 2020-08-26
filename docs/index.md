@@ -24,6 +24,7 @@ footer: MIT Licensed | Copyright © 2019-present Aleksei Zarubin
 
 namespace App\Http\Controllers\API;
 
+use App\Models\Post;
 use Orion\Http\Controllers\Controller;
 
 class PostsController extends Controller
