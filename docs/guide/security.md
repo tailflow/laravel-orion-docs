@@ -8,14 +8,14 @@ Laravel Orion does not provide any authentication perks at the moment, assuming 
 
 By default, both [model](./models.html) and [relation](./relationships.html) controllers rely on [model policies](https://laravel.com/docs/master/authorization#creating-policies) to determine whether currently authenticated user is allowed to perform certain actions or not.
 
-While it is not recommended, but in some situations you may want to disable authorization checks on a particular controller. To do so, you can use `Orion\Traits\DisableAuthorization` trait.
+While it is not recommended, but in some situations you may want to disable authorization checks on a particular controller. To do so, you can use `Orion\Concerns\DisableAuthorization` trait.
 
 ```php
 
 namespace App\Http\Controllers\API;
 
 use App\Models\Post;
-use Orion\Traits\DisableAuthorization;
+use Orion\Concerns\DisableAuthorization;
 
 class PostsController extends APIController
 {
