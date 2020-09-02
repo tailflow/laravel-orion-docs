@@ -6,7 +6,7 @@ Laravel Orion does not provide any authentication perks at the moment, assuming 
 
 ## Authorization
 
-By default, both [model](./models.html) and [relation](./relationships.html) controllers rely on [model policies](https://laravel.com/docs/master/authorization#creating-policies) to determine whether currently authenticated user is allowed to perform certain actions or not.
+Both [model](./models.html) and [relation](./relationships.html) controllers rely on [model policies](https://laravel.com/docs/master/authorization#creating-policies) to determine whether currently authenticated user is allowed to perform certain actions or not.
 
 While it is not recommended, but in some situations you may want to disable authorization checks on a particular controller. To do so, you can use `Orion\Concerns\DisableAuthorization` trait.
 
@@ -25,6 +25,37 @@ class PostsController extends APIController
      * @var string $model
      */
     protected $model = Post::class;
+}
+```
+
+### Resolving User
+
+By default, `api` guard is used to resolve the currently authenticated user for authorization.
+
+However, you can change the way the user is resolved by overriding `resolveUser` method on a controller.
+
+```php
+
+namespace App\Http\Controllers\API;
+
+use App\Models\Post;
+
+class PostsController extends APIController
+{
+    /**
+     * @var string $model
+     */
+    protected $model = Post::class;
+
+     /**
+     * Retrieves currently authenticated user based on the guard.
+     *
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     */
+    public function resolveUser()
+    {
+        return Auth::guard('custom-guard')->user();
+    }
 }
 ```
 
