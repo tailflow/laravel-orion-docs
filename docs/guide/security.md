@@ -120,14 +120,14 @@ use Orion\Http\Requests\Request;
 
 class PostRequest extends Request
 {
-    public function commonRules()
+    public function commonRules() : array
     {
         return [
             'title' => 'required'
         ];
     }
 
-    public function storeRules()
+    public function storeRules() : array
     {
         return [
             'status' => 'required|in:draft,review'

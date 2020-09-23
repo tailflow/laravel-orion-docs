@@ -21,7 +21,7 @@ class PostsController extends Controller
     *
     * @return array
     */
-    protected function includes()
+    protected function includes() : array
     {
         return ['user', 'meta'];
     }

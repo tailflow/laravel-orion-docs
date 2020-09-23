@@ -13,7 +13,7 @@ Laravel Orion provides comprehensive search capabilities for your API endpoints 
         {"field" : "created_at", "operator" : ">=", "value" : "2020-01-01"},
         {"type" : "or", "field" : "meta.source_id", "operator" : "in", "value" : [1,2,3]}
     ],
-     "search" : {
+    "search" : {
         "value" : "Example post"
     },
     "sort" : [
@@ -56,7 +56,7 @@ class PostsController extends Controller
      *
      * @return array
      */
-    protected function exposedScopes()
+    protected function exposedScopes() : array
     {
         return ['active', 'whereCategory'];
     }
@@ -96,7 +96,7 @@ class PostsController extends Controller
     *
     * @return array
     */
-    protected function filterableBy()
+    protected function filterableBy() : array
     {
         return ['id', 'title', 'user.id', 'meta.source_id', 'created_at'];
     }
@@ -154,7 +154,7 @@ class PostsController extends Controller
      *
      * @return array
      */
-    protected function searchableBy()
+    protected function searchableBy() : array
     {
         return ['title', 'description', 'user.name'];
     }
@@ -204,7 +204,7 @@ class PostsController extends Controller
      *
      * @return array
      */
-    protected function sortableBy()
+    protected function sortableBy() : array
     {
          return ['id', 'name', 'meta.priority'];
     }
