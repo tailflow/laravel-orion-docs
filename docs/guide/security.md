@@ -12,12 +12,12 @@ While it is not recommended, but in some situations you may want to disable auth
 
 ```php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Post;
 use Orion\Concerns\DisableAuthorization;
 
-class PostsController extends APIController
+class PostsController extends ApiController
 {
     use DisableAuthorization;
 
@@ -28,7 +28,7 @@ class PostsController extends APIController
 }
 ```
 
-### Resolving User
+### Resolving user
 
 By default, `api` guard is used to resolve the currently authenticated user for authorization.
 
@@ -36,11 +36,11 @@ However, you can change the way the user is resolved by overriding `resolveUser`
 
 ```php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Post;
 
-class PostsController extends APIController
+class PostsController extends ApiController
 {
     /**
      * @var string $model
@@ -70,12 +70,12 @@ If request class names in your app do not follow this naming convention or if yo
 
 ```php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Message;
 use App\Http\Requests\CustomMessageRequest;
 
-class MessagesController extends APIController
+class MessagesController extends ApiController
 {
     /**
      * @var string $model
@@ -98,7 +98,7 @@ public function store(CustomMessageRequest $request)
 }
 ```
 
-### Validation Rules
+### Validation rules
 
 #### Defining rules for `store` and `update` endpoints
 

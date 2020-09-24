@@ -43,7 +43,7 @@ First, the list of exposed via API scopes needs to be set on a controller:
 
 ```php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use Orion\Http\Controllers\Controller;
 
@@ -83,7 +83,7 @@ If you need granular control over query constraints, using filters might be a be
 
 ```php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use Orion\Http\Controllers\Controller;
 
@@ -141,7 +141,7 @@ First, you need to define the list of fields across which the search will be per
 
 ```php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use Orion\Http\Controllers\Controller;
 
@@ -191,7 +191,7 @@ Similar to the way fields are whitelisted for filters, they need to be specified
 
 ```php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use Orion\Http\Controllers\Controller;
 

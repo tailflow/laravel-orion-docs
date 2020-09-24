@@ -7,7 +7,7 @@ Defining model relationship controller is very similar to defining model control
 ```php
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Post;
 use Orion\Http\Controllers\RelationController;
@@ -56,17 +56,17 @@ use Orion\Facades\Orion;
 
 Route::group(['as' => 'api.'], function() {
     ...
-    Orion::hasOneResource('profiles', 'image' , 'API\ProfileImageController');
-    Orion::hasManyResource('users', 'posts' , 'API\UserPostsController');
-    Orion::belongsToResource('posts', 'user' , 'API\PostUserController');
-    Orion::belongsToManyResource('users', 'roles' , 'API\UserRolesController');
-    Orion::hasOneThroughResource('posts', 'meta' , 'API\PostMetaController');
-    Orion::hasManyThroughResource('users', 'comments' , 'API\UserCommentsController');
-    Orion::morphOneResource('posts', 'image', 'API\PostImageController');
-    Orion::morphManyResource('posts', 'comments', 'API\PostCommentsController');
-    Orion::morphToResource('images', 'post', 'API\ImagePostController');
-    Orion::morphToManyResource('posts', 'tags', 'API\PostTagsController');
-    Orion::morphedByManyResource('tags', 'posts', 'API\TagsPostsController');
+    Orion::hasOneResource('profiles', 'image' , 'Api\ProfileImageController');
+    Orion::hasManyResource('users', 'posts' , 'Api\UserPostsController');
+    Orion::belongsToResource('posts', 'user' , 'Api\PostUserController');
+    Orion::belongsToManyResource('users', 'roles' , 'Api\UserRolesController');
+    Orion::hasOneThroughResource('posts', 'meta' , 'Api\PostMetaController');
+    Orion::hasManyThroughResource('users', 'comments' , 'Api\UserCommentsController');
+    Orion::morphOneResource('posts', 'image', 'Api\PostImageController');
+    Orion::morphManyResource('posts', 'comments', 'Api\PostCommentsController');
+    Orion::morphToResource('images', 'post', 'Api\ImagePostController');
+    Orion::morphToManyResource('posts', 'tags', 'Api\PostTagsController');
+    Orion::morphedByManyResource('tags', 'posts', 'Api\TagsPostsController');
     ...
 });
 
@@ -84,7 +84,7 @@ use Orion\Facades\Orion;
 
 Route::group(['as' => 'api.'], function() {
     ...
-    Orion::hasManyResource('users', 'posts', 'API\UserPostsController')->withSoftDeletes();
+    Orion::hasManyResource('users', 'posts', 'Api\UserPostsController')->withSoftDeletes();
     ...
 });
 
@@ -97,8 +97,8 @@ This will introduce `restore` and `batchRestore` endpoints. To learn how to perm
 | Domain | Method    | URI                                             | Name                                   | Action                                                                    | Middleware                                      |
 +--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
 ...
-|        | POST      | api/users/{user}/posts/{post}/restore           | api.users.relation.posts.restore       | App\Http\Controllers\API\UserPostsController@restore                      | api                                             |
-|        | POST      | api/users/{user}/posts/batch/restore            | api.users.relation.posts.batchRestore  | App\Http\Controllers\API\UserPostsController@batchRestore                 | api                                             |
+|        | POST      | api/users/{user}/posts/{post}/restore           | api.users.relation.posts.restore       | App\Http\Controllers\Api\UserPostsController@restore                      | api                                             |
+|        | POST      | api/users/{user}/posts/batch/restore            | api.users.relation.posts.batchRestore  | App\Http\Controllers\Api\UserPostsController@batchRestore                 | api                                             |
 ```
 
 ## One to One
@@ -119,7 +119,7 @@ The `belongsTo` and `morphTo` relations are not provided with `store` endpoint.
 **Example route registration**
 
 ```php
-Orion::hasOneResource('profiles', 'image' , 'API\ProfileImageController');
+Orion::hasOneResource('profiles', 'image' , 'Api\ProfileImageController');
 ```
 
 **Example available endpoints**
@@ -128,13 +128,13 @@ Orion::hasOneResource('profiles', 'image' , 'API\ProfileImageController');
 +-----------+-------------------------------------------------+------------------------------------------+---------------------------------------------------------------------------+
 | Method    | URI                                             | Name                                     | Action                                                                    |
 +-----------+-------------------------------------------------+------------------------------------------+---------------------------------------------------------------------------+
-| POST      | api/profiles/{profile}/image                    | api.profiles.relation.image.store        | App\Http\Controllers\API\ProfileImageController@store                     |
-| GET|HEAD  | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.show         | App\Http\Controllers\API\ProfileImageController@show                      |
-| PATCH|PUT | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.update       | App\Http\Controllers\API\ProfileImageController@update                    |
-| DELETE    | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.destroy      | App\Http\Controllers\API\ProfileImageController@destroy                   |
-| POST      | api/profiles/{profile}/image/batch              | api.profiles.relation.image.batchStore   | App\Http\Controllers\API\ProfileImageController@batchStore                |
-| PATCH     | api/profiles/{profile}/image/batch              | api.profiles.relation.image.batchUpdate  | App\Http\Controllers\API\ProfileImageController@batchUpdate               |
-| DELETE    | api/profiles/{profile}/image/batch              | api.profiles.relation.image.batchDestroy | App\Http\Controllers\API\ProfileImageController@batchDestroy              |
+| POST      | api/profiles/{profile}/image                    | api.profiles.relation.image.store        | App\Http\Controllers\Api\ProfileImageController@store                     |
+| GET|HEAD  | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.show         | App\Http\Controllers\Api\ProfileImageController@show                      |
+| PATCH|PUT | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.update       | App\Http\Controllers\Api\ProfileImageController@update                    |
+| DELETE    | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.destroy      | App\Http\Controllers\Api\ProfileImageController@destroy                   |
+| POST      | api/profiles/{profile}/image/batch              | api.profiles.relation.image.batchStore   | App\Http\Controllers\Api\ProfileImageController@batchStore                |
+| PATCH     | api/profiles/{profile}/image/batch              | api.profiles.relation.image.batchUpdate  | App\Http\Controllers\Api\ProfileImageController@batchUpdate               |
+| DELETE    | api/profiles/{profile}/image/batch              | api.profiles.relation.image.batchDestroy | App\Http\Controllers\Api\ProfileImageController@batchDestroy              |
 ```
 
 :::tip TIP
@@ -155,7 +155,7 @@ For one-to-many relationships, Laravel Orion provides 11 endpoints (endpoints fo
 **Example route registration**
 
 ```php
-Orion::hasManyResource('users', 'posts' , 'API\UserPostsController');
+Orion::hasManyResource('users', 'posts' , 'Api\UserPostsController');
 ```
 
 **Example available endpoints**
@@ -164,18 +164,18 @@ Orion::hasManyResource('users', 'posts' , 'API\UserPostsController');
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
 | Method    | URI                                             | Name                                   | Action                                                                    |
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
-| GET|HEAD  | api/users/{user}/posts                          | api.users.relation.posts.index         | App\Http\Controllers\API\UserPostsController@index                        |
-| POST      | api/users/{user}/posts/search                   | api.users.relation.posts.search        | App\Http\Controllers\API\UserPostsController@index                        |
-| POST      | api/users/{user}/posts                          | api.users.relation.posts.store         | App\Http\Controllers\API\UserPostsController@store                        |
-| GET|HEAD  | api/users/{user}/posts/{post}                   | api.users.relation.posts.show          | App\Http\Controllers\API\UserPostsController@show                         |
-| PATCH     | api/users/{user}/posts/{post}                   | api.users.relation.posts.update        | App\Http\Controllers\API\UserPostsController@update                       |
-| PUT       | api/users/{user}/posts/{post}                   | api.users.relation.posts.update        | App\Http\Controllers\API\UserPostsController@update                       |
-| DELETE    | api/users/{user}/posts/{post}                   | api.users.relation.posts.destroy       | App\Http\Controllers\API\UserPostsController@destroy                      |
-| POST      | api/users/{user}/posts/associate                | api.users.relation.posts.associate     | App\Http\Controllers\API\UserPostsController@associate                    |
-| DELETE    | api/users/{user}/posts/{post}/dissociate        | api.users.relation.posts.dissociate    | App\Http\Controllers\API\UserPostsController@dissociate                   |
-| POST      | api/users/{user}/posts/batch                    | api.users.relation.posts.batchStore    | App\Http\Controllers\API\UserPostsController@batchStore                   |
-| PATCH     | api/users/{user}/posts/batch                    | api.users.relation.posts.batchUpdate   | App\Http\Controllers\API\UserPostsController@batchUpdate                  |
-| DELETE    | api/users/{user}/posts/batch                    | api.users.relation.posts.batchDestroy  | App\Http\Controllers\API\UserPostsController@batchDestroy                 |
+| GET|HEAD  | api/users/{user}/posts                          | api.users.relation.posts.index         | App\Http\Controllers\Api\UserPostsController@index                        |
+| POST      | api/users/{user}/posts/search                   | api.users.relation.posts.search        | App\Http\Controllers\Api\UserPostsController@index                        |
+| POST      | api/users/{user}/posts                          | api.users.relation.posts.store         | App\Http\Controllers\Api\UserPostsController@store                        |
+| GET|HEAD  | api/users/{user}/posts/{post}                   | api.users.relation.posts.show          | App\Http\Controllers\Api\UserPostsController@show                         |
+| PATCH     | api/users/{user}/posts/{post}                   | api.users.relation.posts.update        | App\Http\Controllers\Api\UserPostsController@update                       |
+| PUT       | api/users/{user}/posts/{post}                   | api.users.relation.posts.update        | App\Http\Controllers\Api\UserPostsController@update                       |
+| DELETE    | api/users/{user}/posts/{post}                   | api.users.relation.posts.destroy       | App\Http\Controllers\Api\UserPostsController@destroy                      |
+| POST      | api/users/{user}/posts/associate                | api.users.relation.posts.associate     | App\Http\Controllers\Api\UserPostsController@associate                    |
+| DELETE    | api/users/{user}/posts/{post}/dissociate        | api.users.relation.posts.dissociate    | App\Http\Controllers\Api\UserPostsController@dissociate                   |
+| POST      | api/users/{user}/posts/batch                    | api.users.relation.posts.batchStore    | App\Http\Controllers\Api\UserPostsController@batchStore                   |
+| PATCH     | api/users/{user}/posts/batch                    | api.users.relation.posts.batchUpdate   | App\Http\Controllers\Api\UserPostsController@batchUpdate                  |
+| DELETE    | api/users/{user}/posts/batch                    | api.users.relation.posts.batchDestroy  | App\Http\Controllers\Api\UserPostsController@batchDestroy                 |
 ```
 
 ### Associating
@@ -210,7 +210,7 @@ For many-to-many relationships, Laravel Orion provides 14 endpoints (endpoints f
 **Example route registration**
 
 ```php
-Orion::belongsToManyResource('users', 'roles' , 'API\UserRolesController');
+Orion::belongsToManyResource('users', 'roles' , 'Api\UserRolesController');
 ```
 
 **Example available endpoints**
@@ -219,21 +219,21 @@ Orion::belongsToManyResource('users', 'roles' , 'API\UserRolesController');
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
 | Method    | URI                                             | Name                                   | Action                                                                    |
 +-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+
-| GET|HEAD  | api/users/{user}/roles                          | api.users.relation.roles.index         | App\Http\Controllers\API\UserRolesController@index                        |
-| POST      | api/users/{user}/roles/search                   | api.users.relation.roles.search        | App\Http\Controllers\API\UserRolesController@index                        |
-| POST      | api/users/{user}/roles                          | api.users.relation.roles.store         | App\Http\Controllers\API\UserRolesController@store                        |
-| GET|HEAD  | api/users/{user}/roles/{role}                   | api.users.relation.roles.show          | App\Http\Controllers\API\UserRolesController@show                         |
-| PATCH     | api/users/{user}/roles/{role}                   | api.users.relation.roles.update        | App\Http\Controllers\API\UserRolesController@update                       |
-| PUT       | api/users/{user}/roles/{role}                   | api.users.relation.roles.update        | App\Http\Controllers\API\UserRolesController@update                       |
-| DELETE    | api/users/{user}/roles/{role}                   | api.users.relation.roles.destroy       | App\Http\Controllers\API\UserRolesController@destroy                      |
-| POST      | api/users/{user}/roles/attach                   | api.users.relation.roles.attach        | App\Http\Controllers\API\UserRolesController@attach                       |
-| DELETE    | api/users/{user}/roles/detach                   | api.users.relation.roles.detach        | App\Http\Controllers\API\UserRolesController@detach                       |
-| PATCH     | api/users/{user}/roles/sync                     | api.users.relation.roles.sync          | App\Http\Controllers\API\UserRolesController@sync                         |
-| PATCH     | api/users/{user}/roles/toggle                   | api.users.relation.roles.toggle        | App\Http\Controllers\API\UserRolesController@toggle                       |
-| PATCH     | api/users/{user}/roles/{role}/pivot             | api.users.relation.roles.pivot         | App\Http\Controllers\API\UserRolesController@updatePivot                  |
-| POST      | api/users/{user}/roles/batch                    | api.users.relation.roles.batchStore    | App\Http\Controllers\API\UserRolesController@batchStore                   |
-| PATCH     | api/users/{user}/roles/batch                    | api.users.relation.roles.batchUpdate   | App\Http\Controllers\API\UserRolesController@batchUpdate                  |
-| DELETE    | api/users/{user}/roles/batch                    | api.users.relation.roles.batchDestroy  | App\Http\Controllers\API\UserRolesController@batchDestroy                 |
+| GET|HEAD  | api/users/{user}/roles                          | api.users.relation.roles.index         | App\Http\Controllers\Api\UserRolesController@index                        |
+| POST      | api/users/{user}/roles/search                   | api.users.relation.roles.search        | App\Http\Controllers\Api\UserRolesController@index                        |
+| POST      | api/users/{user}/roles                          | api.users.relation.roles.store         | App\Http\Controllers\Api\UserRolesController@store                        |
+| GET|HEAD  | api/users/{user}/roles/{role}                   | api.users.relation.roles.show          | App\Http\Controllers\Api\UserRolesController@show                         |
+| PATCH     | api/users/{user}/roles/{role}                   | api.users.relation.roles.update        | App\Http\Controllers\Api\UserRolesController@update                       |
+| PUT       | api/users/{user}/roles/{role}                   | api.users.relation.roles.update        | App\Http\Controllers\Api\UserRolesController@update                       |
+| DELETE    | api/users/{user}/roles/{role}                   | api.users.relation.roles.destroy       | App\Http\Controllers\Api\UserRolesController@destroy                      |
+| POST      | api/users/{user}/roles/attach                   | api.users.relation.roles.attach        | App\Http\Controllers\Api\UserRolesController@attach                       |
+| DELETE    | api/users/{user}/roles/detach                   | api.users.relation.roles.detach        | App\Http\Controllers\Api\UserRolesController@detach                       |
+| PATCH     | api/users/{user}/roles/sync                     | api.users.relation.roles.sync          | App\Http\Controllers\Api\UserRolesController@sync                         |
+| PATCH     | api/users/{user}/roles/toggle                   | api.users.relation.roles.toggle        | App\Http\Controllers\Api\UserRolesController@toggle                       |
+| PATCH     | api/users/{user}/roles/{role}/pivot             | api.users.relation.roles.pivot         | App\Http\Controllers\Api\UserRolesController@updatePivot                  |
+| POST      | api/users/{user}/roles/batch                    | api.users.relation.roles.batchStore    | App\Http\Controllers\Api\UserRolesController@batchStore                   |
+| PATCH     | api/users/{user}/roles/batch                    | api.users.relation.roles.batchUpdate   | App\Http\Controllers\Api\UserRolesController@batchUpdate                  |
+| DELETE    | api/users/{user}/roles/batch                    | api.users.relation.roles.batchDestroy  | App\Http\Controllers\Api\UserRolesController@batchDestroy                 |
 ```
 
 :::warning ATTENTION

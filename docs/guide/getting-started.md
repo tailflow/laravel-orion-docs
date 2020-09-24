@@ -19,7 +19,7 @@ With Laravel Orion it can be acomplished in 3 simple steps:
 ```php
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Post;
 use Orion\Http\Controllers\Controller;
@@ -35,7 +35,7 @@ class PostsController extends Controller
 ```php
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use Orion\Http\Controllers\Controller;
 
@@ -65,7 +65,7 @@ use Illuminate\Support\Facades\Route;
 use Orion\Facades\Orion;
 
 Route::group(['as' => 'api.'], function() {
-    Orion::resource('posts', 'API\PostsController');
+    Orion::resource('posts', 'Api\PostsController');
 });
 
 ```
@@ -79,13 +79,13 @@ You can also take a look at all available endpoints by running `php artisan rout
 | Domain | Method    | URI                                             | Name                                   | Action                                                                    | Middleware                                      |
 +--------+-----------+-------------------------------------------------+----------------------------------------+---------------------------------------------------------------------------+-------------------------------------------------+
 ...
-|        | GET|HEAD  | api/posts                                       | api.posts.index                        | App\Http\Controllers\API\PostsController@index                            | api                                             |
-|        | POST      | api/posts/search                                | api.posts.search                       | App\Http\Controllers\API\PostsController@index                            | api                                             |
-|        | POST      | api/posts                                       | api.posts.store                        | App\Http\Controllers\API\PostsController@store                            | api                                             |
-|        | GET|HEAD  | api/posts/{post}                                | api.posts.show                         | App\Http\Controllers\API\PostsController@show                             | api                                             |  
-|        | PUT|PATCH | api/posts/{post}                                | api.posts.update                       | App\Http\Controllers\API\PostsController@update                           | api                                             |
-|        | DELETE    | api/posts/{post}                                | api.posts.destroy                      | App\Http\Controllers\API\PostsController@destroy                          | api                                             |
-|        | POST      | api/posts/batch                                 | api.posts.batchStore                   | App\Http\Controllers\API\PostsController@batchStore                       | api                                             |
-|        | PATCH     | api/posts/batch                                 | api.posts.batchUpdate                  | App\Http\Controllers\API\PostsController@batchUpdate                      | api                                             |
-|        | DELETE    | api/posts/batch                                 | api.posts.batchDestroy                 | App\Http\Controllers\API\PostsController@batchDestroy                     | api                                             |
+|        | GET|HEAD  | api/posts                                       | api.posts.index                        | App\Http\Controllers\Api\PostsController@index                            | api                                             |
+|        | POST      | api/posts/search                                | api.posts.search                       | App\Http\Controllers\Api\PostsController@index                            | api                                             |
+|        | POST      | api/posts                                       | api.posts.store                        | App\Http\Controllers\Api\PostsController@store                            | api                                             |
+|        | GET|HEAD  | api/posts/{post}                                | api.posts.show                         | App\Http\Controllers\Api\PostsController@show                             | api                                             |  
+|        | PUT|PATCH | api/posts/{post}                                | api.posts.update                       | App\Http\Controllers\Api\PostsController@update                           | api                                             |
+|        | DELETE    | api/posts/{post}                                | api.posts.destroy                      | App\Http\Controllers\Api\PostsController@destroy                          | api                                             |
+|        | POST      | api/posts/batch                                 | api.posts.batchStore                   | App\Http\Controllers\Api\PostsController@batchStore                       | api                                             |
+|        | PATCH     | api/posts/batch                                 | api.posts.batchUpdate                  | App\Http\Controllers\Api\PostsController@batchUpdate                      | api                                             |
+|        | DELETE    | api/posts/batch                                 | api.posts.batchDestroy                 | App\Http\Controllers\Api\PostsController@batchDestroy                     | api                                             |
 ```

@@ -7,7 +7,7 @@ Here is a common use case: imagine you have an API controller for blog posts and
 ```php
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Post;
 use Orion\Http\Requests\Request;

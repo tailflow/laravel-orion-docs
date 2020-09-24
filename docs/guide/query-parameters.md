@@ -8,7 +8,7 @@ Sometimes you may want to include relationships together with the returned resou
 
 ```php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use Orion\Http\Controllers\Controller;
 

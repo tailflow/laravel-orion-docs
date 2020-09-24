@@ -10,13 +10,13 @@ If resource class names in your app do not follow this naming convention or if y
 
 ```php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Message;
 use App\Http\Resources\CustomMessageResource;
 use App\Http\Resources\CustomMessageCollectionResource;
 
-class MessagesController extends APIController
+class MessagesController extends ApiController
 {
     /**
      * @var string $model
