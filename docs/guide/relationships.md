@@ -404,3 +404,36 @@ Request payload consist of only one field `pivot`. Its properties are pivot tabl
     }
 }
 ```
+
+## Customizing queries
+
+It is possible, same as in [model controllers](./models.html#customizing-queries), to redefine Eloquent queries for each endpoint.
+
+### Standard operations
+
+| Method | Build (parent) | Run (parent) | Build | Run | Perform |
+| ---- | -------------- | ------------ | ----- |---- | ------- |
+| index | buildIndexParentFetchQuery | runIndexParentFetchQuery | buildIndexFetchQuery | runIndexFetchQuery | - |
+| store | buildStoreParentFetchQuery | runStoreParentFetchQuery | - | - | performStore |
+| show | buildShowParentFetchQuery | runShowParentFetchQuery | buildShowFetchQuery | buildShowFetchQuery | - |
+| update | buildUpdateParentFetchQuery | runUpdateParentFetchQuery | buildUpdateFetchQuery | buildUpdateFetchQuery | performUpdate |
+| destroy | buildDestroyParentFetchQuery | runDestroyParentFetchQuery | buildDestroyFetchQuery | buildDestroyFetchQuery | performDestroy |
+| restore | buildRestoreParentFetchQuery | runRestoreParentFetchQuery | buildRestoreFetchQuery | buildRestoreFetchQuery | performRestore |
+
+### One-to-many operations
+
+| Method | Build (parent) | Run (parent) | Build | Run | Perform |
+| ---- | -------------- | ------------ | ----- |---- | ------- |
+| associate | buildAssociateParentFetchQuery | runAssociateParentFetchQuery | buildAssociateFetchQuery | runAssociateFetchQuery | performAssociate |
+| dissociate | buildDissociateParentFetchQuery | runDissociateParentFetchQuery | buildDissociateFetchQuery | runDissociateFetchQuery | performDissociate |
+
+
+### Many-to-many operations
+
+| Method | Build (parent) | Run (parent) | Build | Run | Perform |
+| ---- | -------------- | ------------ | ----- |---- | ------- |
+| attach | buildAttachParentFetchQuery | runAttachParentFetchQuery | - | - | performAttach |
+| detach | buildDetachParentFetchQuery | runDetachParentFetchQuery | - | - | performDetach |
+| sync | buildSyncParentFetchQuery | runSyncParentFetchQuery | - | - | performSync |
+| toggle | buildToggleParentFetchQuery | runToggleParentFetchQuery | - | - | performToggle |
+| updatePivot | buildUpdatePivotParentFetchQuery | runUpdatePivotParentFetchQuery | - | - | performUpdatePivot |

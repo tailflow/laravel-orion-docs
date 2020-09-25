@@ -174,7 +174,7 @@ class PostsController extends Controller
 
 #### Performing operations
 
-The main purpose of endpoints like `index` or `show` is to retrieve data from the database, not change it. But endpoints like `store`, `update,` etc. make changes to the database. It is also possible to customize, how certain operations, like storing a model, are performed.
+The main purpose of endpoints like `index` or `show` is to retrieve data from the database, not change it. But endpoints like `store`, `update,` etc. make changes to the database. It is also possible to customize how certain operations, like storing a model, are performed.
 
 In the given example we would force fill the attributes on the post, if the currenthly authenticated user is admin (roles implementation here is imaginary):
 
@@ -220,7 +220,7 @@ Cool, now index endpoint returns only published posts. But what if you would lik
 
 #### Building queries
 
-If you take a look how `buildIndexFetchQuery` method is implemented, you will notice that it uses `buildFetchQuery` method. In fact, this method is used by `index`, `show`, `update`, `destroy`, and `restore` endpoints to build the query for fetching model(s), and you can override it as well!
+If you take a look at how `buildIndexFetchQuery` method is implemented, you will notice that it uses `buildFetchQuery` method. In fact, this method is used by `index`, `show`, `update`, `destroy`, and `restore` endpoints to build the query for fetching model(s), and you can override it as well!
 
 Here is how it would look like, if you would like to apply the same constraint to `index` and `show` endpoints (and `update`, `destroy`, and `restore`) at once:
 
@@ -345,3 +345,14 @@ class PostsController extends Controller
     }
 }
 ```
+
+#### Methods map
+
+| Method | Build | Run | Perform |
+| ---- | ----- | --- | ------- |
+| index | buildIndexFetchQuery | runIndexFetchQuery | - |
+| store | - | - | performStore |
+| show | buildShowFetchQuery | runShowFetchQuery | - |
+| update | buildUpdateFetchQuery | runUpdateFetchQuery | performUpdate |
+| destroy | buildDestroyFetchQuery | runDestroyFetchQuery | performDestroy |
+| restore | buildRestoreFetchQuery | runRestoreFetchQuery | performRestore |
