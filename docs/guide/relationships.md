@@ -407,9 +407,9 @@ Request payload consist of only one field `pivot`. Its properties are pivot tabl
 
 ## Customizing queries
 
-It is possible, same as in [model controllers](./models.html#customizing-queries), to redefine Eloquent queries for each endpoint.
+It is possible, same as in [model controllers](./models.html#customizing-queries), to redefine Eloquent queries for each endpoint. The only major difference is that each endpoint in relation controller also has "build" and "run" methods for fetching relation's parent model.
 
-### Standard operations
+### Standard operations methods
 
 | Method | Build (parent) | Run (parent) | Build | Run | Perform |
 | ---- | -------------- | ------------ | ----- |---- | ------- |
@@ -420,7 +420,7 @@ It is possible, same as in [model controllers](./models.html#customizing-queries
 | destroy | buildDestroyParentFetchQuery | runDestroyParentFetchQuery | buildDestroyFetchQuery | buildDestroyFetchQuery | performDestroy |
 | restore | buildRestoreParentFetchQuery | runRestoreParentFetchQuery | buildRestoreFetchQuery | buildRestoreFetchQuery | performRestore |
 
-### One-to-many operations
+### One-to-many operations methods
 
 | Method | Build (parent) | Run (parent) | Build | Run | Perform |
 | ---- | -------------- | ------------ | ----- |---- | ------- |
@@ -428,7 +428,7 @@ It is possible, same as in [model controllers](./models.html#customizing-queries
 | dissociate | buildDissociateParentFetchQuery | runDissociateParentFetchQuery | buildDissociateFetchQuery | runDissociateFetchQuery | performDissociate |
 
 
-### Many-to-many operations
+### Many-to-many operations methods
 
 | Method | Build (parent) | Run (parent) | Build | Run | Perform |
 | ---- | -------------- | ------------ | ----- |---- | ------- |

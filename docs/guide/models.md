@@ -346,7 +346,7 @@ class PostsController extends Controller
 }
 ```
 
-#### Methods map
+### Standard operations methods
 
 | Method | Build | Run | Perform |
 | ---- | ----- | --- | ------- |
