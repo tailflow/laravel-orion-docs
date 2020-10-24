@@ -1,13 +1,13 @@
 module.exports = {
-    base: '/docs/',
+    base: '/laravel-orion-docs/',
     title: 'Laravel Orion',
     description: 'The simplest way to create REST API with Laravel',
     head: [
         ['link', { rel: "shortcut icon", href: "/favicon.ico" }],
     ],
     themeConfig: {
-        repo: 'laravel-orion/laravel-orion',
-        docsRepo: 'laravel-orion/docs',
+        repo: 'tailflow/laravel-orion',
+        docsRepo: 'tailflow/laravel-orion-docs',
         docsDir: 'docs',
         editLinks: true,
         nav: [
