@@ -3,9 +3,9 @@
 </p>
 
 <p align="center">
-<a href="https://travis-ci.org/laravel-orion/docs"><img src="https://travis-ci.org/laravel-orion/docs.svg" alt="Build Status"></a>
+<a href="https://travis-ci.org/tailflow/laravel-orion-docs"><img src="https://travis-ci.org/tailflow/laravel-orion-docs.svg" alt="Build Status"></a>
 </p>
 
 ## Official Documentation
 
-Documentation for Laravel Orion can be found on the [website](https://laravel-orion.github.io/docs/).
+Documentation for Laravel Orion can be found on the [website](https://tailflow.github.io/laravel-orion-docs/).
