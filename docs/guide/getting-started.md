@@ -1,5 +1,10 @@
 # Getting Started
 
+## Requirements
+
+- PHP >= 7.2
+- Laravel >= 5.7
+
 ## Installation
 
 Laravel Orion can be installed into a new or existing project, simply by adding a composer dependency:
