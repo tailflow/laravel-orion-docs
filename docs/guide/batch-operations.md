@@ -69,11 +69,11 @@ The endpoint expects an object in request payload with `resources` array, where 
 Batch operations are enabled by default on all resources. If you would like to disable specific endpoints, you can use Laravel's `except` method:
 
 ```php
-Orion::resource('posts', 'API\PostsController')->except(['batchStore', 'batchUpdate']);
+Orion::resource('posts', PostsController::class)->except(['batchStore', 'batchUpdate']);
 ```
 
 To disable all batch operations on a resource, you can use `withoutBatch` method:
 
 ```php
-Orion::resource('posts', 'API\PostsController')->withoutBatch();
+Orion::resource('posts', PostsController::class)->withoutBatch();
 ```

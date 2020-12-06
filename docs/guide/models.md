@@ -37,10 +37,11 @@ Once controller is created, it is the time to register routes.
 
 use Illuminate\Support\Facades\Route;
 use Orion\Facades\Orion;
+use App\Http\Controllers\PostsController;
 
 Route::group(['as' => 'api.'], function() {
     ...
-    Orion::resource('posts', 'Api\PostsController');
+    Orion::resource('posts', PostsController::class);
     ...
 });
 

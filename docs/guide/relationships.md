@@ -53,20 +53,22 @@ Routes, unlike controllers, are defined in a different way for each relationship
 
 use Illuminate\Support\Facades\Route;
 use Orion\Facades\Orion;
+use App\Http\Controllers\ProfileImageController;
+...
 
 Route::group(['as' => 'api.'], function() {
     ...
-    Orion::hasOneResource('profiles', 'image' , 'Api\ProfileImageController');
-    Orion::hasManyResource('users', 'posts' , 'Api\UserPostsController');
-    Orion::belongsToResource('posts', 'user' , 'Api\PostUserController');
-    Orion::belongsToManyResource('users', 'roles' , 'Api\UserRolesController');
-    Orion::hasOneThroughResource('posts', 'meta' , 'Api\PostMetaController');
-    Orion::hasManyThroughResource('users', 'comments' , 'Api\UserCommentsController');
-    Orion::morphOneResource('posts', 'image', 'Api\PostImageController');
-    Orion::morphManyResource('posts', 'comments', 'Api\PostCommentsController');
-    Orion::morphToResource('images', 'post', 'Api\ImagePostController');
-    Orion::morphToManyResource('posts', 'tags', 'Api\PostTagsController');
-    Orion::morphedByManyResource('tags', 'posts', 'Api\TagsPostsController');
+    Orion::hasOneResource('profiles', 'image', ProfileImageController::class);
+    Orion::hasManyResource('users', 'posts', UserPostsController::class);
+    Orion::belongsToResource('posts', 'user', PostUserController::class);
+    Orion::belongsToManyResource('users', 'roles', UserRolesController::class);
+    Orion::hasOneThroughResource('posts', 'meta', PostMetaController::class);
+    Orion::hasManyThroughResource('users', 'comments', UserCommentsController::class);
+    Orion::morphOneResource('posts', 'image', PostImageController::class);
+    Orion::morphManyResource('posts', 'comments', PostCommentsController::class);
+    Orion::morphToResource('images', 'post', ImagePostController::class);
+    Orion::morphToManyResource('posts', 'tags', PostTagsController::class);
+    Orion::morphedByManyResource('tags', 'posts', TagsPostsController::class);
     ...
 });
 
@@ -81,10 +83,11 @@ If your relation model uses `SoftDeletes` trait and you would like to expose the
 
 use Illuminate\Support\Facades\Route;
 use Orion\Facades\Orion;
+use App\Http\Controllers\UserPostsController;
 
 Route::group(['as' => 'api.'], function() {
     ...
-    Orion::hasManyResource('users', 'posts', 'Api\UserPostsController')->withSoftDeletes();
+    Orion::hasManyResource('users', 'posts', UserPostsController::class)->withSoftDeletes();
     ...
 });
 
@@ -119,7 +122,7 @@ The `belongsTo` and `morphTo` relations are not provided with `store` endpoint.
 **Example route registration**
 
 ```php
-Orion::hasOneResource('profiles', 'image' , 'Api\ProfileImageController');
+Orion::hasOneResource('profiles', 'image' , ProfileImageController::class);
 ```
 
 **Example available endpoints**
@@ -155,7 +158,7 @@ For one-to-many relationships, Laravel Orion provides 11 endpoints (endpoints fo
 **Example route registration**
 
 ```php
-Orion::hasManyResource('users', 'posts' , 'Api\UserPostsController');
+Orion::hasManyResource('users', 'posts' , UserPostsController::class);
 ```
 
 **Example available endpoints**
@@ -210,7 +213,7 @@ For many-to-many relationships, Laravel Orion provides 14 endpoints (endpoints f
 **Example route registration**
 
 ```php
-Orion::belongsToManyResource('users', 'roles' , 'Api\UserRolesController');
+Orion::belongsToManyResource('users', 'roles' , UserRolesController::class);
 ```
 
 **Example available endpoints**
