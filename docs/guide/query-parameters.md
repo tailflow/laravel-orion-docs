@@ -36,6 +36,32 @@ To instruct the API to return relations, url needs to contain `include` query pa
 (GET) https://myapp.com/api/posts?include=user,meta
 ```
 
+To load the relations by default without instructing it through the query parameters, use the `alwaysIncludes` function:
+
+```php
+
+namespace App\Http\Controllers\Api;
+
+use Orion\Http\Controllers\Controller;
+
+class PostsController extends Controller
+{
+    ...
+
+    /**
+    * The relations that are loaded by default together with a resource.
+    *
+    * @return array
+    */
+    protected function alwaysIncludes() : array
+    {
+        return ['user', 'meta'];
+    }
+
+    ...
+}
+```
+
 ## Soft Deletes
 
 ### Returning trashed resources
