@@ -4,7 +4,9 @@ Laravel Orion allows consumers of your API to use query parameters for working w
 
 ## Including Relations
 
-Sometimes you may want to include relationships together with the returned resources. First, allowed set of relations to be used in query parameters needs to be defined on a controller:
+Sometimes you may want to include relationships together with the returned resources. First, allowed set of relations to be used in query parameters needs to be defined on a controller.
+
+### Whitelisting Relations
 
 ```php
 
@@ -23,7 +25,33 @@ class PostsController extends Controller
     */
     protected function includes() : array
     {
-        return ['user', 'meta'];
+        return ['user', 'user.team', 'user.profile', 'meta'];
+    }
+
+    ...
+}
+```
+
+It is also possible to use wildcards to reduce the overhead of defining all possible relations:
+
+```php
+
+namespace App\Http\Controllers\Api;
+
+use Orion\Http\Controllers\Controller;
+
+class PostsController extends Controller
+{
+    ...
+
+    /**
+    * The relations that are allowed to be included together with a resource.
+    *
+    * @return array
+    */
+    protected function includes() : array
+    {
+        return ['user.*', 'meta'];
     }
 
     ...
@@ -36,7 +64,9 @@ To instruct the API to return relations, url needs to contain `include` query pa
 (GET) https://myapp.com/api/posts?include=user,meta
 ```
 
-To load the relations by default without instructing it through the query parameters, use the `alwaysIncludes` function:
+### Always Included Relations
+
+To load the relations by default without passing it through the query parameter, use the `alwaysIncludes` method:
 
 ```php
 
@@ -61,6 +91,12 @@ class PostsController extends Controller
     ...
 }
 ```
+
+::: warning NOTE
+
+Unlike `include` method, the `alwaysIncludes` method does not support wildcards. 
+
+:::
 
 ## Soft Deletes
 

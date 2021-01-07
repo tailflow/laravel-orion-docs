@@ -21,10 +21,35 @@ class PostsController extends Controller
 }
 ```
 
+### Disabling pagination
+
+By default, resources returned by the `index` endpoint are paginated. To disable the pagination and return all resources, you can use `DisablePagination` trait.
+
+```php
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Models\Post;
+use Orion\Http\Controllers\Controller;
+use Orion\Concerns\DisablePagination;
+
+class PostsController extends Controller
+{
+    use DisablePagination;
+
+    /**
+     * Fully-qualified model class name
+     */
+    protected $model = Post::class; // or "App\Models\Post"
+}
+```
+
 ::: warning KEY TAKEAWAYS
 
 * Model controllers always extend `Orion\Http\Controllers\Controller`
 * `$model` property is set to a fully qualified model class name
+* Pagination can be disabled for both model and relation resources using `DisablePagination` trait
 
 :::
 
@@ -92,6 +117,37 @@ This will introduce `restore` and `batchRestore` endpoints. To learn how to perm
 ...
 |        | POST      | api/posts/{post}/restore                        | api.posts.restore                      | App\Http\Controllers\Api\PostsController@restore                          | api                                             |
 |        | POST      | api/posts/batch/restore                         | api.posts.batchRestore                 | App\Http\Controllers\Api\PostsController@batchRestore                     | api                                             |
+```
+
+## Customizing Keys
+
+By default, endpoints use primary key (usually `id`) to retrieve models from the database. However, in some cases you would want to use a different field to fetch the models while maintaining the primary key as it is. To do that, override the `keyName` method on the controller:
+
+```php
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Models\Post;
+use Orion\Http\Controllers\Controller;
+
+class PostsController extends Controller
+{
+    /**
+     * Fully-qualified model class name
+     */
+    protected $model = Post::class; // or "App\Models\Post"
+
+    /**
+     * The name of the field used to fetch a resource from the database.
+     *
+     * @return string
+     */
+    protected function keyName(): string
+    {
+        return 'slug';
+    }
+}
 ```
 
 ## Customizing Queries

@@ -20,8 +20,8 @@ class PostCommentsController extends RelationController
     protected $model = Post::class; // or "App\Models\Post"
 
     /**
-    * Name of the relationship as it is defined on the Post model
-    */
+     * Name of the relationship as it is defined on the Post model
+     */
     protected $relation = 'comments';
 }
 ```
@@ -408,7 +408,91 @@ Request payload consist of only one field `pivot`. Its properties are pivot tabl
 }
 ```
 
-## Customizing queries
+## Customizing Keys
+
+Just like [model resources](./models.html#customizing-keys), relation resources are using primary key to fetch resources from the database.
+
+### Customizing relation resource key
+
+```php
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Models\Team;
+use Orion\Http\Controllers\RelationController;
+
+class TeamPostsController extends RelationController
+{
+    /**
+     * Fully-qualified model class name
+     */
+    protected $model = Team::class; // or "App\Models\Team"
+    
+    /**
+     * Name of the relationship as it is defined on the Post model
+     */
+    protected $relation = 'posts';
+
+    /**
+     * The name of the field used to fetch a resource from the database.
+     *
+     * @return string
+     */
+    protected function keyName(): string
+    {
+        return 'slug'; // "slug" here is the field on the Post model (posts relation)
+    }
+}
+```
+
+### Customizing parent resource key
+
+If both parent and relation resources use custom keys, you would also need to override the `parentKeyName` method:
+
+```php
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Models\Team;
+use Orion\Http\Controllers\RelationController;
+
+class TeamPostsController extends RelationController
+{
+    /**
+     * Fully-qualified model class name
+     */
+    protected $model = Team::class; // or "App\Models\Team"
+    
+    /**
+     * Name of the relationship as it is defined on the Post model
+     */
+    protected $relation = 'posts';
+
+     /**
+     * The name of the field used to fetch parent resource from the database.
+     *
+     * @return string
+     */
+    protected function parentKeyName(): string
+    {
+        return 'short_name'; // "short_name" here is the field on the Team model
+    }
+
+    /**
+     * The name of the field used to fetch a resource from the database.
+     *
+     * @return string
+     */
+    protected function keyName(): string
+    {
+        return 'slug'; // "slug" here is the field on the Post model (posts relation)
+    }
+}
+```
+
+## Customizing Queries
 
 It is possible, same as in [model controllers](./models.html#customizing-queries), to redefine Eloquent queries for each endpoint. The only major difference is that each endpoint in relation controller also has "build" and "run" methods for fetching relation's parent model.
 
