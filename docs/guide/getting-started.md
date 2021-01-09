@@ -21,17 +21,22 @@ With Laravel Orion it can be acomplished in 3 simple steps:
 
 1. Create `PostsController` and extend it from `Orion\Http\Controllers\Controller`
 
+The controller relies on model policies to determine whether the currently authenticated user is allowed to perform certain actions or not
+
+For Getting Started, disable the authorization by using DisableAuthorization trait. For details, take a look at [Authorization](https://tailflow.github.io/laravel-orion-docs/guide/security.html#authorization) in the Security Section of the  Documentation.
+
 ```php
 <?php
 
 namespace App\Http\Controllers\Api;
 
 use App\Models\Post;
+use Orion\Concerns\DisableAuthorization;
 use Orion\Http\Controllers\Controller;
 
 class PostsController extends Controller
 {
-
+    use DisableAuthorization; 
 }
 ```
 
