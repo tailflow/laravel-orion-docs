@@ -13,6 +13,7 @@ module.exports = {
         nav: [
             { text: 'Home', link: '/' },
             { text: 'Guide', link: '/guide/' },
+            { text: 'Screencasts', link: '/screencasts/' },
         ],
         sidebar: {
             '/guide/': [
@@ -30,6 +31,15 @@ module.exports = {
                         'query-parameters',
                         'security',
                         'responses'
+                    ]
+                }
+            ],
+            '/screencasts/': [
+                {
+                    title: 'Screencasts',
+                    collapsable: false,
+                    children: [
+                        '',
                     ]
                 }
             ],
