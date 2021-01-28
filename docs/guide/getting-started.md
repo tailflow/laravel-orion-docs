@@ -58,7 +58,8 @@ By default Laravel is not shipped with `API` folder in `app/Http/Controllers`, b
 :::
 
 ::: warning ATTENTION
-Make sure to have [policy](https://laravel.com/docs/master/authorization#creating-policies) created and registered for the model you are exposing via the API or consider using `DisableAuthorization` trait (only for local testing) to avoid getting 403 error, if the policy is not registered or incorrect.
+- Make sure to have [policy](https://laravel.com/docs/master/authorization#creating-policies) created and registered for the model you are exposing via the API or consider using `DisableAuthorization` trait (only for local testing) to avoid getting 403 error, if the policy is not registered or incorrect.
+- [Request classes](./security.html#validation) **must** extend `Orion\Http\Requests\Request` class instead of `Illuminate\Foundation\Http\FormRequest`
 :::
 
 3. Finally, register the route in `api.php` by calling `Orion::resource`

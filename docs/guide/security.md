@@ -61,6 +61,10 @@ class PostsController extends ApiController
 
 ## Validation
 
+:::warning ATTENTION
+Request classes **must** extend `Orion\Http\Requests\Request` class instead of `Illuminate\Foundation\Http\FormRequest`.
+:::
+
 To validate incoming requests data to `store` and `update` endpoints, Laravel Orion will try to find [request class](https://laravel.com/docs/master/validation#form-request-validation) for resource model following the class name pattern:
  `App\Http\Requests\<model>Request`.
 
