@@ -28,7 +28,7 @@ class PostsController extends ApiController
 }
 ```
 
-### Resolving user
+### Usage with Sanctum (or any other custom Auth guard)
 
 By default, `api` guard is used to resolve the currently authenticated user for authorization.
 
@@ -54,7 +54,7 @@ class PostsController extends ApiController
      */
     public function resolveUser()
     {
-        return Auth::guard('custom-guard')->user();
+        return Auth::guard('sanctum')->user();
     }
 }
 ```
