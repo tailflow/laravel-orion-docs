@@ -45,3 +45,9 @@ When performing a search query, you can also sort the results. Let's take a look
 When doing a lookup, you can take it one step further, and make the API even simpler and more maintainable by utilizing scopes.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/dxo6ZYF8B0Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Pagination
+
+In this episode Luke walks you through the pagination meta data and how you can use it for building pagination links on the frontend.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6_Akr_ldKCQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
