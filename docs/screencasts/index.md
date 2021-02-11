@@ -51,3 +51,15 @@ When doing a lookup, you can take it one step further, and make the API even sim
 In this episode Luke walks you through the pagination meta data and how you can use it for building pagination links on the frontend.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/6_Akr_ldKCQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Soft Deletes (Laravel)
+
+Before jumping into Soft Deletes functionality specific to Laravel Orion, let's review how Soft Deletes work in Laravel itself.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/548pfXfgQWk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Soft Deletes
+
+Now, when we have a clear understanding of how Soft Deletes work in Laravel, we can explore the available options on how to work with them via the API.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zTQPbcx353Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
