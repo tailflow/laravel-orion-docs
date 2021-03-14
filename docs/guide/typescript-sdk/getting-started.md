@@ -75,7 +75,10 @@ Laravel Orion TypeScript SDK makes it incredibly easy to consume your API.
 import {Post} from '../post.ts';
 
 // retrieve a list of posts
-const posts = await Post.$query().get(); 
+const posts = await Post.$query().get();
+
+// search for posts
+const posts = await Post.$query().lookFor('some value').search();
 
 // create a post
 const newPost = await Post.$query().store({

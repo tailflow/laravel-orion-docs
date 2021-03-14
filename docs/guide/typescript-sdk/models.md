@@ -39,7 +39,7 @@ console.log(post.$attributes.body);
 
 As you may have guessed, along with attributes you can also define a so called "persisted attributes". Those attributes are not available on a model at the time of its creation, but they become available only after it is stored in the database, processed, and returned by the API.
 
-Default persisted attributes are `id`, `created_at`, `updated_at`, and `deleted_at`, but you can specify additional ones by overriding the *second* generic in model definition.
+Default persisted attributes are `id`, `created_at`, `updated_at`, and `deleted_at`, but you can specify additional ones by overriding the *second* generic parameter in model definition.
 
 ```typescript
 // post.ts
@@ -59,7 +59,7 @@ export class Post extends Model<{
 
 #### Overriding default persisted attributes
 
-In some cases you might not want to have one or even all of the default persisted attributes. To accomplish that, simply override the *fourth* generic in the model definition.
+In some cases you might not want to have one or even all of the default persisted attributes. To accomplish that, simply override the *fourth* generic parameter in the model definition.
 
 ```typescript
 // post.ts
@@ -110,4 +110,43 @@ export class Post extends Model<{
 {
     protected $keyName: string = 'slug';
 }
+```
+
+## Operations
+
+### Retrieving a list of resources
+
+```typescript
+const posts = await Post.$query().get(); 
+```
+
+### Creating a resource
+```typescript
+const newPost = await Post.$query().store({
+    title: 'New post'
+});
+```
+
+### Retrieving a resource
+```typescript
+const post = await Post.$query().find(5);
+```
+
+### Updating a resource
+```typescript
+let post = await Post.$query().find(5);
+
+post.$attributes.title = 'Updated post';
+await post.$save();
+// or
+await post.$save({title: 'Updated post'});
+//or
+const updatedPost = await Post.$query().update(5, {
+   title: 'Updated title'
+});
+```
+
+### Deleting a resource
+```typescript
+const deletedPost = await Post.$query().delete(5);
 ```
