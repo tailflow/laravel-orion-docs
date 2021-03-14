@@ -40,7 +40,8 @@ module.exports = {
                         'typescript-sdk/getting-started',
                         'typescript-sdk/configuration',
                         'typescript-sdk/models',
-                        'typescript-sdk/relationships'
+                        'typescript-sdk/relationships',
+                        'typescript-sdk/query-parameters'
                     ]
                 }
             ],

@@ -120,6 +120,39 @@ export class Post extends Model<{
 const posts = await Post.$query().get(); 
 ```
 
+### Searching for resources
+
+#### Keyword-based search
+```typescript
+const posts = await Post.$query().lookFor('some value').search(); 
+```
+
+#### Scopes
+```typescript
+const posts = await Post.$query().scope('published', [Date.now()]).search(); 
+```
+
+#### Filters
+```typescript
+const posts = await Post.$query().filter('meta.source_id', '=', 'test-source').search(); 
+```
+
+#### Sorting
+```typescript
+const posts = await Post.$query().sortBy('published_at', SortDirection.Desc).search(); 
+```
+
+::: tip TIP
+You can chain methods to build complex search queries.
+```typescript
+const posts = await Post.$query()
+    .lookFor('some value')
+    .scope('published', [Date.now()])
+    .sortBy('published_at', SortDirection.Desc)
+    .search(); 
+```
+:::
+
 ### Creating a resource
 ```typescript
 const newPost = await Post.$query().store({
@@ -149,4 +182,10 @@ const updatedPost = await Post.$query().update(5, {
 ### Deleting a resource
 ```typescript
 const deletedPost = await Post.$query().delete(5);
+```
+
+#### Force deleting
+To force delete a resource, provide a second argument to the delete method.
+```typescript
+const deletedPost = await Post.$query().delete(5, true);
 ```
