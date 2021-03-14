@@ -32,6 +32,16 @@ module.exports = {
                         'security',
                         'responses'
                     ]
+                },
+                {
+                    title: 'TypeScript SDK',
+                    collapsable: false,
+                    children: [
+                        'typescript-sdk/getting-started',
+                        'typescript-sdk/configuration',
+                        'typescript-sdk/models',
+                        'typescript-sdk/relationships'
+                    ]
                 }
             ],
             '/screencasts/': [

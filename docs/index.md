@@ -11,7 +11,7 @@ features:
 - title: Easy to use and learn
   details: Utilizes standard Laravel features such as Request classes, Policies and API Resources.
 - title: SDK out of the box
-  details: (coming soon...) TypesScript SDK
+  details: TypesScript SDK
 footer: MIT Licensed | Copyright © 2019-present Aleksei Zarubin
 ---
 
