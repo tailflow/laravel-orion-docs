@@ -94,11 +94,13 @@ post.$attributes.title = 'Updated post';
 await post.$save();
 // or
 await post.$save({title: 'Updated post'}); // <-- and here
-//or
+// or
 const updatedPost = await Post.$query().update(5, {
    title: 'Updated title' // <-- and, of course, here
 });
 
 // delete a post
 const deletedPost = await Post.$query().delete(5);
+// or
+await post.$destroy();
 ```
