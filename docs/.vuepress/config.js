@@ -37,6 +37,7 @@ module.exports = {
                     title: 'TypeScript SDK',
                     collapsable: false,
                     children: [
+                        'typescript-sdk/introduction',
                         'typescript-sdk/getting-started',
                         'typescript-sdk/configuration',
                         'typescript-sdk/models',

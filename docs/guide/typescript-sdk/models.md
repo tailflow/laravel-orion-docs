@@ -20,10 +20,6 @@ export class Post extends Model<{
 }
 ```
 
-::: tip TIP
-You do not need to define the `id`, `created_at`, and `updated_at` attributes - SDK does that for you automatically.
-:::
-
 ### Accessing attributes
 
 Once model is retrieved from the API, its attributes are available via the `$attributes` property on the model object.
@@ -85,6 +81,25 @@ export class Post extends Model<{
     title: string,
     body: string,
 }>
+{
+    protected $keyName: string = 'slug';
+}
+```
+
+### Customizing primary key type
+
+By default, the type of primary key is `number | string`. If primary key is a `string` or you would like to be more explicit, simply override the *fourth* generci parameter in model definition. 
+
+```typescript
+// post.ts
+
+import {Model} from "@tailflow/laravel-orion/lib/model";
+
+export class Post extends Model<{
+    slug: string,
+    title: string,
+    body: string,
+}, {}, {}, string>
 {
     protected $keyName: string = 'slug';
 }

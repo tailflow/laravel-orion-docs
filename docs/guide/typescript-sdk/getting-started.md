@@ -60,10 +60,10 @@ export class Post extends Model<{
 ```
 
 ::: tip TIP
-You do not need to define the `id`, `created_at`, and `updated_at` attributes - SDK does that for you automatically.
+You do not need to define the `id`, `created_at`, and `updated_at` attributes - SDK does that for you automatically. You can, however, [override](/guide/typescript-sdk/models.html#persisted-attributes) them.
 :::
 
-Congratulations, you now have successfully set up the model, and everything is ready to query the API 🎉
+Congratulations, you have successfully set up the model, and everything is ready to query the API 🎉
 
 ## Querying the API
 

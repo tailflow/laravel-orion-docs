@@ -39,6 +39,34 @@ export class Post extends Model<{
 
 TypeScript SDK supports *all* relationship types ✨
 
+
+### Many to Many
+
+When defining a many-to-many relationship, you can optionally provide a pivot model type, if the pivot table has additional fields.
+
+```typescript
+// post.ts
+
+import {Model} from "@tailflow/laravel-orion/lib/model";
+import {BelongsToMany} from "@tailflow/laravel-orion/lib/drivers/default/relations/belongsToMany";
+import {Tag} from "./tag";
+
+export class Post extends Model<{
+   title: string,
+   body: string
+}, {
+   thumbnail_url: string
+}, {
+   tags: Array<Tag>,
+}> {
+   public tags(): BelongsToMany<Tag, {
+       pivot_field: string
+   }> {
+      return new BelongsToMany(Tag, this);
+   }
+}
+```
+
 ## CRUD and Search
 
 Performing CRUD and search operations on relation resources is basically the same as on
