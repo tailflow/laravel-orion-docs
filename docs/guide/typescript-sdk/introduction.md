@@ -9,7 +9,7 @@
 
 ## How It Works
 
-Laravel Orion TypeScript SDK allows you to build expressive frontend applications powered by REST API.
+Define a model with typed attributes, set API url, and that's it - everything is ready to work with the API ✨
 
 ```typescript
 import {Orion} from "@tailflow/laravel-orion/lib/orion";
