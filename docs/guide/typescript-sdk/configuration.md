@@ -37,3 +37,17 @@ Orion.init('https://your-api.test', 'api', AuthDriver.Sanctum, 'test-acess-token
 // or
 Orion.setToken('test-access-token');
 ```
+
+## Customizing Axios instance
+
+```typescript
+import axios from 'axios';
+
+Orion.makeHttpClientUsing(() => {
+  const client = axios.create();
+
+  client.interceptors.request.use(...);
+
+  return client;
+});
+```

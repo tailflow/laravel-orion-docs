@@ -54,6 +54,10 @@ export class Post extends Model<{
 }
 ```
 
+#### Soft Deletes
+
+If a model is soft deletable, you may want to use `DefaultSoftDeletablePersistedAttributes` type. This type simply adds `deleted_at` attribute along other default persisted attributes.
+
 ## Primary Key
 
 ### Getting and setting primary key value
