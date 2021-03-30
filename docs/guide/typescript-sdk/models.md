@@ -131,7 +131,7 @@ const posts = await Post.$query().scope('published', [Date.now()]).search();
 
 #### Filters
 ```typescript
-const posts = await Post.$query().filter('meta.source_id', '=', 'test-source').search(); 
+const posts = await Post.$query().filter('meta.source_id', FilterOperator.Equal, 'test-source').search(); 
 ```
 
 #### Sorting
