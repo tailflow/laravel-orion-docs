@@ -5,11 +5,13 @@
 Laravel Orion can be installed into a new or existing project, simply by adding a composer dependency:
 
 **Using NPM**
+
 ```bash
 npm install @tailflow/laravel-orion --save
 ```
 
 **Using Yarn**
+
 ```bash
 yarn add @tailflow/laravel-orion
 ```
@@ -24,11 +26,13 @@ import {Orion} from "@tailflow/laravel-orion/lib/orion";
 Orion.init('https://your-api.test');
 Orion.setToken('access-token-here');
 ```
+
 That's it! Now let's move on to the model setup.
 
 ## Setting up a model
 
-Let's create our first model and query the API. Pick any model that you have in your Laravel API - I will go with `Post` model, just as an example.
+Let's create our first model and query the API. Pick any model that you have in your Laravel API - I will go with `Post`
+model, just as an example.
 
 Add a class `Post` in your TypeScript app and extend it from `Model`.
 
@@ -37,13 +41,12 @@ Add a class `Post` in your TypeScript app and extend it from `Model`.
 
 import {Model} from "@tailflow/laravel-orion/lib/model";
 
-export class Post extends Model
-{
-    
+export class Post extends Model {
+
 }
 ```
 
-Next, define attributes of the model
+Next, define attributes of the model and its [resource name](/guide/typescript-sdk/models.html#resource-name)
 
 ```typescript
 // post.ts
@@ -53,14 +56,16 @@ import {Model} from "@tailflow/laravel-orion/lib/model";
 export class Post extends Model<{
     title: string,
     body: string
-}>
-{
-    
+}> {
+    public $resource(): string {
+        return 'posts';
+    }
 }
 ```
 
 ::: tip TIP
-You do not need to define the `id`, `created_at`, and `updated_at` attributes - SDK does that for you automatically. You can, however, [override](/guide/typescript-sdk/models.html#persisted-attributes) them.
+You do not need to define the `id`, `created_at`, and `updated_at` attributes - SDK does that for you
+automatically. You can, however, [override](/guide/typescript-sdk/models.html#persisted-attributes) them.
 :::
 
 Congratulations, you have successfully set up the model, and everything is ready to query the API 🎉
@@ -68,6 +73,10 @@ Congratulations, you have successfully set up the model, and everything is ready
 ## Querying the API
 
 Laravel Orion TypeScript SDK makes it incredibly easy to consume your API.
+
+::: warning Integration with Sanctum for SPA
+If you are using Sanctum, CSRF protection needs to be initialized, before you can query the API. Learn how to accomplish that [here](/guide/typescript-sdk/configuration.html#integration-with-sanctum-for-spa).
+:::
 
 ```typescript
 // somewhere in your app
@@ -96,7 +105,7 @@ await post.$save();
 await post.$save({title: 'Updated post'}); // <-- and here
 // or
 const updatedPost = await Post.$query().update(5, {
-   title: 'Updated title' // <-- and, of course, here
+    title: 'Updated title' // <-- and, of course, here
 });
 
 // delete a post

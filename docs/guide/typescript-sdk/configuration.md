@@ -18,8 +18,6 @@ Orion.setPrefix('api/v1');
 
 ## Auth driver
 
-If you are using Sanctum, setting the auth driver to `AuthDriver.Sanctum` is necessary to enable automatic [XSRF token](https://laravel.com/docs/8.x/sanctum#csrf-protection) fetching.
-
 ```typescript
 import {AuthDriver} from '@tailflow/laravel-orion/lib/drivers/default/enums/authDriver';
 
@@ -36,6 +34,25 @@ import {AuthDriver} from '@tailflow/laravel-orion/lib/drivers/default/enums/auth
 Orion.init('https://your-api.test', 'api', AuthDriver.Sanctum, 'test-acess-token');
 // or
 Orion.setToken('test-access-token');
+```
+
+## Integration with Sanctum for SPA
+
+Before you can make requests to the API, [CSRF protection](https://laravel.com/docs/master/sanctum#csrf-protection) needs to be initialized.
+
+```typescript
+import {AuthDriver} from '@tailflow/laravel-orion/lib/drivers/default/enums/authDriver';
+
+Orion.init('https://your-api.test');
+Orion.setAuthDriver(AuthDriver.Sanctum);
+
+try {
+    await Orion.csrf();
+    // now you can make requests to the API
+    const posts = await Post.$query().get();
+} catch (error) {
+    console.error('Unable to retrieve CSRF cookie.');
+}
 ```
 
 ## Customizing Axios instance

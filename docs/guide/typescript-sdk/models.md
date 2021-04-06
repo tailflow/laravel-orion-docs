@@ -58,6 +58,27 @@ export class Post extends Model<{
 
 If a model is soft deletable, you may want to use `DefaultSoftDeletablePersistedAttributes` type. This type simply adds `deleted_at` attribute along other default persisted attributes.
 
+## Resource Name
+
+If you have an API resource under `/api/posts`, then `posts` is the name of the
+resource that you need to specify on a model.
+
+```typescript
+// post.ts
+
+import {Model} from "@tailflow/laravel-orion/lib/model";
+
+export class Post extends Model<{
+    title: string,
+    body: string
+}>
+{
+    public $resource(): string {
+        return 'posts';
+    }
+}
+```
+
 ## Primary Key
 
 ### Getting and setting primary key value
