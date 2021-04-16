@@ -31,12 +31,34 @@ export class Post extends Model<{
 // retrieve a list of posts
 const posts = await Post.$query().get();
 
+// search for posts
+const posts = await Post.$query().lookFor('some value').search();
+
 // create a post
 const newPost = await Post.$query().store({
     title: 'New post' // <-- you get a nice autocompletion here, because the attributes are typed 
 });
+console.log(newPost.$attributes.title);  // <-- oh, and here as well
 
-// and a lot of other cool stuff
+// retrieve a post
+const post = await Post.$query().find(5);
+
+// update a post
+post.$attributes.title = 'Updated post';
+await post.$save();
+// or
+await post.$save({title: 'Updated post'}); // <-- and here
+// or
+const updatedPost = await Post.$query().update(5, {
+    title: 'Updated title' // <-- and, of course, here
+});
+
+// delete a post
+const deletedPost = await Post.$query().delete(5);
+// or
+await post.$destroy();
+
+// and more: search, relantionship operations, etc.
 ```
 
 Ready to dive deeper? Head to the [Getting Started](/guide/typescript-sdk/getting-started.html) section and start building.
