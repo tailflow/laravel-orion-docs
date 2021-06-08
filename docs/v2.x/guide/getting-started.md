@@ -11,6 +11,8 @@ Laravel Orion can be installed into a new or existing project, simply by adding 
 
 ```bash
 composer require tailflow/laravel-orion
+
+php artisan vendor:publish --tag=orion-config
 ```
 
 ## Simple CRUD
