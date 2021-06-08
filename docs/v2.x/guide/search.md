@@ -11,6 +11,7 @@ Laravel Orion provides comprehensive search capabilities for your API endpoints 
     ],
     "filters" : [
         {"field" : "created_at", "operator" : ">=", "value" : "2020-01-01"},
+        {"field" : "options->visible", "operator" : ">=", "value" : true},
         {"type" : "or", "field" : "meta.source_id", "operator" : "in", "value" : [1,2,3]}
     ],
     "search" : {
@@ -18,6 +19,7 @@ Laravel Orion provides comprehensive search capabilities for your API endpoints 
     },
     "sort" : [
         {"field" : "name", "direction" : "asc"},
+        {"field" : "options->key", "direction" : "asc"},
         {"field" : "meta.priority", "direction" : "desc"}
     ]
 }
@@ -98,7 +100,7 @@ class PostsController extends Controller
     */
     protected function filterableBy() : array
     {
-        return ['id', 'title', 'user.id', 'meta.source_id', 'created_at'];
+        return ['id', 'title', 'options->visible', 'user.id', 'meta.source_id', 'created_at'];
     }
 
     ...
@@ -112,6 +114,7 @@ In the request to a search endpoint include `filters` property:
 {
     "filters" : [
         {"field" : "created_at", "operator" : ">=", "value" : "2020-01-01"},
+        {"field" : "options->visible", "operator" : ">=", "value" : true},
         {"type" : "or", "field" : "meta.source_id", "operator" : "in", "value" : [1,2,3]}
     ]
 }
@@ -132,6 +135,8 @@ Last, but not least `value` - the actual value an attribute must have to satisfy
 You can filter results based on the attributes of relations simply by whitelisting them alongside other attributes using dot notation.
 In the example above `user.id` and `meta.source_id` are one of such attributes.
 
+It is also possible to filter based on the values inside json fields by whitelisting them alongside other attributes using "arrow" notation.
+In the example above `options->visible` is one of such attributes.
 :::
 
 ## Keyword Search
@@ -156,7 +161,7 @@ class PostsController extends Controller
      */
     protected function searchableBy() : array
     {
-        return ['title', 'description', 'user.name'];
+        return ['title', 'description', 'options->key', 'user.name'];
     }
 
     ...
@@ -180,9 +185,11 @@ Support for [Algolia](https://www.algolia.com/) and [ElasticSearch](https://www.
 
 ::: tip TIP
 
-You can search on the attributes of relations simply by whitelisting them alongside other attributes using dot notation.
+You can perform search on the attributes of relations simply by whitelisting them alongside other attributes using dot notation.
 In the example above `user.name` is one of such attributes.
 
+It is also possible to perform search on the values inside json fields by whitelisting them alongside other attributes using "arrow" notation.
+In the example above `options->key` is one of such attributes.
 :::
 
 ## Sorting
@@ -206,7 +213,7 @@ class PostsController extends Controller
      */
     protected function sortableBy() : array
     {
-         return ['id', 'name', 'meta.priority'];
+         return ['id', 'name', 'options->key', 'meta.priority'];
     }
 
     ...
@@ -220,6 +227,7 @@ In the request to a search endpoint include `search` property:
 {
     "sort" : [
         {"field" : "name", "direction" : "asc"},
+        {"field" : "options->key", "direction" : "asc"},
         {"field" : "meta.priority", "direction" : "desc"}
     ]
 }
@@ -234,4 +242,6 @@ The `field` property value is simply one of the whitelisted attributes and `dire
 You can sort results based on the attributes of relations simply by whitelisting them alongside other attributes using dot notation.
 In the example above `meta.priority` is one of such attributes.
 
+It is also possible to results based on the values inside json fields by whitelisting them alongside other attributes using "arrow" notation.
+In the example above `options->key` is one of such attributes.
 :::
