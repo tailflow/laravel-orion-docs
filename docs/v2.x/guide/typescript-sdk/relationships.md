@@ -70,7 +70,7 @@ export class Post extends Model<{
 ## CRUD and Search
 
 Performing CRUD and search operations on relation resources is basically the same as on
-the [model resources](/guide/typescript-sdk/models.html#operations).
+the [model resources](/v2.x/guide/typescript-sdk/models.html#operations).
 
 To obtain a query builder instance specific to relation resource, simply call the relation method on a model instance.
 

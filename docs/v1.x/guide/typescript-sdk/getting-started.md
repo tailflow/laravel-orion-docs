@@ -46,7 +46,7 @@ export class Post extends Model {
 }
 ```
 
-Next, define attributes of the model and its [resource name](/guide/typescript-sdk/models.html#resource-name)
+Next, define attributes of the model and its [resource name](/v1.x/guide/typescript-sdk/models.html#resource-name)
 
 ```typescript
 // post.ts
@@ -65,7 +65,7 @@ export class Post extends Model<{
 
 ::: tip TIP
 You do not need to define the `id`, `created_at`, and `updated_at` attributes - SDK does that for you
-automatically. You can, however, [override](/guide/typescript-sdk/models.html#persisted-attributes) them.
+automatically. You can, however, [override](/v1.x/guide/typescript-sdk/models.html#persisted-attributes) them.
 :::
 
 Congratulations, you have successfully set up the model, and everything is ready to query the API 🎉
@@ -75,7 +75,7 @@ Congratulations, you have successfully set up the model, and everything is ready
 Laravel Orion TypeScript SDK makes it incredibly easy to consume your API.
 
 ::: warning Integration with Sanctum for SPA
-If you are using Sanctum, CSRF protection needs to be initialized, before you can query the API. Learn how to accomplish that [here](/guide/typescript-sdk/configuration.html#integration-with-sanctum-for-spa).
+If you are using Sanctum, CSRF protection needs to be initialized, before you can query the API. Learn how to accomplish that [here](/v1.x/guide/typescript-sdk/configuration.html#integration-with-sanctum-for-spa).
 :::
 
 ```typescript

@@ -4,7 +4,7 @@ heroImage: /logo.png
 heroText: Laravel Orion
 tagline: The simplest way to create REST API with Laravel
 actionText: Get Started →
-actionLink: /guide/
+actionLink: /v2.x/guide/
 features:
 - title: Simple yet powerful
   details: Fully featured REST API for your Eloquent models and relationships with the simplicity of Laravel as you love it.
