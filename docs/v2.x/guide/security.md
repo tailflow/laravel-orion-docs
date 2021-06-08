@@ -32,7 +32,7 @@ class PostsController extends ApiController
 
 By default, `api` guard is used to resolve the currently authenticated user for authorization.
 
-However, you can change the way the user is resolved by overriding `resolveUser` method on a controller.
+However, you can change the way users are resolved either by setting `auth.guard` in `config/orion.php` or by overriding `resolveUser` method on a controller.
 
 ```php
 
