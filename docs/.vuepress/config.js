@@ -72,7 +72,8 @@ module.exports = {
                         'batch-operations',
                         'query-parameters',
                         'security',
-                        'responses'
+                        'responses',
+                        'specifications'
                     ]
                 },
                 {

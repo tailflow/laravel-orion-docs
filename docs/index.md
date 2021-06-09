@@ -10,8 +10,8 @@ features:
   details: Fully featured REST API for your Eloquent models and relationships with the simplicity of Laravel as you love it.
 - title: Easy to use and learn
   details: Utilizes standard Laravel features such as Request classes, Policies and API Resources.
-- title: SDK out of the box
-  details: TypesScript SDK
+- title: SDK and OpenAPI specs
+  details: TypesScript SDK and OpenAPI specifications out of the box.
 footer: MIT Licensed | Copyright © 2019-present Aleksei Zarubin
 ---
 
@@ -111,3 +111,11 @@ Route::group(['as' => 'api.'], function() {
 |        | PATCH     | api/posts/{post}/tags/toggle                    | api.posts.relation.tags.toggle         | App\Http\Controllers\Api\PostTagsController@toggle                        | api                                             |
 |        | PATCH     | api/posts/{post}/tags/{tag}/pivot               | api.posts.relation.tags.pivot          | App\Http\Controllers\Api\PostTagsController@updatePivot                   | api                                             |
 ```
+
+::: tip TIP
+To automatically generate the OpenAPI [specifications](/v2.x/guide/specifications.html), simply run:
+
+```bash
+php artisan orion:specs
+```
+:::
