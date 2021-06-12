@@ -63,6 +63,7 @@ module.exports = {
                     title: 'Guide',
                     collapsable: false,
                     children: [
+                        'prologue',
                         '',
                         'getting-started',
                         'models',
