@@ -10,6 +10,41 @@ The command will create `specs.yaml` file inside the `storage/app/specs` directo
 
 ## Customizations
 
+### Info and Servers
+
+Specifications' `info` and `servers`  fields are populated from the `orion.php` config file:
+
+```php
+'specs' => [
+    'info' => [
+        'title' => env('APP_NAME'),
+        'description' => null,
+        'terms_of_service' => null,
+        'contact' => [
+            'name' => null,
+            'url' => null,
+            'email' => null,
+        ],
+        'license' => [
+            'name' => null,
+            'url' => null,
+        ],
+            'version' => '1.0.0',
+    ],
+    'servers' => [
+        ['url' => env('APP_URL').'/api', 'description' => 'Default Environment'],
+    ],
+],
+```
+
+::: tip TIP
+If you haven't published the config yet, you can do so by running the following command:
+
+```bash
+php artisan vendor:publish --tag=orion-config
+```
+:::
+
 ### File Path
 If you would like the file to be stored at a different path (e.g. `storage/app/specs/example.yaml`), you can easily customize it by providing the `--path` option.
 
@@ -19,7 +54,7 @@ If you would like the file to be stored at a different path (e.g. `storage/app/s
 php artisan orion:specs --path="specs/example.yaml"
 ```
 
-### File format
+### File Format
 
 By default, the specifications file is stored in `.yaml` format. However, it is possible to store it in `.json`, simply by providing the `--format` option.
 
