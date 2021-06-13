@@ -6,7 +6,7 @@ The built-in OpenAPI specification generation feature allows you to produce the 
 php artisan orion:specs
 ```
 
-The command will create `specs.yaml` file inside the `storage/app/specs` directory.
+The command will create `specs.json` file inside the `storage/app/specs` directory.
 
 ## Customizations
 
