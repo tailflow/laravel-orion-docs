@@ -2,10 +2,10 @@
 
 ## Features
 
-- Models with typed [attributes](/guide/typescript-sdk/models.html#attributes) and [relationships](/guide/typescript-sdk/relationships.html#definition)
+- Models with typed [attributes](/v1.x/guide/typescript-sdk/models.html#attributes) and [relationships](/v1.x/guide/typescript-sdk/relationships.html#definition)
 - Support of all API operations on [model](/guide/models.html) and [relationship](/guide/relationships.html) resources
-- Extensive [search queries](/guide/typescript-sdk/models.html#searching-for-resources)
-- [CSRF cookie fetching](/guide/typescript-sdk/configuration.html#integration-with-sanctum-for-spa) for seamless integration with [Sanctum](https://laravel.com/docs/master/sanctum#spa-authenticating)
+- Extensive [search queries](/v1.x/guide/typescript-sdk/models.html#searching-for-resources)
+- [CSRF cookie fetching](/v1.x/guide/typescript-sdk/configuration.html#integration-with-sanctum-for-spa) for seamless integration with [Sanctum](https://laravel.com/docs/master/sanctum#spa-authenticating)
 
 ## How It Works
 
@@ -61,4 +61,4 @@ await post.$destroy();
 // and more: search, relantionship operations, etc.
 ```
 
-Ready to dive deeper? Head to the [Getting Started](/guide/typescript-sdk/getting-started.html) section and start building.
+Ready to dive deeper? Head to the [Getting Started](/v1.x/guide/typescript-sdk/getting-started.html) section and start building.
