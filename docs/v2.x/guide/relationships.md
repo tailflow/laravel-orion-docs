@@ -524,3 +524,7 @@ It is possible, same as in [model controllers](./models.html#customizing-queries
 | sync | buildSyncParentFetchQuery | runSyncParentFetchQuery | - | - | performSync |
 | toggle | buildToggleParentFetchQuery | runToggleParentFetchQuery | - | - | performToggle |
 | updatePivot | buildUpdatePivotParentFetchQuery | runUpdatePivotParentFetchQuery | - | - | performUpdatePivot |
+
+::: tip TIP
+You can also customize how attributes are filled on the model by overriding `performFill` method.
+:::

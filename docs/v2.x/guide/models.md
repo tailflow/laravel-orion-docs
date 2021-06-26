@@ -271,6 +271,10 @@ class PostsController extends Controller
 }
 ```
 
+::: tip TIP
+You can also customize how attributes are filled on the model by overriding `performFill` method.
+:::
+
 ### For a group of endpoints
 
 Cool, now index endpoint returns only published posts. But what if you would like to apply the same constraint to `show` endpoint as well? Sure enough, we could duplicate it and override the `buildShowFetchQuery` method, but there is a better way.
