@@ -15,6 +15,15 @@ composer require tailflow/laravel-orion
 php artisan vendor:publish --tag=orion-config
 ```
 
+::: warning NOTE
+Users with Composer v1 may encounter the error during installation:
+```bash
+Installation error: Installation request for doctrine/dbal (locked at 3.0.0) -> satisfiable by doctrine/dbal[3.0.0]
+```
+
+In that case, either upgrade Composer to v2 (recommended) or run `composer require doctrine/dbal` before installing Orion.
+:::
+
 ## Simple CRUD
 
 Let's assume you have a model `Post` that represents a blog post and you would like to manage it via REST API.
