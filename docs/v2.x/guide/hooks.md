@@ -31,6 +31,13 @@ class PostsController extends Controller
 }
 ```
 
+## Transactions
+
+By default, queries executed in hooks and queries for an operation itself (e.g. updating an entity) are not wrapped in a transaction. You can easily change this behaviour by:
+
+1. Setting `transactions.enabled` to `true` in `orion.php` config file, which would affect all controllers
+2. Overriding `transactionsAreEnabled` method on any controller for a more granular control
+
 ## On model controllers
 
 * beforeIndex - executed before retrieving the list of models.
