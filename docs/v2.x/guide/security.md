@@ -59,6 +59,35 @@ class PostsController extends ApiController
 }
 ```
 
+### Authorizing parent entities
+
+Relation operations pass an additional argument to policies - the parent entity. You can use that argument to setup additional checks on whether a user is authorized to perform certain actions on a relation entity *in the context of a given parent entity*.
+
+```php
+class PostPolicy
+{
+    public function update($user, $post)
+    {
+        return $post->user_id === $user->id;
+    }
+}
+
+class PostMetaPolicy
+{
+    public function update($user, $postMeta, $post) // <---- $post here is the parent entity
+    {
+        // please note that the check is performed against
+        // the parent entity $post, not the relation entity $postMeta
+        return Gate::forUser($user)->inspect('update', $post); 
+    }
+    
+    public function create($user, $post)
+    {
+        return Gate::forUser($user)->inspect('update', $post);
+    }
+}
+```
+
 ## Validation
 
 :::warning ATTENTION
