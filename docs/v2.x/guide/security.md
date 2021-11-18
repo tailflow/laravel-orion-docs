@@ -133,15 +133,15 @@ public function store(CustomMessageRequest $request)
 
 ### Validation rules
 
-#### Defining rules for `store` and `update` endpoints
+#### Defining rules for `store` and `update` operations
 
 Laravel Orion provides `Orion\Http\Requests\Request` class with a handful of methods to specify validation rules.
 
 To define common rules for both `store` and `update` endpoints you can use `commonRules` method.
-If you would like to define rules specific to endpoint you can use `storeRules` and `updateRules` methods.
+If you would like to define rules specific to an endpoint, you can use `storeRules` and `updateRules` methods.
 
 :::warning ATTENTION
-Rules specified in `storeRules` and `updateRules` methods are merged with rules from `commonRules` method.
+Rules for a particular field specified in the `storeRules` and `updateRules` methods overwrite rules from the `commonRules` method, if both contain the same key.
 :::
 
 ```php
@@ -171,14 +171,39 @@ class PostRequest extends Request
 
 In this example, when request is made to `store` endpoint, both `title` and `status` fields will be required. However, when request method is made to `update` endpoint, only `title` field would be required, because there is no other rules defined in `updateRules` method and `title` field is marked as required in the `commonRules` method.
 
-#### Defining rules for relation methods
+#### Defining rules for relation-specific operations
 
 You can also define rules for relation specific endpoints: `associateRules`, `attachRules`, `detachRules`, `syncRules`, `toggleRules`, `updatePivotRules`.
 
 :::warning ATTENTION
-Rules specified in these methods are **NOT** merged with rules from `commonRules` method.
+Rules specified in these methods are **NOT** merged with rules from the `commonRules` method.
 :::
 
 #### Defining rules for batch operations
 
-You can also define rules for batch endpoints: `batchStore`, `batchUpdate`.
+You can also define rules for batch endpoints: `batchStoreRules`, `batchUpdateRules`.
+
+### Validation messages
+
+Just like it is possible to configure the rules for specific endpoints, it is possible to customize their validation messages.
+
+#### Customizing validation messages for `store` and `update` operations
+
+To define common messages for both `store` and `update` endpoints you can use `commonMessages` method.
+If you would like to define messages specific to an endpoint, you can use `storeMessages` and `updateMessages` methods.
+
+:::warning ATTENTION
+Messages for a particular field specified in the `storeMessages` and `updateMessages` methods overwrite messages from the `commonMessages` method, if both contain the same key.
+:::
+
+#### Customizing validation messages for relation-specific operations
+
+You can also customize messages for relation-specific endpoints: `associateMessages`, `attachMessages`, `detachMessages`, `syncMessages`, `toggleMessages`, `updatePivotMessages`.
+
+:::warning ATTENTION
+Messages specified in these methods are **NOT** merged with messages from the `commonMessages` method.
+:::
+
+#### Customizing validation messages for batch operations
+
+You can also customize messages for batch endpoints: `batchStoreMessages`, `batchUpdateMessages`.
