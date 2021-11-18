@@ -54,6 +54,7 @@ By default, queries executed in hooks and queries for an operation itself (e.g. 
 * afterDestroy - executed after deleting a model, but before building response.
 * beforeRestore - executed before retrieving a model and restoring it.
 * afterRestore - executed after restoring a model, but before building response.
+* beforeFresh - executed before model is refreshed after saving, but before `afterSave` and `afterStore`
 
 **Batch hooks:**
 
