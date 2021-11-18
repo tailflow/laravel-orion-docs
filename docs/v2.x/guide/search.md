@@ -128,14 +128,16 @@ The `type` (default is `and`) property serves as a logical operator for combinin
 
 The `operator` property must be one of the supported comparison operations: `<`, `<=`, `>`, `>=`, `=`, `!=`, `like`, `not like`, `ilike`, `not ilike`, `in`, `not in`. These operators are exactly the same operators you would usually pass to `->where('<some field>', '<operator>', '<value>')` calls on Eloquent [query builder](https://laravel.com/docs/queries).
 
-Last, but not least `value` - the actual value an attribute must have to satisfy the specified comparison conditions.
+The Last, but not least `value` - the actual value an attribute must have to satisfy the specified comparison conditions.
 
 ::: tip TIP
 
 You can filter results based on the attributes of relations simply by whitelisting them alongside other attributes using dot notation.
 In the example above `user.id` and `meta.source_id` are one of such attributes.
 
-It is also possible to filter based on the values inside json fields by whitelisting them alongside other attributes using "arrow" notation.
+Many-to-many relation resources can also be filtered by their pivot values. Just use `pivot.<field>` notation, where `<field>` is a field on the pivot table.
+
+It is also possible to filter results based on the values inside json fields by whitelisting them alongside other attributes using "arrow" notation.
 In the example above `options->visible` is one of such attributes.
 :::
 
@@ -242,6 +244,8 @@ The `field` property value is simply one of the whitelisted attributes and `dire
 You can sort results based on the attributes of relations simply by whitelisting them alongside other attributes using dot notation.
 In the example above `meta.priority` is one of such attributes.
 
-It is also possible to results based on the values inside json fields by whitelisting them alongside other attributes using "arrow" notation.
+Many-to-many relation resources can also be sorted by their pivot values. Just use `pivot.<field>` notation, where `<field>` is a field on the pivot table.
+
+It is also possible to sort results based on the values inside json fields by whitelisting them alongside other attributes using "arrow" notation.
 In the example above `options->key` is one of such attributes.
 :::
