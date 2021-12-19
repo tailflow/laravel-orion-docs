@@ -19,3 +19,9 @@ And, as a bonus, `search` endpoint on both model and relationship controllers al
 * [Relations inclusion](./query-parameters.html#including-relations) and [soft deletes](./query-parameters.html#soft-deletes) via query parameters
 * Straightforward [authorization](./security.html#authorization) and [validation](./security.html#validation)
 * [Responses](./responses.html) transformation via API resources
+
+## Supported By
+
+[<img src="https://res.cloudinary.com/dudxt4lp6/image/upload/v1639908579/Laravel%20Orion/logo_geecko_hcuz34.svg" width="300">](https://geecko.com)
+
+</a>

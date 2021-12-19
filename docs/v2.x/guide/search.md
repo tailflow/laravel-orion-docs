@@ -146,6 +146,10 @@ In the example above `options->visible` is one of such attributes.
 This type of search is something you would normally do, for example, as a search input functionality on your website to find all blog posts that have a phrase "Laravel is awesome" in it.
 First, you need to define the list of fields across which the search will be performed:
 
+::: warning ATTENTION
+The search is **case-sensitive** by default. You can change this behavior by settings `search.case-sensitive` to `false` in `orion.php` config.
+:::
+
 ```php
 
 namespace App\Http\Controllers\Api;
@@ -176,10 +180,16 @@ In the request to a search endpoint include `search` property:
 // (POST) https://myapp.com/api/posts/search
 {
      "search" : {
-        "value" : "Laravel is awesome"
+        "value" : "Laravel is awesome",
+        "case_sensitive": false // (default: true)
     },
 }
 ```
+
+::: tip TIP
+
+You can perform case-insensitive search by providing `case_sensitive: false` field in the request, even when `search.case-sensitive` is set to `true` in `orion.php` config.
+:::
 
 At the moment, the search is performed using database query on **all** of the specified fields. 
 
