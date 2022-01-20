@@ -58,7 +58,7 @@ class PostsController extends Controller
      *
      * @return array
      */
-    protected function exposedScopes() : array
+    public function exposedScopes() : array
     {
         return ['active', 'whereCategory'];
     }
