@@ -83,7 +83,7 @@ class PostsController extends Controller
     *
     * @return array
     */
-    protected function alwaysIncludes() : array
+    public function alwaysIncludes() : array
     {
         return ['user', 'meta'];
     }
