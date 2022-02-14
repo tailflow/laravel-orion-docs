@@ -23,7 +23,7 @@ class PostsController extends Controller
     *
     * @return array
     */
-    protected function includes() : array
+    public function includes() : array
     {
         return ['user', 'user.team', 'user.profile', 'meta'];
     }
@@ -49,7 +49,7 @@ class PostsController extends Controller
     *
     * @return array
     */
-    protected function includes() : array
+    public function includes() : array
     {
         return ['user.*', 'meta'];
     }
@@ -83,7 +83,7 @@ class PostsController extends Controller
     *
     * @return array
     */
-    protected function alwaysIncludes() : array
+    public function alwaysIncludes() : array
     {
         return ['user', 'meta'];
     }

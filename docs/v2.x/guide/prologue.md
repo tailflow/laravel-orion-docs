@@ -41,18 +41,18 @@ use Orion\Http\Controllers\Controller;
 // options field here is a json/jsonb field of the Post model
 // visible and key fields are fields inside that json/jsonb field 
 class PostsController extends Controller
-{ 
-    protected function filterableBy() : array
+{
+    public function filterableBy() : array
     {
         return ['options->visible'];
     }
 
-    protected function searchableBy() : array
+    public function searchableBy() : array
     {
         return [ 'options->key'];
     }
-    
-    protected function sortableBy() : array
+
+    public function sortableBy() : array
     {
          return ['options->key'];
     }
@@ -64,7 +64,7 @@ class PostsController extends Controller
 Previously, it was possible to search on relation fields one-level deep only, e.g.:
 
 ```php
-protected function searchableBy() : array
+public function searchableBy() : array
 {
     return ['user.name']; // name field of the user relation
 }
@@ -73,7 +73,7 @@ protected function searchableBy() : array
 This release makes it possible to perform search on deeply nested relations:
 
 ```php
-protected function searchableBy() : array
+public function searchableBy() : array
 {
     return ['user.name', 'user.location.address.postalcode']; // postalcode field of the deeply nested user.location.address relation
 }
