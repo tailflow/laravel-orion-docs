@@ -126,9 +126,21 @@ The `field` property value is simply one of the whitelisted attributes.
 
 The `type` (default is `and`) property serves as a logical operator for combining multiple filters and can be either `and` or `or`. Under the hood it defines whether to use `where` or `orWhere` method on query builder for applying a filter.
 
-The `operator` property must be one of the supported comparison operations: `<`, `<=`, `>`, `>=`, `=`, `!=`, `like`, `not like`, `ilike`, `not ilike`, `in`, `not in`. These operators are exactly the same operators you would usually pass to `->where('<some field>', '<operator>', '<value>')` calls on Eloquent [query builder](https://laravel.com/docs/queries).
+The `operator` property must be one of the supported comparison operations: 
+```
+'<', '<=', '>', '>=', '=', '!=', 'like', 'not like', 'ilike', 'not ilike', 'in', 'not in', 'all in', 'any in'
+```
+These operators (except for the `all in` and `any in`) are exactly the same operators you would usually pass to `->where('<some field>', '<operator>', '<value>')` calls on Eloquent [query builder](https://laravel.com/docs/queries).
 
-The Last, but not least `value` - the actual value an attribute must have to satisfy the specified comparison conditions.
+The following operators are intended to be used on `json / jsonb` columns, basically applying the `whereJsonContains` [constraint](https://laravel.com/docs/9.x/queries#json-where-clauses):
+
+```
+'all in', 'any in'
+```
+
+The difference between `all in` and `any in` is that when `all in` is applied, it expects *all* given values to be present in the column for an entity to be considered included in the results, while `any in` expects *at least one* value to be present.
+
+The last, but not least `value` - the actual value an attribute must have to satisfy the specified comparison conditions.
 
 ::: tip TIP
 
