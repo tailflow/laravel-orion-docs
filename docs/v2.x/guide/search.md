@@ -58,7 +58,7 @@ class PostsController extends Controller
      *
      * @return array
      */
-    protected function exposedScopes() : array
+    public function exposedScopes() : array
     {
         return ['active', 'whereCategory'];
     }
@@ -98,7 +98,7 @@ class PostsController extends Controller
     *
     * @return array
     */
-    protected function filterableBy() : array
+    public function filterableBy() : array
     {
         return ['id', 'title', 'options->visible', 'user.id', 'meta.source_id', 'created_at'];
     }
@@ -177,7 +177,7 @@ class PostsController extends Controller
      *
      * @return array
      */
-    protected function searchableBy() : array
+    public function searchableBy() : array
     {
         return ['title', 'description', 'options->key', 'user.name'];
     }
@@ -235,7 +235,7 @@ class PostsController extends Controller
      *
      * @return array
      */
-    protected function sortableBy() : array
+    public function sortableBy() : array
     {
          return ['id', 'name', 'options->key', 'meta.priority'];
     }
