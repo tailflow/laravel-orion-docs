@@ -41,18 +41,18 @@ use Orion\Http\Controllers\Controller;
 // options field here is a json/jsonb field of the Post model
 // visible and key fields are fields inside that json/jsonb field 
 class PostsController extends Controller
-{ 
-    protected function filterableBy() : array
+{
+    public function filterableBy() : array
     {
         return ['options->visible'];
     }
 
-    protected function searchableBy() : array
+    public function searchableBy() : array
     {
         return [ 'options->key'];
     }
-    
-    protected function sortableBy() : array
+
+    public function sortableBy() : array
     {
          return ['options->key'];
     }
