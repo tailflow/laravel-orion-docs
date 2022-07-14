@@ -119,3 +119,43 @@ The last, but not least, `force` query parameter allows you to permanently delet
 ```bash
 (DELETE) https://myapp.com/api/posts/5?force=true
 ```
+
+## Pagination Limit
+
+By default, 15 entities are returned per page from the `index` or `search` endpoints. To customize that, use `limit` method:
+
+```php
+
+namespace App\Http\Controllers\Api;
+
+use Orion\Http\Controllers\Controller;
+
+class PostsController extends Controller
+{
+    ...
+
+    /**
+    * Default pagination limit.
+    *
+    * @return int
+    */
+    public function limit() : int
+    {
+        return 20;
+    }
+
+    ...
+}
+```
+
+To instruct the API to return a specific number of entities per page, url needs to contain `limit` query parameter.
+
+```bash
+(GET) https://myapp.com/api/posts?limit=30
+```
+
+::: warning NOTE
+
+Value specified in the `limit` query parameter *always* overwrites the value specified in the `limit` method on a controller.
+
+:::
