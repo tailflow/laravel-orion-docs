@@ -114,42 +114,8 @@ These parameters are accepted on `index`, `search`, and `show` endpoints of both
 
 ### Force deleting
 
-The `force` query parameter allows you to permanently delete a resource. The parameter is accepted on the `destroy` endpoint of both [standard](./models.html#soft-deletes) and [relation](./relationships.html#soft-deletes) resources.
+The last, but not least, `force` query parameter allows you to permanently delete a resource. The parameter is accepted on the `destroy` endpoint of both [standard](./models.html#soft-deletes) and [relation](./relationships.html#soft-deletes) resources.
 
 ```bash
 (DELETE) https://myapp.com/api/posts/5?force=true
-```
-
-## Pagination
-
-You can specify either the number of results you want or the current page you are fetching.
-
-```
-(GET) https://myapp.com/api/posts?page=2&limit=10
-```
-
-The default limit can be specified in the controller by overriding the "limit" method.
-By default this value is 15.
-
-```php
-namespace App\Http\Controllers\Api;
-
-use Orion\Http\Controllers\Controller;
-
-class PostsController extends Controller
-{
-    ...
-
-    /**
-     * Default pagination limit.
-     *
-     * @return int
-     */
-    public function limit(): int
-    {
-        return 15;
-    }
-
-    ...
-}
 ```
