@@ -271,3 +271,30 @@ Many-to-many relation resources can also be sorted by their pivot values. Just u
 It is also possible to sort results based on the values inside json fields by whitelisting them alongside other attributes using "arrow" notation.
 In the example above `options->key` is one of such attributes.
 :::
+
+## Nested filtering
+
+If you want to add priority in your filtering, you may need nested filters. This feature allows you to bring your where to closures in order to isolate them from the other params.
+This is quite usefull when you want to take advantage of an "OR" condition.
+
+```json
+// (POST) https://myapp.com/api/posts/search
+{
+  "filters" : [
+    {"field" : "created_at", "operator" : ">=", "value" : "2020-01-01"},
+    {"type": "or", "nested" : [
+      {"field" : "options->visible", "operator" : ">=", "value" : true},
+      {"type" : "or", "field" : "meta.source_id", "operator" : "in", "value" : [1,2,3]}
+    ]}
+  ]
+}
+```
+
+The nested field can be added infinitely. This means you can go as deep as you want in the nesting filtering.
+
+::: warning NOTE
+
+By default, nesting depth is limited to 1.
+If you want to expand this limit, modify **"max_nested_depth"** in your config file. 
+
+:::
