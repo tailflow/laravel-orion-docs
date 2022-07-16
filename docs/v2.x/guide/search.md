@@ -142,6 +142,39 @@ The difference between `all in` and `any in` is that when `all in` is applied, i
 
 The last, but not least `value` - the actual value an attribute must have to satisfy the specified comparison conditions.
 
+### Nested filters
+
+If you would like to apply filters in "groups", then nested filters feature is what you might be looking for.
+
+```json
+// (POST) https://myapp.com/api/posts/search
+{
+  "filters" : [
+      {"field" : "created_at", "operator" : ">=", "value" : "2020-01-01"},
+      {"type": "or", "nested" : [
+        {"field" : "options->visible", "operator" : "=", "value" : true},
+        {"type" : "and", "field" : "meta.source_id", "operator" : "in", "value" : [1,2,3]}
+      ]}
+  ]
+}
+```
+
+In the request above, the entities would be returned by the API, if `created_at` field is greater or equal to `2020-01-01` ***OR*** `options->visible` field is equal to `true` ***AND*** `meta.source_id` field value is in array of `[1,2,3]`.
+
+The conditions above can be expressed in a pseudo language as follows:
+
+```
+(created_at >= "2020-01-01') OR (options->visible = true AND meta.source_id IN [1,2,3])
+```
+
+The nested filters can be added indefinitely, but the depth is limited to 1 by default to prevent any potential overuse of the feature, as each nested filter increases the overall "complexity" of the underlying query to the database.
+
+::: warning NOTE
+
+If you need to increase this limit, modify `search.max_nested_depth` in `orion.php` config file.
+
+:::
+
 ::: tip TIP
 
 You can filter results based on the attributes of relations simply by whitelisting them alongside other attributes using dot notation.
@@ -270,31 +303,4 @@ Many-to-many relation resources can also be sorted by their pivot values. Just u
 
 It is also possible to sort results based on the values inside json fields by whitelisting them alongside other attributes using "arrow" notation.
 In the example above `options->key` is one of such attributes.
-:::
-
-## Nested filtering
-
-If you want to add priority in your filtering, you may need nested filters. This feature allows you to bring your where to closures in order to isolate them from the other params.
-This is quite usefull when you want to take advantage of an "OR" condition.
-
-```json
-// (POST) https://myapp.com/api/posts/search
-{
-  "filters" : [
-    {"field" : "created_at", "operator" : ">=", "value" : "2020-01-01"},
-    {"type": "or", "nested" : [
-      {"field" : "options->visible", "operator" : ">=", "value" : true},
-      {"type" : "or", "field" : "meta.source_id", "operator" : "in", "value" : [1,2,3]}
-    ]}
-  ]
-}
-```
-
-The nested field can be added infinitely. This means you can go as deep as you want in the nesting filtering.
-
-::: warning NOTE
-
-By default, nesting depth is limited to 1.
-If you want to expand this limit, modify **"max_nested_depth"** in your config file. 
-
 :::
