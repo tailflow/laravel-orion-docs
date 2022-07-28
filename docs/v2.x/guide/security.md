@@ -207,3 +207,9 @@ Messages specified in these methods are **NOT** merged with messages from the `c
 #### Customizing validation messages for batch operations
 
 You can also customize messages for batch endpoints: `batchStoreMessages`, `batchUpdateMessages`.
+
+### Retrieving request data
+
+By default, upon storing or updating entities, *all* request data is retrieved and passed into the `fill` method on a model.
+
+However, it is possible to pass only the validated data. To do that, set `use_validated` to `true` in `orion.php` config file.
