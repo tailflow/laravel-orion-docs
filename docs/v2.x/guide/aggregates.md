@@ -68,37 +68,37 @@ To instruct the API to return aggregates via query params, url needs to contain 
 ### Count
 
 ```bash
-(GET) https://myapp.com/api/posts?aggregateCount=user,meta
+(GET) https://myapp.com/api/posts?with_count=user,meta
 ```
 
 ### Exists
 
 ```bash
-(GET) https://myapp.com/api/posts?aggregateExists=user,meta
+(GET) https://myapp.com/api/posts?with_exists=user,meta
 ```
 
 ### Average
 
 ```bash
-(GET) https://myapp.com/api/users?aggregateAvg=posts.stars
+(GET) https://myapp.com/api/users?with_avg=posts.stars
 ```
 
 ### Sum
 
 ```bash
-(GET) https://myapp.com/api/users?aggregateSum=posts.stars
+(GET) https://myapp.com/api/users?with_sum=posts.stars
 ```
 
 ### Min
 
 ```bash
-(GET) https://myapp.com/api/users?aggregateMin=posts.stars
+(GET) https://myapp.com/api/users?with_min=posts.stars
 ```
 
 ### Max
 
 ```bash
-(GET) https://myapp.com/api/users?aggregateMax=posts.stars
+(GET) https://myapp.com/api/users?with_max=posts.stars
 ```
 
 ## Post params
