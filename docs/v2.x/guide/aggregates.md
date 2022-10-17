@@ -109,7 +109,7 @@ If you want to take advantage of more powerfull aggregates, you can use post par
 
 ```json
 {
-  "aggregate": [
+  "aggregates": [
     {
       "relation": "posts",
       "type": "count"
@@ -122,7 +122,7 @@ If you want to take advantage of more powerfull aggregates, you can use post par
 
 ```json
 {
-  "aggregate": [
+  "aggregates": [
     {
       "relation": "posts",
       "type": "exists"
@@ -135,7 +135,7 @@ If you want to take advantage of more powerfull aggregates, you can use post par
 
 ```json
 {
-  "aggregate": [
+  "aggregates": [
     {
       "relation": "posts",
       "field": "stars",
@@ -148,7 +148,7 @@ If you want to take advantage of more powerfull aggregates, you can use post par
 
 ```json
 {
-  "aggregate": [
+  "aggregates": [
     {
       "relation": "posts",
       "field": "stars",
@@ -162,7 +162,7 @@ If you want to take advantage of more powerfull aggregates, you can use post par
 
 ```json
 {
-  "aggregate": [
+  "aggregates": [
     {
       "relation": "posts",
       "field": "stars",
@@ -175,7 +175,7 @@ If you want to take advantage of more powerfull aggregates, you can use post par
 
 ```json
 {
-  "aggregate": [
+  "aggregates": [
     {
       "relation": "posts",
       "field": "stars",
@@ -191,7 +191,7 @@ You can also specify filters in your queries. These filters supports nested filt
 
 ```json
 {
-  "aggregate": [
+  "aggregates": [
     {
       "relation": "posts",
       "type": "count",

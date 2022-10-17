@@ -102,7 +102,7 @@ If you want to take advantage of more powerfull includes, you can use post param
 
 ```json
 {
-  "include": [
+  "includes": [
     {
       "relation": "comments"
     }
@@ -116,7 +116,7 @@ You can also specify filters in your queries. These filters supports nested filt
 
 ```json
 {
-  "include": [
+  "includes": [
     {
       "relation": "posts",
       "filters": [
