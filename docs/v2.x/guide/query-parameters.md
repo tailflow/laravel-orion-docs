@@ -63,3 +63,32 @@ To instruct the API to return a specific number of entities per page, url needs 
 Value specified in the `limit` query parameter *always* overwrites the value specified in the `limit` method on a controller.
 
 :::
+
+
+## Max Pagination Limit
+
+By default, the `limit` query parameter can go up to 500 results from the API at maximum. To customize that, use `maxLimit` method:
+
+```php
+
+namespace App\Http\Controllers\Api;
+
+use Orion\Http\Controllers\Controller;
+
+class PostsController extends Controller
+{
+    ...
+
+    /**
+    * Max pagination limit.
+    *
+    * @return int
+    */
+    public function maxLimit() : int
+    {
+        return 100;
+    }
+
+    ...
+}
+```
