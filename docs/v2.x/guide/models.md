@@ -409,11 +409,11 @@ class PostsController extends Controller
 
 ### Standard operations methods
 
-| Method | Build | Run | Perform |
-| ---- | ----- | --- | ------- |
-| index | buildIndexFetchQuery | runIndexFetchQuery | - |
-| store | - | - | performStore |
-| show | buildShowFetchQuery | runShowFetchQuery | - |
-| update | buildUpdateFetchQuery | runUpdateFetchQuery | performUpdate |
+| Method | Build                  | Run                  | Perform |
+| ---- |------------------------|----------------------| ------- |
+| index | buildIndexFetchQuery   | runIndexFetchQuery   | - |
+| store | buildStoreFetchQuery   | runStoreFetchQuery   | performStore |
+| show | buildShowFetchQuery    | runShowFetchQuery    | - |
+| update | buildUpdateFetchQuery  | runUpdateFetchQuery  | performUpdate |
 | destroy | buildDestroyFetchQuery | runDestroyFetchQuery | performDestroy |
 | restore | buildRestoreFetchQuery | runRestoreFetchQuery | performRestore |

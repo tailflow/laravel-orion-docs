@@ -498,14 +498,14 @@ It is possible, same as in [model controllers](./models.html#customizing-queries
 
 ### Standard operations methods
 
-| Method | Build (parent) | Run (parent) | Build | Run | Perform |
-| ---- | -------------- | ------------ | ----- |---- | ------- |
-| index | buildIndexParentFetchQuery | runIndexParentFetchQuery | buildIndexFetchQuery | runIndexFetchQuery | - |
-| store | buildStoreParentFetchQuery | runStoreParentFetchQuery | - | - | performStore |
-| show | buildShowParentFetchQuery | runShowParentFetchQuery | buildShowFetchQuery | buildShowFetchQuery | - |
-| update | buildUpdateParentFetchQuery | runUpdateParentFetchQuery | buildUpdateFetchQuery | buildUpdateFetchQuery | performUpdate |
-| destroy | buildDestroyParentFetchQuery | runDestroyParentFetchQuery | buildDestroyFetchQuery | buildDestroyFetchQuery | performDestroy |
-| restore | buildRestoreParentFetchQuery | runRestoreParentFetchQuery | buildRestoreFetchQuery | buildRestoreFetchQuery | performRestore |
+| Method | Build (parent) | Run (parent) | Build                  | Run                  | Perform |
+| ---- | -------------- | ------------ |------------------------|----------------------| ------- |
+| index | buildIndexParentFetchQuery | runIndexParentFetchQuery | buildIndexFetchQuery   | runIndexFetchQuery   | - |
+| store | buildStoreParentFetchQuery | runStoreParentFetchQuery | buildStoreFetchQuery   | runStoreFetchQuery   | performStore |
+| show | buildShowParentFetchQuery | runShowParentFetchQuery | buildShowFetchQuery    | runShowFetchQuery    | - |
+| update | buildUpdateParentFetchQuery | runUpdateParentFetchQuery | buildUpdateFetchQuery  | runUpdateFetchQuery  | performUpdate |
+| destroy | buildDestroyParentFetchQuery | runDestroyParentFetchQuery | buildDestroyFetchQuery | runDestroyFetchQuery | performDestroy |
+| restore | buildRestoreParentFetchQuery | runRestoreParentFetchQuery | buildRestoreFetchQuery | runRestoreFetchQuery | performRestore |
 
 ### One-to-many operations methods
 

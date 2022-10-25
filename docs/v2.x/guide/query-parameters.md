@@ -1,6 +1,6 @@
 # Query Parameters
 
-Laravel Orion allows consumers of your API to use query parameters for working with soft deletable models and interacts with pagination in response.
+Laravel Orion allows consumers of your API to use query parameters for interaction with soft deletable resources, including other related resources (defined as relations on a particular model) together in response, aggregating relations and/or fields, and specifying how many resources to return in response (pagination limit).
 
 ## Soft Deletes
 
@@ -60,14 +60,14 @@ To instruct the API to return a specific number of entities per page, url needs 
 
 ::: warning NOTE
 
-Value specified in the `limit` query parameter *always* overwrites the value specified in the `limit` method on a controller.
+Value specified in the `limit` query parameter *always* overwrites the value specified in the `limit` method on a controller, but it can never exceed the value specified in the `maxLimit` method.
 
 :::
 
 
 ## Max Pagination Limit
 
-By default, the `limit` query parameter can go up to 500 results from the API at maximum. To customize that, use `maxLimit` method:
+By default, there is no limit on how many entities could be requested from API. To customize that, use `maxLimit` method:
 
 ```php
 
@@ -91,4 +91,30 @@ class PostsController extends Controller
 
     ...
 }
+```
+
+## Aggregating
+
+First, relations and fields used for aggregation need to be [whitelisted](./search.html#aggregates).
+
+To instruct the API to return aggregates, url needs to contain a specific query parameter with a comma separated list of relations or fields.
+
+```bash
+(GET) https://myapp.com/api/posts?with_count=user,meta
+(GET) https://myapp.com/api/posts?with_exists=user,meta
+(GET) https://myapp.com/api/users?with_avg=posts.stars
+(GET) https://myapp.com/api/users?with_sum=posts.stars
+(GET) https://myapp.com/api/users?with_min=posts.stars
+(GET) https://myapp.com/api/users?with_max=posts.stars
+```
+
+
+## Including Relations
+
+First, relations need to be [whitelisted](./search.html#includes).
+
+To instruct the API to return relations, url needs to contain `include` query parameter with a comma separated list of relations.
+
+```bash
+(GET) https://myapp.com/api/posts?include=user,meta
 ```

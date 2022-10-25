@@ -70,8 +70,6 @@ module.exports = {
                         'relationships',
                         'hooks',
                         'search',
-                        'includes',
-                        'aggregates',
                         'batch-operations',
                         'query-parameters',
                         'security',

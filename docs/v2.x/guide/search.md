@@ -1,6 +1,6 @@
 # Search
 
-Laravel Orion provides comprehensive search capabilities for your API endpoints with sorting, filtering and keyword search.
+Laravel Orion provides comprehensive search capabilities for your API endpoints with sorting, filtering, keyword search, aggregates and includes.
 
 ```json
 // (POST) https://myapp.com/api/posts/search
@@ -21,13 +21,30 @@ Laravel Orion provides comprehensive search capabilities for your API endpoints 
         {"field" : "name", "direction" : "asc"},
         {"field" : "options->key", "direction" : "asc"},
         {"field" : "meta.priority", "direction" : "desc"}
+    ],
+    "aggregates": [
+        {
+          "relation": "tags",
+          "type": "count",
+          "filters": [
+            {"field" : "tags.created_at", "operator" : ">=", "value" : "2020-01-01"}
+          ]
+        }
+    ],
+    "includes": [
+        {
+          "relation": "tags",
+          "filters": [
+            {"field" : "tags.created_at", "operator" : ">=", "value" : "2020-01-01"}
+          ]
+        }
     ]
 }
 ```
 
 ::: warning NOTE
 
-Order in which query constraints are be applied does **not** depend on the order of properties in the payload. It is always defined as follows: `scopes` -> `filters` -> `search` -> `sort`.
+Order in which query constraints are be applied does **not** depend on the order of properties in the payload. It is always defined as follows: `scopes` -> `filters` -> `search` -> `sort` -> `includes` -> `aggregates`.
 
 :::
 
@@ -303,4 +320,251 @@ Many-to-many relation resources can also be sorted by their pivot values. Just u
 
 It is also possible to sort results based on the values inside json fields by whitelisting them alongside other attributes using "arrow" notation.
 In the example above `options->key` is one of such attributes.
+:::
+
+## Aggregates
+
+To utilize [aggregates](https://laravel.com/docs/master/queries#aggregates), the required relations and/or fields need to be whitelisted.
+
+Available aggregates are the following: `count`, `avg`, `sum`, `min`, `max` and `exists`.
+
+```php
+
+namespace App\Http\Controllers\Api;
+
+use Orion\Http\Controllers\Controller;
+
+class PostsController extends Controller
+{
+    ...
+
+    /**
+    * The relations and fields that are allowed to be aggregated on a resource.
+    *
+    * @return array
+    */
+    public function aggregates() : array
+    {
+        return ['user', 'user.team', 'user.profile', 'meta'];
+    }
+
+    ...
+}
+```
+
+It is also possible to use wildcards to reduce the overhead of defining all possible relations and/or fields:
+
+```php
+
+namespace App\Http\Controllers\Api;
+
+use Orion\Http\Controllers\Controller;
+
+class PostsController extends Controller
+{
+    ...
+
+    /**
+    * The relations and fields that are allowed to be aggregated on a resource.
+    *
+    * @return array
+    */
+    public function aggregates() : array
+    {
+        return ['user.*', 'meta'];
+    }
+
+    ...
+}
+```
+
+In the request to a search endpoint include `aggregates` property:
+
+```json
+// (POST) https://myapp.com/api/posts/search
+{
+    "aggregates" : [
+        {"type" : "count", "relation" : "tags"},
+        {"type" : "exists", "relation" : "tags"},
+        {"type" : "avg", "relation" : "tags", "field": "stars"},
+        {"type" : "sum", "relation" : "tags", "field": "stars"},
+        {"type" : "min", "relation" : "tags", "field": "stars"},
+        {"type" : "max", "relation" : "tags", "field": "stars"}
+    ]
+}
+```
+
+::: danger NOTE
+
+Be aware that `count` and `exists` aggregates do not work like others aggregates and require only the `relation` field.
+
+:::
+
+### Applying filters
+
+You can also specify filters for aggregates. Nested filters are also supported.
+
+```json
+{
+  "aggregates": [
+    {
+      "relation": "tags",
+      "type": "count",
+      "filters": [
+        {"field" : "tags.created_at", "operator" : ">=", "value" : "2020-01-01"}
+      ]
+    },
+    {
+      "relation": "tags",
+      "field": "stars",
+      "type": "avg",
+      "filters": [
+        {"field" : "tags.created_at", "operator" : ">=", "value" : "2020-01-01"},
+        {"nested": [
+          {"field": "tags.id", "operator": "=", "value": 1},
+          {"field": "tags.id", "operator": ">", "value": 10, "type": "or"}
+        ]}
+      ]
+    }
+  ]
+}
+```
+
+::: warning NOTE
+
+Filters need to be whitelisted in the `filterableBy` method on a controller.
+
+:::
+
+## Includes
+
+Sometimes you may want to include relationships together with the returned resources. Just like aggregates, includes need to be whitelisted first.
+
+```php
+
+namespace App\Http\Controllers\Api;
+
+use Orion\Http\Controllers\Controller;
+
+class PostsController extends Controller
+{
+    ...
+
+    /**
+    * The relations that are allowed to be included together with a resource.
+    *
+    * @return array
+    */
+    public function includes() : array
+    {
+        return ['user', 'user.team', 'user.profile', 'meta'];
+    }
+
+    ...
+}
+```
+
+It is also possible to use wildcards to reduce the overhead of defining all possible relations:
+
+```php
+
+namespace App\Http\Controllers\Api;
+
+use Orion\Http\Controllers\Controller;
+
+class PostsController extends Controller
+{
+    ...
+
+    /**
+    * The relations that are allowed to be included together with a resource.
+    *
+    * @return array
+    */
+    public function includes() : array
+    {
+        return ['user.*', 'meta'];
+    }
+
+    ...
+}
+```
+
+In the request to a search endpoint include `includes` property:
+
+```json
+// (POST) https://myapp.com/api/posts/search
+{
+    "includes" : [
+        {"relation" : "tags"},
+        {"relation" : "comments"}
+    ]
+}
+```
+
+### Always Included Relations
+
+To load the relations by default without passing it through the query parameter, use the `alwaysIncludes` method:
+
+```php
+
+namespace App\Http\Controllers\Api;
+
+use Orion\Http\Controllers\Controller;
+
+class PostsController extends Controller
+{
+    ...
+
+    /**
+    * The relations that are loaded by default together with a resource.
+    *
+    * @return array
+    */
+    public function alwaysIncludes() : array
+    {
+        return ['user', 'meta'];
+    }
+
+    ...
+}
+```
+
+::: warning NOTE
+
+Unlike `include` method, the `alwaysIncludes` method does not support wildcards.
+
+:::
+
+### Applying filters
+
+You can also specify filters for includes. Nested filters are also supported.
+
+```json
+{
+  "includes": [
+    {
+      "relation": "comments",
+      "filters": [
+        {"field" : "comments.created_at", "operator" : ">=", "value" : "2020-01-01"}
+      ]
+    },
+    {
+      "relation": "tags",
+      "filters": [
+        {"field" : "tags.created_at", "operator" : ">=", "value" : "2020-01-01"},
+        {"nested": [
+          {"field": "tags.id", "operator": "=", "value": 1},
+          {"field": "tags.id", "operator": ">", "value": 20, "type": "or"}
+        ]}
+      ]
+    }
+  ]
+}
+```
+
+::: warning NOTE
+
+Filters need to be whitelisted in the `filterableBy` method on a controller.
+
 :::
