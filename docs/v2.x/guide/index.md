@@ -22,6 +22,4 @@ And, as a bonus, `search` endpoint on both model and relationship controllers al
 
 ## Supported By
 
-[<img src="https://res.cloudinary.com/dudxt4lp6/image/upload/v1639908579/Laravel%20Orion/logo_geecko_hcuz34.svg" width="300">](https://geecko.com)
-
-</a>
+<SupportedBy/>
