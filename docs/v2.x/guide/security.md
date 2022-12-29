@@ -90,7 +90,7 @@ class PostMetaPolicy
 
 ### Customizing policy classes
 
-It is quite common to see different authorization rules for the same models used in different controllers or scenarios. By default, the policy is resolved by Laravel using its built-in functionality. However, if you would like to use a specific policy in a controller, set the `protected $policy` or `protected $parentPolicy` variables accordingly:
+It is quite common to see different authorization rules for the same models used in different controllers or scenarios. By default, the policy is resolved by Laravel using its built-in functionality. However, if you would like to use a specific policy for a controller, set the `protected $policy` or `protected $parentPolicy` variables accordingly:
 
 **Model controller**
 ```php
