@@ -88,6 +88,68 @@ class PostMetaPolicy
 }
 ```
 
+### Customizing policy classes
+
+It is quite common to see different authorization rules for the same models used in different controllers or scenarios. By default, the policy is resolved by Laravel using its built-in functionality. However, if you would like to use a specific policy in a controller, set the `protected $policy` or `protected $parentPolicy` variables accordingly:
+
+**Model controller**
+```php
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Models\Post;
+use App\Policies\CustomPostPolicy;
+
+class PostsController extends ApiController
+{
+    /**
+     * @var string $model
+     */
+    protected $model = Post::class;
+
+    /**
+     * @var string $policy
+     */
+    protected $policy = CustomPostPolicy::class;
+}
+```
+
+**Relation controller**
+```php
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Models\Team;
+use App\Policies\CustomPostPolicy;
+use App\Policies\CustomTeamPolicy;
+use Orion\Http\Controllers\RelationController;
+
+class TeamPostsController extends RelationController
+{
+     /**
+     * @var string $model
+     */
+    protected $model = Team::class; // or "App\Models\Team"
+    
+    /**
+     * Name of the relationship as it is defined on the Post model
+     */
+    protected $relation = 'posts';
+
+    /**
+     * @var string $parentPolicy
+     */
+    protected $parentPolicy = CustomTeamPolicy::class;
+
+   /**
+     * @var string $policy
+     */
+    protected $policy = CustomPostPolicy::class;
+}
+```
+
 ## Validation
 
 :::warning ATTENTION
@@ -102,6 +164,7 @@ For example, if you have `App\Models\Message` model, the related request class w
 If request class names in your app do not follow this naming convention or if you just would like to be more explicit, set `protected $request` property on controller to a fully-qualified request class name.
 
 ```php
+<?php
 
 namespace App\Http\Controllers\Api;
 
