@@ -113,7 +113,7 @@ The following relationships are considered one-to-one relationships:
 - `belongsTo` (inverse of the `hasMany` relation)
 - `morphTo` (inverse of the `morphMany` relation)
 
-For one-to-one relationships, Laravel Orion provides 7 endpoints (basically endpoints for CRUD operations): `store`, `show`, `update`, `destroy`, `batchStore`, `batchUpdate`, `batchDestroy`
+For one-to-one relationships, Laravel Orion provides 4 endpoints (basically endpoints for CRUD operations): `store`, `show`, `update`, `destroy`
 
 :::warning ATTENTION
 The `belongsTo` and `morphTo` relations are not provided with `store` endpoint.
@@ -135,9 +135,6 @@ Orion::hasOneResource('profiles', 'image' , ProfileImageController::class);
 | GET|HEAD  | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.show         | App\Http\Controllers\Api\ProfileImageController@show                      |
 | PATCH|PUT | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.update       | App\Http\Controllers\Api\ProfileImageController@update                    |
 | DELETE    | api/profiles/{profile}/image/{image?}           | api.profiles.relation.image.destroy      | App\Http\Controllers\Api\ProfileImageController@destroy                   |
-| POST      | api/profiles/{profile}/image/batch              | api.profiles.relation.image.batchStore   | App\Http\Controllers\Api\ProfileImageController@batchStore                |
-| PATCH     | api/profiles/{profile}/image/batch              | api.profiles.relation.image.batchUpdate  | App\Http\Controllers\Api\ProfileImageController@batchUpdate               |
-| DELETE    | api/profiles/{profile}/image/batch              | api.profiles.relation.image.batchDestroy | App\Http\Controllers\Api\ProfileImageController@batchDestroy              |
 ```
 
 :::tip TIP
