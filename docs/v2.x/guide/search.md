@@ -496,7 +496,7 @@ In the request to a search endpoint include `includes` property:
 // (POST) https://myapp.com/api/posts/search
 {
     "includes" : [
-        {"relation" : "tags", "limit":  10},
+        {"relation" : "tags", "limit" : 10},
         {"relation" : "comments"}
     ]
 }
