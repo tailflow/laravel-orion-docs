@@ -496,11 +496,17 @@ In the request to a search endpoint include `includes` property:
 // (POST) https://myapp.com/api/posts/search
 {
     "includes" : [
-        {"relation" : "tags"},
+        {"relation" : "tags", "limit":  10},
         {"relation" : "comments"}
     ]
 }
 ```
+
+::: tip TIP
+
+You can limit the number of returned relation entities by providing the `limit` field.
+
+:::
 
 ### Always Included Relations
 
