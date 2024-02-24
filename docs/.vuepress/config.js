@@ -4,6 +4,11 @@ module.exports = {
     description: 'The simplest way to create REST API with Laravel',
     head: [
         ['link', {rel: "shortcut icon", href: "/favicon.ico"}],
+        ['script', {
+            src: 'https://eu.umami.is/script.js',
+            'data-website-id': '11e9ba57-1985-486a-ba09-4252f458d401',
+            'defer': true
+        }],
     ],
     themeConfig: {
         repo: 'tailflow/laravel-orion',
