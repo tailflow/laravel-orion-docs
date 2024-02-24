@@ -6,8 +6,8 @@ module.exports = {
         ['link', {rel: "shortcut icon", href: "/favicon.ico"}],
         ['script', {
             src: 'https://eu.umami.is/script.js',
-            'data-website-id': '11e9ba57-1985-486a-ba09-4252f458d401',
-            'defer': true
+            'data-website-id': '38472b29-c64c-403b-bb20-299484607211',
+            defer: true
         }],
     ],
     themeConfig: {
