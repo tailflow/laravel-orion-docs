@@ -199,7 +199,7 @@ const updatedPost = await Post.$query().update(5, {
 
 ### Deleting a resource
 ```typescript
-const deletedPost = await Post.$query().delete(5);
+const deletedPost = await Post.$query().destroy(5);
 // or
 await post.$destroy();
 ```
@@ -207,7 +207,7 @@ await post.$destroy();
 #### Force deleting
 To force delete a resource, provide a second argument to the delete method.
 ```typescript
-const deletedPost = await Post.$query().delete(5, true);
+const deletedPost = await Post.$query().destroy(5, true);
 // or
 await post.$destroy(true);
 ```
