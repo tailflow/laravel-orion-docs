@@ -39,7 +39,7 @@ export default defineNuxtConfig({
     '@nuxt/scripts',
     '@nuxt/ui',
     '@nuxt/content',
-    'nuxt-og-image',
+    '@nuxtjs/seo',
     'nuxt-llms'
   ],
 
@@ -48,6 +48,11 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
+
+  site: {
+    url: 'https://orion.tailflow.org',
+    name: 'Orion for Laravel'
+  },
 
   colorMode: {
     preference: 'dark'
@@ -130,5 +135,14 @@ export default defineNuxtConfig({
 
   ogImage: {
     zeroRuntime: true
+  },
+
+  // The /raw/*.md mirror routes are for LLM consumption, not search engines
+  robots: {
+    disallow: ['/raw']
+  },
+
+  sitemap: {
+    exclude: ['/raw/**']
   }
 })
