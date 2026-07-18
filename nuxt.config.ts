@@ -133,6 +133,14 @@ export default defineNuxtConfig({
     ]
   },
 
+  // The Cloudflare preset detection flips the icon server bundle to `remote`,
+  // making the prerenderer fetch icons from the Iconify API (and time out on
+  // slow CI networks). The server bundle only exists at build time here, so
+  // always read icons from the installed @iconify-json packages.
+  icon: {
+    serverBundle: 'local'
+  },
+
   // These three inspections cannot handle CJK anchors: heading ids render as
   // raw unicode while markdown hrefs are percent-encoded (uppercase hex), so
   // the checker mis-compares strings that browsers resolve correctly.
