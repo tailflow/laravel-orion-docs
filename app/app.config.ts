@@ -32,7 +32,7 @@ export default defineAppConfig({
     }]
   },
   footer: {
-    credits: 'Copyright © 2019-2024 Aleksei Zarubin',
+    credits: 'Copyright © 2019-2026 Aleksei Zarubin',
     colorMode: false,
     links: [{
       'icon': 'i-simple-icons-x',

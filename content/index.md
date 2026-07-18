@@ -15,7 +15,7 @@ ui:
 #headline
   :::u-button
   ---
-  to: https://github.com/tailflow/laravel-orion/releases/tag/2.22.5
+  to: https://github.com/tailflow/laravel-orion/releases/tag/2.23.0
   target: _blank
   color: primary
   variant: subtle
@@ -23,7 +23,7 @@ ui:
   trailing-icon: i-lucide-arrow-up-right
   class: rounded-full
   ---
-  v2.22.5 released
+  v2.23.0 released
   :::
 
 #title

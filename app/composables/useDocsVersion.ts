@@ -10,7 +10,7 @@ export interface DocsVersion {
 const versions: DocsVersion[] = [
   {
     name: 'latest',
-    label: 'v2.22.5',
+    label: 'v2.23.0',
     suffix: 'latest',
     icon: 'i-lucide-box',
     path: '/',
