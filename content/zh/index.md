@@ -205,7 +205,7 @@ Orion 提供了一种只需一行代码即可注册整个模型或关联 API 资
   size: lg
   trailing-icon: i-lucide-arrow-right
   ---
-  了解更多
+  深入了解路由
   :::
 
 #default
@@ -359,7 +359,7 @@ reverse: true
   size: lg
   trailing-icon: i-lucide-arrow-right
   ---
-  了解更多
+  深入了解规范
   :::
 
 #default

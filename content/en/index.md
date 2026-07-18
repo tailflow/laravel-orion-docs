@@ -205,7 +205,7 @@ Orion provides a way to register entire model or relationship API resources with
   size: lg
   trailing-icon: i-lucide-arrow-right
   ---
-  Learn more
+  Learn more about routes
   :::
 
 #default
@@ -359,7 +359,7 @@ To automatically generate OpenAPI specifications, simply run one command.
   size: lg
   trailing-icon: i-lucide-arrow-right
   ---
-  Learn more
+  Learn more about specifications
   :::
 
 #default
