@@ -1,31 +1,31 @@
 {
   "header": {
-    "selectLanguage": "Select language"
+    "selectLanguage": "언어 선택"
   },
   "version": {
-    "latest": "latest",
-    "deprecated": "deprecated"
+    "latest": "최신",
+    "deprecated": "지원 종료"
   },
   "toc": {
-    "title": "Table of Contents",
-    "community": "Community",
-    "editPage": "Edit this page",
-    "starOnGitHub": "Star on GitHub"
+    "title": "목차",
+    "community": "커뮤니티",
+    "editPage": "이 페이지 편집하기",
+    "starOnGitHub": "GitHub에서 스타 누르기"
   },
   "page": {
-    "copyPage": "Copy page",
-    "copyMarkdownLink": "Copy Markdown link",
-    "viewAsMarkdown": "View as Markdown",
-    "openInChatGPT": "Open in ChatGPT",
-    "openInClaude": "Open in Claude",
-    "copiedToClipboard": "Copied to clipboard",
-    "openCopyActionsMenu": "Open copy actions menu"
+    "copyPage": "페이지 복사",
+    "copyMarkdownLink": "Markdown 링크 복사",
+    "viewAsMarkdown": "Markdown으로 보기",
+    "openInChatGPT": "ChatGPT에서 열기",
+    "openInClaude": "Claude에서 열기",
+    "copiedToClipboard": "클립보드에 복사되었습니다",
+    "openCopyActionsMenu": "복사 작업 메뉴 열기"
   },
   "footer": {
     "credits": "Copyright © 2019-2026 Aleksei Zarubin"
   },
   "error": {
-    "title": "Page not found",
-    "description": "We are sorry but this page could not be found."
+    "title": "페이지를 찾을 수 없습니다",
+    "description": "죄송합니다. 요청하신 페이지를 찾을 수 없습니다."
   }
 }

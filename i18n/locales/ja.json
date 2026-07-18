@@ -1,31 +1,31 @@
 {
   "header": {
-    "selectLanguage": "Select language"
+    "selectLanguage": "言語を選択"
   },
   "version": {
-    "latest": "latest",
-    "deprecated": "deprecated"
+    "latest": "最新",
+    "deprecated": "非推奨"
   },
   "toc": {
-    "title": "Table of Contents",
-    "community": "Community",
-    "editPage": "Edit this page",
-    "starOnGitHub": "Star on GitHub"
+    "title": "目次",
+    "community": "コミュニティ",
+    "editPage": "このページを編集する",
+    "starOnGitHub": "GitHubでスターを付ける"
   },
   "page": {
-    "copyPage": "Copy page",
-    "copyMarkdownLink": "Copy Markdown link",
-    "viewAsMarkdown": "View as Markdown",
-    "openInChatGPT": "Open in ChatGPT",
-    "openInClaude": "Open in Claude",
-    "copiedToClipboard": "Copied to clipboard",
-    "openCopyActionsMenu": "Open copy actions menu"
+    "copyPage": "ページをコピー",
+    "copyMarkdownLink": "Markdownリンクをコピー",
+    "viewAsMarkdown": "Markdownで表示",
+    "openInChatGPT": "ChatGPTで開く",
+    "openInClaude": "Claudeで開く",
+    "copiedToClipboard": "クリップボードにコピーしました",
+    "openCopyActionsMenu": "コピー操作メニューを開く"
   },
   "footer": {
     "credits": "Copyright © 2019-2026 Aleksei Zarubin"
   },
   "error": {
-    "title": "Page not found",
-    "description": "We are sorry but this page could not be found."
+    "title": "ページが見つかりません",
+    "description": "申し訳ありませんが、このページは見つかりませんでした。"
   }
 }
