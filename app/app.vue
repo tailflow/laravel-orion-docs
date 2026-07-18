@@ -1,21 +1,9 @@
 <script setup lang="ts">
-import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
-
 const { seo } = useAppConfig()
 
-const { data: nav } = await useAsyncData('navigation', () => fetchContentNavigation())
-const { data: files } = useLazyFetch<ParsedContent[]>('/api/search.json', {
-  default: () => [],
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs'))
+const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
   server: false
-})
-const { version } = useContentSource()
-
-const navigation = computed(() => {
-  if (version.value.name === 'latest') {
-    return nav.value?.filter(item => item._path !== '/v1.x') || []
-  }
-
-  return nav.value?.filter(item => item._path === '/v1.x').flatMap(item => item.children) || []
 })
 
 useHead({
@@ -40,10 +28,8 @@ provide('navigation', navigation)
 </script>
 
 <template>
-  <div>
-    <NuxtLoadingIndicator color="white" />
-
-    <Banner />
+  <UApp>
+    <NuxtLoadingIndicator />
 
     <AppHeader />
 
@@ -61,7 +47,5 @@ provide('navigation', navigation)
         :navigation="navigation"
       />
     </ClientOnly>
-
-    <UNotifications />
-  </div>
+  </UApp>
 </template>

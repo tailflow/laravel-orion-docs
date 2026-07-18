@@ -1,48 +1,49 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  extends: ['@nuxt/ui-pro'],
   modules: [
-    '@nuxt/content',
     '@nuxt/eslint',
+    '@nuxt/image',
+    '@nuxt/scripts',
     '@nuxt/ui',
-    '@nuxt/fonts',
-    '@nuxthq/studio'
+    '@nuxt/content',
+    'nuxt-og-image',
+    'nuxt-llms'
   ],
-  hooks: {
-    // Define `@nuxt/ui` components as global to use them in `.md` (feel free to add those you need)
-    'components:extend': (components) => {
-      const globals = components.filter(c => ['UButton', 'UIcon'].includes(c.pascalName))
 
-      globals.forEach(c => c.global = true)
-    }
-  },
-  ui: {
-    icons: ['heroicons', 'simple-icons']
-  },
-  css: [
-    'assets/css/main.css'
-  ],
-  content: {
-    highlight: {
-      langs: ['json', 'js', 'ts', 'html', 'css', 'vue', 'shell', 'mdc', 'md', 'yaml', 'php']
-    }
-  },
-  colorMode: {
-    disableTransition: true,
-    preference: 'dark'
-  },
-  routeRules: {
-    '/': {
-      prerender: true
-    },
-    '/api/search.json': { prerender: true }
-  },
   devtools: {
     enabled: true
   },
-  typescript: {
-    strict: false
+
+  css: ['~/assets/css/main.css'],
+
+  content: {
+    build: {
+      markdown: {
+        toc: {
+          searchDepth: 1
+        }
+      }
+    },
+    experimental: {
+      sqliteConnector: 'native'
+    }
   },
+
+  experimental: {
+    asyncContext: true
+  },
+
+  compatibilityDate: '2026-06-30',
+
+  nitro: {
+    prerender: {
+      routes: [
+        '/'
+      ],
+      crawlLinks: true
+    }
+  },
+
   eslint: {
     config: {
       stylistic: {
@@ -50,5 +51,35 @@ export default defineNuxtConfig({
         braceStyle: '1tbs'
       }
     }
+  },
+
+  llms: {
+    domain: 'https://docs-template.nuxt.dev/',
+    title: 'Nuxt Docs Template',
+    description: 'A template for building documentation with Nuxt UI and Nuxt Content.',
+    full: {
+      title: 'Nuxt Docs Template - Full Documentation',
+      description: 'This is the full documentation for the Nuxt Docs Template.'
+    },
+    sections: [
+      {
+        title: 'Getting Started',
+        contentCollection: 'docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/getting-started%' }
+        ]
+      },
+      {
+        title: 'Essentials',
+        contentCollection: 'docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/essentials%' }
+        ]
+      }
+    ]
+  },
+
+  ogImage: {
+    zeroRuntime: true
   }
 })
