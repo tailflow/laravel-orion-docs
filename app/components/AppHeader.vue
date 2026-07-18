@@ -14,7 +14,7 @@ const { header } = useAppConfig()
     <UContentSearchButton
       v-if="header?.search"
       :collapsed="false"
-      class="w-full"
+      class="w-full text-muted"
     />
 
     <template #left>
