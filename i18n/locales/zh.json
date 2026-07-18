@@ -1,0 +1,31 @@
+{
+  "header": {
+    "selectLanguage": "选择语言"
+  },
+  "version": {
+    "latest": "最新",
+    "deprecated": "已弃用"
+  },
+  "toc": {
+    "title": "目录",
+    "community": "社区",
+    "editPage": "编辑此页",
+    "starOnGitHub": "在 GitHub 上加星"
+  },
+  "page": {
+    "copyPage": "复制页面",
+    "copyMarkdownLink": "复制 Markdown 链接",
+    "viewAsMarkdown": "以 Markdown 查看",
+    "openInChatGPT": "在 ChatGPT 中打开",
+    "openInClaude": "在 Claude 中打开",
+    "copiedToClipboard": "已复制到剪贴板",
+    "openCopyActionsMenu": "打开复制操作菜单"
+  },
+  "footer": {
+    "credits": "版权所有 © 2019-2026 Aleksei Zarubin"
+  },
+  "error": {
+    "title": "页面未找到",
+    "description": "抱歉，无法找到该页面。"
+  }
+}

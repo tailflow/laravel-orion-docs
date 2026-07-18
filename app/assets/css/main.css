@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@source "../../../content/**/*";
+
+@theme static {
+  --font-sans: 'DM Sans', sans-serif;
+}
+
+pre {
+  white-space: pre !important;
+  overflow-x: auto;
+}

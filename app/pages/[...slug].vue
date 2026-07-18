@@ -1,0 +1,127 @@
+<script setup lang="ts">
+import type { ContentNavigationItem } from '@nuxt/content'
+import { findPageHeadline } from '@nuxt/content/utils'
+
+definePageMeta({
+  layout: 'docs'
+})
+
+const route = useRoute()
+const { t } = useI18n()
+const { toc } = useAppConfig()
+const collection = useDocsCollection()
+const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
+
+const { data: page } = await useAsyncData(route.path, () => queryCollection(collection.value).path(route.path).first())
+if (!page.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+}
+
+const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
+  return queryCollectionItemSurroundings(collection.value, route.path, {
+    fields: ['description']
+  })
+})
+
+const title = page.value.seo?.title || page.value.title
+const description = page.value.seo?.description || page.value.description
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description
+})
+
+const headline = computed(() => findPageHeadline(navigation?.value, page.value?.path))
+
+// The OG renderer has no CJK fonts, so localized pages render their card with
+// the English page's title and description instead.
+const locale = useDocsLocale()
+if (locale.value === 'en') {
+  defineOgImage('Docs', { title, description, headline: headline.value })
+} else {
+  const enPath = route.path.replace(new RegExp(`^/${locale.value}`), '')
+  const { data: enPage } = await useAsyncData(`${route.path}-og`, () => queryCollection('docs_en').path(enPath).first())
+  defineOgImage('Docs', {
+    title: enPage.value?.seo?.title || enPage.value?.title || title,
+    description: enPage.value?.seo?.description || enPage.value?.description || description
+  })
+}
+
+const links = computed(() => {
+  const links = []
+  if (toc?.bottom?.edit) {
+    links.push({
+      icon: 'i-lucide-external-link',
+      label: t('toc.editPage'),
+      to: `${toc.bottom.edit}/${page?.value?.stem}.${page?.value?.extension}`,
+      target: '_blank'
+    })
+  }
+
+  // `label` values in app.config toc links are i18n keys
+  return [...links, ...(toc?.bottom?.links || []).map(link => ({ ...link, label: t(link.label) }))].filter(Boolean)
+})
+</script>
+
+<template>
+  <UPage v-if="page">
+    <UPageHeader
+      :title="page.title"
+      :description="page.description"
+      :headline="headline"
+    >
+      <template #links>
+        <UButton
+          v-for="(link, index) in page.links"
+          :key="index"
+          v-bind="link"
+        />
+
+        <PageHeaderLinks />
+      </template>
+    </UPageHeader>
+
+    <UPageBody>
+      <ContentRenderer
+        v-if="page"
+        :value="page"
+      />
+
+      <USeparator v-if="surround?.length" />
+
+      <UContentSurround :surround="surround" />
+    </UPageBody>
+
+    <template
+      v-if="page?.body?.toc?.links?.length"
+      #right
+    >
+      <UContentToc
+        :title="t('toc.title')"
+        :links="page.body?.toc?.links"
+      >
+        <template
+          v-if="toc?.bottom"
+          #bottom
+        >
+          <div
+            class="hidden lg:block space-y-6"
+            :class="{ 'mt-6!': page.body?.toc?.links?.length }"
+          >
+            <USeparator
+              v-if="page.body?.toc?.links?.length"
+              type="dashed"
+            />
+
+            <UPageLinks
+              :title="t('toc.community')"
+              :links="links"
+            />
+          </div>
+        </template>
+      </UContentToc>
+    </template>
+  </UPage>
+</template>

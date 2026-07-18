@@ -1,0 +1,31 @@
+{
+  "header": {
+    "selectLanguage": "言語を選択"
+  },
+  "version": {
+    "latest": "最新",
+    "deprecated": "非推奨"
+  },
+  "toc": {
+    "title": "目次",
+    "community": "コミュニティ",
+    "editPage": "このページを編集する",
+    "starOnGitHub": "GitHubでスターを付ける"
+  },
+  "page": {
+    "copyPage": "ページをコピー",
+    "copyMarkdownLink": "Markdownリンクをコピー",
+    "viewAsMarkdown": "Markdownで表示",
+    "openInChatGPT": "ChatGPTで開く",
+    "openInClaude": "Claudeで開く",
+    "copiedToClipboard": "クリップボードにコピーしました",
+    "openCopyActionsMenu": "コピー操作メニューを開く"
+  },
+  "footer": {
+    "credits": "Copyright © 2019-2026 Aleksei Zarubin"
+  },
+  "error": {
+    "title": "ページが見つかりません",
+    "description": "申し訳ありませんが、このページは見つかりませんでした。"
+  }
+}
