@@ -22,7 +22,7 @@ const { header } = useAppConfig()
         :to="header?.to || '/'"
         class="flex items-center gap-2"
       >
-        <AppLogo class="w-auto h-6 shrink-0 text-primary" />
+        <AppLogo class="w-auto h-8 shrink-0 text-primary" />
 
         <span class="text-lg font-bold text-highlighted">Orion for Laravel</span>
       </NuxtLink>
