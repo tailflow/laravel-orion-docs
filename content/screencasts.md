@@ -3,13 +3,13 @@ title: Screencasts
 description: Explore the features of Orion for Laravel through a series of video tutorials.
 ---
 
-[@Luke Diebold](https://twitter.com/LukeDiebold) is creating a series of screencasts that cover a wide range of Orion for Laravel features. Huge thanks to all the efforts put into this ❤️
+[@Luke Diebold](https://twitter.com/LukeDiebold) is creating a series of screencasts that cover a wide range of Orion for Laravel features. Huge thanks for all the effort put into this ❤️
 
-*NOTE: this is ongoing series - more episodes will be added as soon as they become available.*
+*NOTE: this is an ongoing series - more episodes will be added as soon as they become available.*
 
 ## Introduction
 
-What is Orion for Laravel? What it can do? Let's find out in this introductory episode to the series of Orion for Laravel screencasts.
+What is Orion for Laravel? What can it do? Let's find out in this introductory episode to the series of Orion for Laravel screencasts.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/x3h6HwQNN38" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -27,19 +27,19 @@ Before diving into the search functionality, we need to prepare our models and m
 
 ## Search - keyword search
 
-One of the available search options is keyword search. It allows you to lookup models that match a provided keyword in ***any*** of the specified attributes, similar to what a typical search bar does.
+One of the available search options is keyword search. It allows you to look up models that match a provided keyword in ***any*** of the specified attributes, similar to what a typical search bar does.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/q6ZPW8iw4ks" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Search - filters
 
-Another way of searching for models is to use filters. Think of it as writing Eloquent query, but on the frontend side.
+Another way of searching for models is to use filters. Think of it as writing an Eloquent query, but on the frontend side.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/IrvQCB7FMUk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Search - sorting
 
-When performing a search query, you can also sort the results. Let's take a look how you can accomplish that, shall we? :)
+When performing a search query, you can also sort the results. Let's take a look at how you can accomplish that, shall we? :)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/PibHcj3EwlQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
