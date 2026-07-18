@@ -137,44 +137,48 @@ Later, you would setup operation hooks, filterable and searchable attributes, in
 
 #default
   :::code-group
-  ```php [PostsController.php]
-  <?php
+    ::::prose-pre{filename="PostsController.php"}
+    ```php [PostsController.php]
+    <?php
 
-  namespace App\Http\Controllers\Api;
+    namespace App\Http\Controllers\Api;
 
-  use App\Models\Post;
-  use Orion\Http\Controllers\Controller;
+    use App\Models\Post;
+    use Orion\Http\Controllers\Controller;
 
-  class PostsController extends Controller
-  {
-      /**
-      * Fully-qualified model class name
-      */
-      protected $model = Post::class; // or "App\Models\Post"
-  }
-  ```
+    class PostsController extends Controller
+    {
+        /**
+        * Fully-qualified model class name
+        */
+        protected $model = Post::class; // or "App\Models\Post"
+    }
+    ```
+    ::::
 
-  ```php [PostTagsController.php]
-  <?php
+    ::::prose-pre{filename="PostTagsController.php"}
+    ```php [PostTagsController.php]
+    <?php
 
-  namespace App\Http\Controllers\Api;
+    namespace App\Http\Controllers\Api;
 
-  use App\Models\Post;
-  use Orion\Http\Controllers\RelationController;
+    use App\Models\Post;
+    use Orion\Http\Controllers\RelationController;
 
-  class PostTagsController extends RelationController
-  {
-      /**
-      * Fully-qualified model class name
-      */
-      protected $model = Post::class; // or "App\Models\Post"
+    class PostTagsController extends RelationController
+    {
+        /**
+        * Fully-qualified model class name
+        */
+        protected $model = Post::class; // or "App\Models\Post"
 
-      /**
-      * Name of the relation as it is defined on the Post model
-      */
-      protected $relation = 'tags';
-  }
-  ```
+        /**
+        * Name of the relation as it is defined on the Post model
+        */
+        protected $relation = 'tags';
+    }
+    ```
+    ::::
   :::
 ::
 
@@ -289,42 +293,46 @@ You can now manage posts and their tags via a standardized API.
 
 #default
   :::code-group
-  ```bash [Posts API]
-  +-----------+------------------------------+-----------------------------+------------------------------------------------------------+------------+
-  | Method    | URI                          | Name                        | Action                                                     | Middleware |
-  +-----------+------------------------------+-----------------------------+------------------------------------------------------------+------------+
-  | GET|HEAD  | api/posts                    | api.posts.index             | App\Http\Controllers\Api\PostsController@index             | api        |
-  | POST      | api/posts/search             | api.posts.search            | App\Http\Controllers\Api\PostsController@index             | api        |
-  | POST      | api/posts                    | api.posts.store             | App\Http\Controllers\Api\PostsController@store             | api        |
-  | GET|HEAD  | api/posts/{post}             | api.posts.show              | App\Http\Controllers\Api\PostsController@show              | api        |
-  | PUT|PATCH | api/posts/{post}             | api.posts.update            | App\Http\Controllers\Api\PostsController@update            | api        |
-  | DELETE    | api/posts/{post}             | api.posts.destroy           | App\Http\Controllers\Api\PostsController@destroy           | api        |
-  | POST      | api/posts/{post}/restore     | api.posts.restore           | App\Http\Controllers\Api\PostsController@restore           | api        |
-  | POST      | api/posts/batch              | api.posts.batchStore        | App\Http\Controllers\Api\PostsController@batchStore        | api        |
-  | PATCH     | api/posts/batch              | api.posts.batchUpdate       | App\Http\Controllers\Api\PostsController@batchUpdate       | api        |
-  | DELETE    | api/posts/batch              | api.posts.batchDestroy      | App\Http\Controllers\Api\PostsController@batchDestroy      | api        |
-  | POST      | api/posts/batch/restore      | api.posts.batchRestore      | App\Http\Controllers\Api\PostsController@batchRestore      | api        |
-  ```
+    ::::prose-pre{filename="Posts API"}
+    ```bash [Posts API]
+    +-----------+------------------------------+-----------------------------+------------------------------------------------------------+------------+
+    | Method    | URI                          | Name                        | Action                                                     | Middleware |
+    +-----------+------------------------------+-----------------------------+------------------------------------------------------------+------------+
+    | GET|HEAD  | api/posts                    | api.posts.index             | App\Http\Controllers\Api\PostsController@index             | api        |
+    | POST      | api/posts/search             | api.posts.search            | App\Http\Controllers\Api\PostsController@index             | api        |
+    | POST      | api/posts                    | api.posts.store             | App\Http\Controllers\Api\PostsController@store             | api        |
+    | GET|HEAD  | api/posts/{post}             | api.posts.show              | App\Http\Controllers\Api\PostsController@show              | api        |
+    | PUT|PATCH | api/posts/{post}             | api.posts.update            | App\Http\Controllers\Api\PostsController@update            | api        |
+    | DELETE    | api/posts/{post}             | api.posts.destroy           | App\Http\Controllers\Api\PostsController@destroy           | api        |
+    | POST      | api/posts/{post}/restore     | api.posts.restore           | App\Http\Controllers\Api\PostsController@restore           | api        |
+    | POST      | api/posts/batch              | api.posts.batchStore        | App\Http\Controllers\Api\PostsController@batchStore        | api        |
+    | PATCH     | api/posts/batch              | api.posts.batchUpdate       | App\Http\Controllers\Api\PostsController@batchUpdate       | api        |
+    | DELETE    | api/posts/batch              | api.posts.batchDestroy      | App\Http\Controllers\Api\PostsController@batchDestroy      | api        |
+    | POST      | api/posts/batch/restore      | api.posts.batchRestore      | App\Http\Controllers\Api\PostsController@batchRestore      | api        |
+    ```
+    ::::
 
-  ```bash [Post Tags API]
-  +———————————+———————————————————————————————————————+————————————————————————————————————————+——————————————————————————————————————————————————————————————+————————————+
-  | Method    | URI                                   | Name                                   | Action                                                       | Middleware |
-  +———————————+———————————————————————————————————————+————————————————————————————————————————+——————————————————————————————————————————————————————————————+————————————+
-  | GET|HEAD  | api/posts/{post}/tags                 | api.posts.relation.tags.index          | App\Http\Controllers\Api\PostTagsController@index            | api        |
-  | POST      | api/posts/{post}/tags/search          | api.posts.relation.tags.search         | App\Http\Controllers\Api\PostTagsController@index            | api        |
-  | POST      | api/posts/{post}/tags                 | api.posts.relation.tags.store          | App\Http\Controllers\Api\PostTagsController@store            | api        |
-  | GET|HEAD  | api/posts/{post}/tags/{tag}           | api.posts.relation.tags.show           | App\Http\Controllers\Api\PostTagsController@show             | api        |
-  | PUT|PATCH | api/posts/{post}/tags/{tag}           | api.posts.relation.tags.update         | App\Http\Controllers\Api\PostTagsController@update           | api        |
-  | DELETE    | api/posts/{post}/tags/{tag}           | api.posts.relation.tags.destroy        | App\Http\Controllers\Api\PostTagsController@destroy          | api        |
-  | POST      | api/posts/{post}/tags/batch           | api.posts.relation.tags.batchStore     | App\Http\Controllers\Api\PostTagsController@batchStore       | api        |
-  | PATCH     | api/posts/{post}/tags/batch           | api.posts.relation.tags.batchUpdate    | App\Http\Controllers\Api\PostTagsController@batchUpdate      | api        |
-  | DELETE    | api/posts/{post}/tags/batch           | api.posts.relation.tags.batchDestroy   | App\Http\Controllers\Api\PostTagsController@batchDestroy     | api        |
-  | POST      | api/posts/{post}/tags/attach          | api.posts.relation.tags.attach         | App\Http\Controllers\Api\PostTagsController@attach           | api        |
-  | DELETE    | api/posts/{post}/tags/detach          | api.posts.relation.tags.detach         | App\Http\Controllers\Api\PostTagsController@detach           | api        |
-  | PATCH     | api/posts/{post}/tags/sync            | api.posts.relation.tags.sync           | App\Http\Controllers\Api\PostTagsController@sync             | api        |
-  | PATCH     | api/posts/{post}/tags/toggle          | api.posts.relation.tags.toggle         | App\Http\Controllers\Api\PostTagsController@toggle           | api        |
-  | PATCH     | api/posts/{post}/tags/{tag}/pivot     | api.posts.relation.tags.pivot          | App\Http\Controllers\Api\PostTagsController@updatePivot      | api        |
-  ```
+    ::::prose-pre{filename="Post Tags API"}
+    ```bash [Post Tags API]
+    +———————————+———————————————————————————————————————+————————————————————————————————————————+——————————————————————————————————————————————————————————————+————————————+
+    | Method    | URI                                   | Name                                   | Action                                                       | Middleware |
+    +———————————+———————————————————————————————————————+————————————————————————————————————————+——————————————————————————————————————————————————————————————+————————————+
+    | GET|HEAD  | api/posts/{post}/tags                 | api.posts.relation.tags.index          | App\Http\Controllers\Api\PostTagsController@index            | api        |
+    | POST      | api/posts/{post}/tags/search          | api.posts.relation.tags.search         | App\Http\Controllers\Api\PostTagsController@index            | api        |
+    | POST      | api/posts/{post}/tags                 | api.posts.relation.tags.store          | App\Http\Controllers\Api\PostTagsController@store            | api        |
+    | GET|HEAD  | api/posts/{post}/tags/{tag}           | api.posts.relation.tags.show           | App\Http\Controllers\Api\PostTagsController@show             | api        |
+    | PUT|PATCH | api/posts/{post}/tags/{tag}           | api.posts.relation.tags.update         | App\Http\Controllers\Api\PostTagsController@update           | api        |
+    | DELETE    | api/posts/{post}/tags/{tag}           | api.posts.relation.tags.destroy        | App\Http\Controllers\Api\PostTagsController@destroy          | api        |
+    | POST      | api/posts/{post}/tags/batch           | api.posts.relation.tags.batchStore     | App\Http\Controllers\Api\PostTagsController@batchStore       | api        |
+    | PATCH     | api/posts/{post}/tags/batch           | api.posts.relation.tags.batchUpdate    | App\Http\Controllers\Api\PostTagsController@batchUpdate      | api        |
+    | DELETE    | api/posts/{post}/tags/batch           | api.posts.relation.tags.batchDestroy   | App\Http\Controllers\Api\PostTagsController@batchDestroy     | api        |
+    | POST      | api/posts/{post}/tags/attach          | api.posts.relation.tags.attach         | App\Http\Controllers\Api\PostTagsController@attach           | api        |
+    | DELETE    | api/posts/{post}/tags/detach          | api.posts.relation.tags.detach         | App\Http\Controllers\Api\PostTagsController@detach           | api        |
+    | PATCH     | api/posts/{post}/tags/sync            | api.posts.relation.tags.sync           | App\Http\Controllers\Api\PostTagsController@sync             | api        |
+    | PATCH     | api/posts/{post}/tags/toggle          | api.posts.relation.tags.toggle         | App\Http\Controllers\Api\PostTagsController@toggle           | api        |
+    | PATCH     | api/posts/{post}/tags/{tag}/pivot     | api.posts.relation.tags.pivot          | App\Http\Controllers\Api\PostTagsController@updatePivot      | api        |
+    ```
+    ::::
   :::
 ::
 
