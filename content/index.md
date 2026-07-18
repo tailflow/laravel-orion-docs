@@ -55,16 +55,18 @@ The simplest way to create REST API with Laravel
   :::
 
 #default
-  :::prose-pre
-  ---
-  code: |
-    composer require tailflow/laravel-orion
-  filename: Terminal
-  ---
+  :::div{.w-fit .max-w-full}
+    ::::prose-pre
+    ---
+    code: |
+      composer require tailflow/laravel-orion
+    filename: Terminal
+    ---
 
-  ```bash [Terminal]
-  composer require tailflow/laravel-orion
-  ```
+    ```bash [Terminal]
+    composer require tailflow/laravel-orion
+    ```
+    ::::
   :::
 ::
 
