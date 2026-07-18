@@ -34,6 +34,8 @@ const { header } = useAppConfig()
         class="lg:hidden"
       />
 
+      <LanguageSelect />
+
       <UColorModeButton v-if="header?.colorMode" />
 
       <template v-if="header?.links">

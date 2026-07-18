@@ -37,7 +37,6 @@ export default defineAppConfig({
     }]
   },
   footer: {
-    credits: 'Copyright © 2019-2026 Aleksei Zarubin',
     colorMode: false,
     links: [{
       'icon': 'i-simple-icons-x',
@@ -52,13 +51,12 @@ export default defineAppConfig({
     }]
   },
   toc: {
-    title: 'Table of Contents',
     bottom: {
-      title: 'Community',
       edit: 'https://github.com/tailflow/laravel-orion-docs-new/edit/main/content',
+      // `label` values are i18n keys, resolved at the usage site
       links: [{
         icon: 'i-lucide-star',
-        label: 'Star on GitHub',
+        label: 'toc.starOnGitHub',
         to: 'https://github.com/tailflow/laravel-orion',
         target: '_blank'
       }]

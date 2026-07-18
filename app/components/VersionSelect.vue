@@ -2,11 +2,12 @@
 import type { DropdownMenuItem } from '@nuxt/ui'
 
 const { versions, version, select } = useDocsVersion()
+const { t } = useI18n()
 
 const items = computed<DropdownMenuItem[]>(() => versions.map(v => ({
   label: v.label,
   icon: v.icon,
-  suffix: v.suffix,
+  suffix: t(`version.${v.name}`),
   ...(v.name === version.value.name
     ? { type: 'checkbox' as const, checked: true }
     : { onSelect: () => select(v) })
@@ -29,7 +30,7 @@ const items = computed<DropdownMenuItem[]>(() => versions.map(v => ({
         :ui="{ base: 'justify-start', trailingIcon: 'ms-auto' }"
       >
         <span class="text-highlighted">{{ version.label }}</span>
-        <span class="text-muted">{{ version.suffix }}</span>
+        <span class="text-muted">{{ t(`version.${version.name}`) }}</span>
       </UButton>
 
       <template #item-label="{ item }">

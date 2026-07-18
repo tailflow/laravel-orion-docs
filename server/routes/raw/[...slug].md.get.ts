@@ -11,7 +11,10 @@ export default eventHandler(async (event) => {
 
   const path = withLeadingSlash(slug.replace('.md', ''))
 
-  const collection = (path.startsWith('/v1.x') ? 'docsv1' : 'docs') as keyof Collections
+  const segment = path.split('/')[1]
+  const collection = (path.startsWith('/v1.x')
+    ? 'docsv1'
+    : ['ja', 'ko', 'zh'].includes(segment!) ? `docs_${segment}` : 'docs_en') as keyof Collections
   const page = await queryCollection(event, collection).path(path).first()
   if (!page) {
     throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })

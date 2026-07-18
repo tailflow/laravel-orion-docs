@@ -7,17 +7,18 @@ definePageMeta({
 })
 
 const route = useRoute()
+const { t } = useI18n()
 const { toc } = useAppConfig()
-const { version } = useDocsVersion()
+const collection = useDocsCollection()
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
-const { data: page } = await useAsyncData(route.path, () => queryCollection(version.value.collection).path(route.path).first())
+const { data: page } = await useAsyncData(route.path, () => queryCollection(collection.value).path(route.path).first())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
 const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
-  return queryCollectionItemSurroundings(version.value.collection, route.path, {
+  return queryCollectionItemSurroundings(collection.value, route.path, {
     fields: ['description']
   })
 })
@@ -41,13 +42,14 @@ const links = computed(() => {
   if (toc?.bottom?.edit) {
     links.push({
       icon: 'i-lucide-external-link',
-      label: 'Edit this page',
+      label: t('toc.editPage'),
       to: `${toc.bottom.edit}/${page?.value?.stem}.${page?.value?.extension}`,
       target: '_blank'
     })
   }
 
-  return [...links, ...(toc?.bottom?.links || [])].filter(Boolean)
+  // `label` values in app.config toc links are i18n keys
+  return [...links, ...(toc?.bottom?.links || []).map(link => ({ ...link, label: t(link.label) }))].filter(Boolean)
 })
 </script>
 
@@ -85,7 +87,7 @@ const links = computed(() => {
       #right
     >
       <UContentToc
-        :title="toc?.title"
+        :title="t('toc.title')"
         :links="page.body?.toc?.links"
       >
         <template
@@ -102,7 +104,7 @@ const links = computed(() => {
             />
 
             <UPageLinks
-              :title="toc.bottom.title"
+              :title="t('toc.community')"
               :links="links"
             />
           </div>

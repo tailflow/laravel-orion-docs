@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url'
 
 const contentDir = fileURLToPath(new URL('./content', import.meta.url))
 
+const locales = ['en', 'ja', 'ko', 'zh'] as const
+
 /**
  * Collect the route path of every content page. Used to prerender routes the
  * crawler cannot discover from '/': `/raw/<path>.md` links only appear inside
@@ -35,10 +37,12 @@ function collectContentPaths(dir: string, prefix = ''): string[] {
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
+    '@nuxt/fonts',
     '@nuxt/image',
     '@nuxt/scripts',
     '@nuxt/ui',
     '@nuxt/content',
+    '@nuxtjs/i18n',
     '@nuxtjs/seo',
     'nuxt-llms'
   ],
@@ -91,9 +95,19 @@ export default defineNuxtConfig({
 
   hooks: {
     'prerender:routes'(ctx) {
-      for (const path of collectContentPaths(contentDir)) {
-        ctx.routes.add(path)
-        ctx.routes.add(`/raw${path}.md`)
+      const trees = [
+        ...locales.map(locale => ({ dir: locale as string, prefix: locale === 'en' ? '' : `/${locale}` })),
+        { dir: 'v1.x', prefix: '/v1.x' }
+      ]
+      for (const { dir, prefix } of trees) {
+        for (const path of collectContentPaths(join(contentDir, dir), prefix)) {
+          ctx.routes.add(path)
+          // Landing pages (path === prefix) are MDC component pages with no
+          // raw-markdown mirror.
+          if (path !== prefix) {
+            ctx.routes.add(`/raw${path}.md`)
+          }
+        }
       }
     }
   },
@@ -107,6 +121,30 @@ export default defineNuxtConfig({
     }
   },
 
+  // The og-image default font set has no CJK glyphs; Noto Sans JP/KR/SC cover
+  // the localized titles. `global: true` is required for the OG renderer to
+  // see the font data.
+  fonts: {
+    families: [
+      { name: 'Noto Sans JP', weights: [400, 700], global: true },
+      { name: 'Noto Sans KR', weights: [400, 700], global: true },
+      { name: 'Noto Sans SC', weights: [400, 700], global: true }
+    ]
+  },
+
+  i18n: {
+    defaultLocale: 'en',
+    strategy: 'prefix_except_default',
+    baseUrl: 'https://orion.tailflow.org',
+    detectBrowserLanguage: false,
+    locales: [
+      { code: 'en', language: 'en-US', name: 'English', file: 'en.json' },
+      { code: 'ja', language: 'ja-JP', name: '日本語', file: 'ja.json' },
+      { code: 'ko', language: 'ko-KR', name: '한국어', file: 'ko.json' },
+      { code: 'zh', language: 'zh-CN', name: '简体中文', file: 'zh.json' }
+    ]
+  },
+
   llms: {
     domain: 'https://orion.tailflow.org',
     title: 'Orion for Laravel',
@@ -118,14 +156,14 @@ export default defineNuxtConfig({
     sections: [
       {
         title: 'Guide',
-        contentCollection: 'docs',
+        contentCollection: 'docs_en',
         contentFilters: [
           { field: 'path', operator: 'LIKE', value: '/guide%' }
         ]
       },
       {
         title: 'TypeScript SDK',
-        contentCollection: 'docs',
+        contentCollection: 'docs_en',
         contentFilters: [
           { field: 'path', operator: 'LIKE', value: '/typescript-sdk%' }
         ]

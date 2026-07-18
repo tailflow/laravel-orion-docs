@@ -1,11 +1,12 @@
 <script setup lang="ts">
 const { footer } = useAppConfig()
+const { t } = useI18n()
 </script>
 
 <template>
   <UFooter>
     <template #left>
-      {{ footer.credits }}
+      {{ t('footer.credits') }}
     </template>
 
     <template #right>

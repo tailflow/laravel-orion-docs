@@ -1,0 +1,31 @@
+{
+  "header": {
+    "selectLanguage": "Select language"
+  },
+  "version": {
+    "latest": "latest",
+    "deprecated": "deprecated"
+  },
+  "toc": {
+    "title": "Table of Contents",
+    "community": "Community",
+    "editPage": "Edit this page",
+    "starOnGitHub": "Star on GitHub"
+  },
+  "page": {
+    "copyPage": "Copy page",
+    "copyMarkdownLink": "Copy Markdown link",
+    "viewAsMarkdown": "View as Markdown",
+    "openInChatGPT": "Open in ChatGPT",
+    "openInClaude": "Open in Claude",
+    "copiedToClipboard": "Copied to clipboard",
+    "openCopyActionsMenu": "Open copy actions menu"
+  },
+  "footer": {
+    "credits": "Copyright © 2019-2026 Aleksei Zarubin"
+  },
+  "error": {
+    "title": "Page not found",
+    "description": "We are sorry but this page could not be found."
+  }
+}
