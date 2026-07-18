@@ -252,11 +252,11 @@ Finally, enjoy a fully featured REST API
 #description
 You can now manage posts and their tags via a standardized API.
 
-  :::tip
+  :::callout{icon="i-lucide-lightbulb"}
   Make sure you have a policy for the model you are exposing via the API.
   :::
 
-  :::tip
+  :::callout{icon="i-lucide-lightbulb"}
   Alternatively, for local testing, you can consider using the `DisableAuthorization` trait to avoid getting a 403 error if the policy is not registered or is incorrect.
   :::
 
