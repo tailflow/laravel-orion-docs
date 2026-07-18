@@ -26,5 +26,8 @@ logs
 # VSC
 .history
 
+# Wrangler
+.wrangler
+
 # Agents
 .claude
