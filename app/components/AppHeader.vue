@@ -4,12 +4,13 @@ import type { ContentNavigationItem } from '@nuxt/content'
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
 const { header } = useAppConfig()
+const localePath = useLocalePath()
 </script>
 
 <template>
   <UHeader
     :ui="{ center: 'flex-1' }"
-    :to="header?.to || '/'"
+    :to="localePath(header?.to || '/')"
   >
     <UContentSearchButton
       v-if="header?.search"
@@ -19,7 +20,7 @@ const { header } = useAppConfig()
 
     <template #left>
       <NuxtLink
-        :to="header?.to || '/'"
+        :to="localePath(header?.to || '/')"
         class="flex items-end gap-1.5"
       >
         <AppLogo class="w-auto h-8 shrink-0 text-primary" />
