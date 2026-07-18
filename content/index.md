@@ -36,6 +36,7 @@ The simplest way to create REST API with Laravel
   :::u-button
   ---
   to: /guide
+  size: lg
   trailing-icon: i-lucide-arrow-right
   ---
   Get started
@@ -46,6 +47,7 @@ The simplest way to create REST API with Laravel
   icon: i-simple-icons-github
   color: neutral
   variant: outline
+  size: lg
   to: https://github.com/tailflow/laravel-orion
   target: _blank
   ---
