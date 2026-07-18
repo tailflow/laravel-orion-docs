@@ -152,9 +152,9 @@ orientation: horizontal
     class PostsController extends Controller
     {
         /**
-        * Fully-qualified model class name
+        * モデルの完全修飾クラス名
         */
-        protected $model = Post::class; // or "App\Models\Post"
+        protected $model = Post::class; // または "App\Models\Post"
     }
     ```
     ::::
@@ -171,12 +171,12 @@ orientation: horizontal
     class PostTagsController extends RelationController
     {
         /**
-        * Fully-qualified model class name
+        * モデルの完全修飾クラス名
         */
-        protected $model = Post::class; // or "App\Models\Post"
+        protected $model = Post::class; // または "App\Models\Post"
 
         /**
-        * Name of the relation as it is defined on the Post model
+        * Post モデルで定義されているリレーション名
         */
         protected $relation = 'tags';
     }

@@ -152,9 +152,9 @@ orientation: horizontal
     class PostsController extends Controller
     {
         /**
-        * Fully-qualified model class name
+        * 모델의 완전한 클래스 이름
         */
-        protected $model = Post::class; // or "App\Models\Post"
+        protected $model = Post::class; // 또는 "App\Models\Post"
     }
     ```
     ::::
@@ -171,12 +171,12 @@ orientation: horizontal
     class PostTagsController extends RelationController
     {
         /**
-        * Fully-qualified model class name
+        * 모델의 완전한 클래스 이름
         */
-        protected $model = Post::class; // or "App\Models\Post"
+        protected $model = Post::class; // 또는 "App\Models\Post"
 
         /**
-        * Name of the relation as it is defined on the Post model
+        * Post 모델에 정의된 관계 이름
         */
         protected $relation = 'tags';
     }

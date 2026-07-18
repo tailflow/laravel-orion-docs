@@ -152,9 +152,9 @@ orientation: horizontal
     class PostsController extends Controller
     {
         /**
-        * Fully-qualified model class name
+        * 模型的完全限定类名
         */
-        protected $model = Post::class; // or "App\Models\Post"
+        protected $model = Post::class; // 或 "App\Models\Post"
     }
     ```
     ::::
@@ -171,12 +171,12 @@ orientation: horizontal
     class PostTagsController extends RelationController
     {
         /**
-        * Fully-qualified model class name
+        * 模型的完全限定类名
         */
-        protected $model = Post::class; // or "App\Models\Post"
+        protected $model = Post::class; // 或 "App\Models\Post"
 
         /**
-        * Name of the relation as it is defined on the Post model
+        * 在 Post 模型上定义的关联名称
         */
         protected $relation = 'tags';
     }
