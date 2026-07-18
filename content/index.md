@@ -9,6 +9,8 @@ seo:
 ::u-page-hero
 ---
 orientation: horizontal
+ui:
+  container: 'pb-8 sm:pb-12 lg:pb-16'
 ---
 #headline
   :::u-button
@@ -67,38 +69,37 @@ The simplest way to create REST API with Laravel
 ::
 
 ::u-page-section
-#features
-  :::u-page-feature
-  ---
-  icon: i-lucide-rocket
-  ---
-  #title
-  Simple yet powerful
+---
+ui:
+  container: 'py-8 sm:py-12 lg:py-16'
+---
+  :::u-page-grid
+    ::::u-page-card
+    ---
+    spotlight: true
+    icon: i-lucide-rocket
+    title: Simple yet powerful
+    description: Fully featured REST API for your Eloquent models and relationships with the simplicity of Laravel as you love it.
+    ---
+    ::::
 
-  #description
-  Fully featured REST API for your Eloquent models and relationships with the simplicity of Laravel as you love it.
-  :::
+    ::::u-page-card
+    ---
+    spotlight: true
+    icon: i-lucide-sparkles
+    title: Easy to use and learn
+    description: Utilizes standard Laravel features such as Request classes, Policies and API Resources.
+    ---
+    ::::
 
-  :::u-page-feature
-  ---
-  icon: i-lucide-sparkles
-  ---
-  #title
-  Easy to use and learn
-
-  #description
-  Utilizes standard Laravel features such as Request classes, Policies and API Resources.
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-layers
-  ---
-  #title
-  SDK and OpenAPI specs
-
-  #description
-  TypesScript SDK and OpenAPI specifications out of the box.
+    ::::u-page-card
+    ---
+    spotlight: true
+    icon: i-lucide-layers
+    title: SDK and OpenAPI specs
+    description: TypesScript SDK and OpenAPI specifications out of the box.
+    ---
+    ::::
   :::
 ::
 

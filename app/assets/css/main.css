@@ -4,12 +4,7 @@
 @source "../../../content/**/*";
 
 @theme static {
-  --container-8xl: 90rem;
   --font-sans: 'DM Sans', sans-serif;
-}
-
-:root {
-  --ui-container: var(--container-8xl);
 }
 
 pre {
