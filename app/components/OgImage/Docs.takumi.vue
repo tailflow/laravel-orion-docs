@@ -13,7 +13,6 @@ defineProps<{
 <template>
   <div
     class="w-full h-full flex bg-neutral-950 relative overflow-hidden"
-    style="font-family: 'Inter', 'Noto Sans JP', 'Noto Sans KR', 'Noto Sans SC', sans-serif"
     data-theme="dark"
   >
     <div class="absolute top-0 left-0 w-1.5 h-full bg-primary-400" />

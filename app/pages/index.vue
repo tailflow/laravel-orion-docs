@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Collections } from '@nuxt/content'
 
-const { locale } = useI18n()
+const locale = useDocsLocale()
 
 const { data: page } = await useAsyncData(`index-${locale.value}`, () => {
   return queryCollection(`landing_${locale.value}` as keyof Collections).first()

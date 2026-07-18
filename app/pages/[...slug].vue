@@ -35,7 +35,19 @@ useSeoMeta({
 
 const headline = computed(() => findPageHeadline(navigation?.value, page.value?.path))
 
-defineOgImage('Docs', { title, description, headline: headline.value })
+// The OG renderer has no CJK fonts, so localized pages render their card with
+// the English page's title and description instead.
+const locale = useDocsLocale()
+if (locale.value === 'en') {
+  defineOgImage('Docs', { title, description, headline: headline.value })
+} else {
+  const enPath = route.path.replace(new RegExp(`^/${locale.value}`), '')
+  const { data: enPage } = await useAsyncData(`${route.path}-og`, () => queryCollection('docs_en').path(enPath).first())
+  defineOgImage('Docs', {
+    title: enPage.value?.seo?.title || enPage.value?.title || title,
+    description: enPage.value?.seo?.description || enPage.value?.description || description
+  })
+}
 
 const links = computed(() => {
   const links = []

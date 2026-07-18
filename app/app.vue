@@ -3,19 +3,22 @@ import type { Collections } from '@nuxt/content'
 import { en, ja, ko, zh_cn } from '@nuxt/ui/locale'
 
 const { seo } = useAppConfig()
-const { locale } = useI18n()
+const locale = useDocsLocale()
 const { version } = useDocsVersion()
 const collection = useDocsCollection()
 
 const uiLocales = { en, ja, ko, zh: zh_cn }
 const uiLocale = computed(() => uiLocales[locale.value])
 
-const { data: navLatest } = await useAsyncData('navigation', () => {
+// The key must include the locale: prerendering shares useAsyncData payloads
+// across pages by key (sharedPrerenderData), so a locale-blind key would leak
+// one locale's navigation into every page.
+const { data: navLatest } = await useAsyncData(computed(() => `navigation-${locale.value}`), () => {
   // Non-default locales get a `/{locale}` root node (page: false) from the
   // prefixed collection — unwrap it, same as the `/v1.x` node below.
   return queryCollectionNavigation(`docs_${locale.value}` as keyof Collections)
     .then(nav => locale.value === 'en' ? nav : (nav[0]?.children ?? []))
-}, { watch: [locale] })
+})
 const { data: navV1 } = await useAsyncData('navigation-v1', () => {
   // Unwrap the `/v1.x` root node (page: false) returned by the prefixed collection
   return queryCollectionNavigation('docsv1').then(nav => nav[0]?.children ?? [])

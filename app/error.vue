@@ -7,7 +7,8 @@ defineProps<{
   error: NuxtError
 }>()
 
-const { locale, t } = useI18n()
+const { t } = useI18n()
+const locale = useDocsLocale()
 
 const uiLocales = { en, ja, ko, zh: zh_cn }
 const uiLocale = computed(() => uiLocales[locale.value])
@@ -25,11 +26,11 @@ useSeoMeta({
   description: t('error.description')
 })
 
-const { data: navigation } = await useAsyncData('navigation', () => {
+const { data: navigation } = await useAsyncData(`navigation-${locale.value}`, () => {
   return queryCollectionNavigation(`docs_${locale.value}` as keyof Collections)
     .then(nav => locale.value === 'en' ? nav : (nav[0]?.children ?? []))
 })
-const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections(`docs_${locale.value}` as keyof Collections), {
+const { data: files } = useLazyAsyncData(`search-${locale.value}`, () => queryCollectionSearchSections(`docs_${locale.value}` as keyof Collections), {
   server: false
 })
 

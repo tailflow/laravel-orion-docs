@@ -37,7 +37,6 @@ function collectContentPaths(dir: string, prefix = ''): string[] {
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
-    '@nuxt/fonts',
     '@nuxt/image',
     '@nuxt/scripts',
     '@nuxt/ui',
@@ -121,17 +120,6 @@ export default defineNuxtConfig({
     }
   },
 
-  // The og-image default font set has no CJK glyphs; Noto Sans JP/KR/SC cover
-  // the localized titles. `global: true` is required for the OG renderer to
-  // see the font data.
-  fonts: {
-    families: [
-      { name: 'Noto Sans JP', weights: [400, 700], global: true },
-      { name: 'Noto Sans KR', weights: [400, 700], global: true },
-      { name: 'Noto Sans SC', weights: [400, 700], global: true }
-    ]
-  },
-
   i18n: {
     defaultLocale: 'en',
     strategy: 'prefix_except_default',
@@ -143,6 +131,13 @@ export default defineNuxtConfig({
       { code: 'ko', language: 'ko-KR', name: '한국어', file: 'ko.json' },
       { code: 'zh', language: 'zh-CN', name: '简体中文', file: 'zh.json' }
     ]
+  },
+
+  // These three inspections cannot handle CJK anchors: heading ids render as
+  // raw unicode while markdown hrefs are percent-encoded (uppercase hex), so
+  // the checker mis-compares strings that browsers resolve correctly.
+  linkChecker: {
+    skipInspections: ['missing-hash', 'no-uppercase-chars', 'no-non-ascii-chars']
   },
 
   llms: {
