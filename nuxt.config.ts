@@ -1,3 +1,36 @@
+import { readdirSync } from 'node:fs'
+import { join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const contentDir = fileURLToPath(new URL('./content', import.meta.url))
+
+/**
+ * Collect the route path of every content page. Used to prerender routes the
+ * crawler cannot discover from '/': `/raw/<path>.md` links only appear inside
+ * a client-side dropdown menu, and the whole `/v1.x` tree is only reachable
+ * through the version-switcher dropdown — without this hook they would 404 on
+ * static hosting.
+ */
+function collectContentPaths(dir: string, prefix = ''): string[] {
+  const paths: string[] = []
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    if (entry.name.startsWith('.') || entry.name.startsWith('_')) {
+      continue
+    }
+    const segment = entry.name.replace(/^\d+\./, '')
+    if (entry.isDirectory()) {
+      paths.push(...collectContentPaths(join(dir, entry.name), `${prefix}/${segment}`))
+    } else if (segment.endsWith('.md')) {
+      const stem = segment.slice(0, -'.md'.length)
+      const path = stem === 'index' ? prefix : `${prefix}/${stem}`
+      if (path) {
+        paths.push(path)
+      }
+    }
+  }
+  return paths
+}
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
@@ -16,11 +49,18 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  colorMode: {
+    preference: 'dark'
+  },
+
   content: {
     build: {
       markdown: {
         toc: {
           searchDepth: 1
+        },
+        highlight: {
+          langs: ['json', 'js', 'ts', 'html', 'css', 'vue', 'shell', 'mdc', 'md', 'yaml', 'php', 'bash']
         }
       }
     },
@@ -44,6 +84,15 @@ export default defineNuxtConfig({
     }
   },
 
+  hooks: {
+    'prerender:routes'(ctx) {
+      for (const path of collectContentPaths(contentDir)) {
+        ctx.routes.add(path)
+        ctx.routes.add(`/raw${path}.md`)
+      }
+    }
+  },
+
   eslint: {
     config: {
       stylistic: {
@@ -54,26 +103,26 @@ export default defineNuxtConfig({
   },
 
   llms: {
-    domain: 'https://docs-template.nuxt.dev/',
-    title: 'Nuxt Docs Template',
-    description: 'A template for building documentation with Nuxt UI and Nuxt Content.',
+    domain: 'https://orion.tailflow.org',
+    title: 'Orion for Laravel',
+    description: 'The simplest way to create REST API with Laravel.',
     full: {
-      title: 'Nuxt Docs Template - Full Documentation',
-      description: 'This is the full documentation for the Nuxt Docs Template.'
+      title: 'Orion for Laravel - Full Documentation',
+      description: 'This is the full documentation for Orion for Laravel.'
     },
     sections: [
       {
-        title: 'Getting Started',
+        title: 'Guide',
         contentCollection: 'docs',
         contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/getting-started%' }
+          { field: 'path', operator: 'LIKE', value: '/guide%' }
         ]
       },
       {
-        title: 'Essentials',
+        title: 'TypeScript SDK',
         contentCollection: 'docs',
         contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/essentials%' }
+          { field: 'path', operator: 'LIKE', value: '/typescript-sdk%' }
         ]
       }
     ]
