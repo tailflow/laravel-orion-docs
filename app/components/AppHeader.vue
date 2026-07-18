@@ -20,7 +20,7 @@ const { header } = useAppConfig()
     <template #left>
       <NuxtLink
         :to="header?.to || '/'"
-        class="flex items-center gap-2"
+        class="flex items-end gap-1.5"
       >
         <AppLogo class="w-auto h-8 shrink-0 text-primary" />
 
