@@ -55,7 +55,7 @@ The simplest way to create REST API with Laravel
   :::
 
 #default
-  :::div{.w-fit .max-w-full}
+  :::div{class="w-fit max-w-full lg:ml-auto"}
     ::::prose-pre
     ---
     code: |
