@@ -12,7 +12,7 @@ export default defineAppConfig({
     }
   },
   seo: {
-    siteName: 'Orion for Laravel - The simplest way to create REST API with Laravel'
+    siteName: 'Orion for Laravel'
   },
   header: {
     title: '',

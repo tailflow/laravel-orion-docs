@@ -2,7 +2,7 @@
 title: Orion for Laravel
 description: The simplest way to create REST API with Laravel
 seo:
-  title: Orion for Laravel
+  title: Orion for Laravel - The simplest way to create REST API with Laravel
   description: The simplest way to create REST API with Laravel
 ---
 
