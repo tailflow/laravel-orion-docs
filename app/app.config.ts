@@ -9,11 +9,6 @@ export default defineAppConfig({
         root: 'border-t border-default',
         left: 'text-sm text-muted'
       }
-    },
-    contentSearchButton: {
-      slots: {
-        base: 'text-muted'
-      }
     }
   },
   seo: {
