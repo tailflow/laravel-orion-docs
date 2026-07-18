@@ -205,7 +205,7 @@ Orionでは、モデルやリレーションのAPIリソース全体を1行の�
   size: lg
   trailing-icon: i-lucide-arrow-right
   ---
-  詳細を見る
+  ルートについて詳しく見る
   :::
 
 #default
@@ -359,7 +359,7 @@ OpenAPI仕様書を自動生成するには、コマンドを1つ実行するだ
   size: lg
   trailing-icon: i-lucide-arrow-right
   ---
-  詳細を見る
+  仕様書について詳しく見る
   :::
 
 #default

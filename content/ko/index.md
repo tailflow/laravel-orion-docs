@@ -205,7 +205,7 @@ Orion은 모델 또는 연관관계 API 리소스 전체를 코드 한 줄로 �
   size: lg
   trailing-icon: i-lucide-arrow-right
   ---
-  자세히 알아보기
+  라우트 자세히 알아보기
   :::
 
 #default
@@ -359,7 +359,7 @@ OpenAPI 명세 생성
   size: lg
   trailing-icon: i-lucide-arrow-right
   ---
-  자세히 알아보기
+  명세 자세히 알아보기
   :::
 
 #default
