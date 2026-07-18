@@ -1,3 +1,4 @@
+import type { Nuxt } from '@nuxt/schema'
 import { readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -43,7 +44,20 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxtjs/i18n',
     '@nuxtjs/seo',
-    'nuxt-llms'
+    'nuxt-llms',
+    // Nuxt tree-shakes `onServerPrefetch` from production client bundles, but
+    // @nuxt/icon registers it in setup and Vue marks such instances as async
+    // boundaries — server-only boundaries shift every useId (reka-ui a11y ids)
+    // between the prerendered HTML and the hydrating client. Keep the hook in
+    // the client bundle until https://github.com/vuejs/core/issues/12591 is
+    // resolved. (A plain config override cannot remove entries: the schema
+    // default is defu-merged, and defu concatenates arrays.)
+    function keepOnServerPrefetch(_options: unknown, nuxt: Nuxt) {
+      const client = nuxt.options.optimization?.treeShake?.composables?.client
+      if (client?.vue) {
+        client.vue = client.vue.filter(c => c !== 'onServerPrefetch')
+      }
+    }
   ],
 
   devtools: {
@@ -181,6 +195,14 @@ export default defineNuxtConfig({
   // The /raw/*.md mirror routes are for LLM consumption, not search engines
   robots: {
     disallow: ['/raw']
+  },
+
+  // nuxt-seo-utils' prerender HTML minifier rewrites every inline <style> and
+  // <script> — including ones Vue renders inside #__nuxt (the shiki highlight
+  // styles from @nuxt/content), which must match the client payload
+  // byte-for-byte or hydration reports mismatches on every page.
+  seo: {
+    minify: false
   },
 
   sitemap: {
