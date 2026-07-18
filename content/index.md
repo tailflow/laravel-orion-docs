@@ -3,7 +3,7 @@ title: Orion for Laravel
 description: The simplest way to create REST API with Laravel
 seo:
   title: Orion for Laravel - The simplest way to create REST API with Laravel
-  description: The simplest way to create REST API with Laravel
+  description: Turn your Eloquent models and relationships into a fully featured REST API with Laravel — search, hooks, TypeScript SDK, and OpenAPI specs out of the box.
 ---
 
 ::u-page-hero
