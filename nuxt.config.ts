@@ -98,6 +98,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2026-06-30',
 
   nitro: {
+    cloudflare: {
+      deployConfig: false
+    },
     prerender: {
       routes: [
         '/'
