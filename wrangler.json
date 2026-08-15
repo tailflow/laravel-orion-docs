@@ -1,5 +1,5 @@
 {
-  "name": "tailflow-laravel-orion-docs",
+  "name": "laravel-orion-docs",
   "compatibility_date": "2026-06-30",
   "assets": {
     "directory": ".output/public",
