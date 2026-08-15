@@ -98,13 +98,6 @@ export default defineNuxtConfig({
   compatibilityDate: '2026-06-30',
 
   nitro: {
-    cloudflare: {
-      wrangler: {
-        assets: {
-          html_handling: 'drop-trailing-slash'
-        }
-      }
-    },
     prerender: {
       routes: [
         '/'
