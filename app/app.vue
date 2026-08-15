@@ -40,14 +40,17 @@ if (!import.meta.dev) {
 
 const localeHead = useLocaleHead({ lang: true, seo: true })
 
+const route = useRoute()
+const isV1 = computed(() => route.path.startsWith('/v1.x'))
+
 useHead(() => ({
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-    ...(localeHead.value.meta || [])
+    ...(localeHead.value.meta || []).filter(m => !isV1.value || m.property !== 'og:locale:alternate')
   ],
   link: [
     { rel: 'icon', href: '/favicon.ico' },
-    ...(localeHead.value.link || [])
+    ...(localeHead.value.link || []).filter(l => !isV1.value || l.rel === 'canonical')
   ],
   htmlAttrs: {
     lang: localeHead.value.htmlAttrs?.lang
