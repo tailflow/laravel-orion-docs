@@ -29,9 +29,17 @@ const navigation = computed(() => version.value.name === 'latest' ? (navLatest.v
 // Version- and locale-scoped search sections; `useSearchCollection` stalls
 // hydration when called in the root setup, so we feed the `files` prop instead
 // (refetched on collection change).
-const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections(collection.value), {
+const { open: searchOpen } = useContentSearch()
+const { data: files, status: searchStatus, execute: loadSearch } = useLazyAsyncData('search', () => queryCollectionSearchSections(collection.value), {
   server: false,
+  immediate: false,
   watch: [collection]
+})
+
+watch(searchOpen, (value) => {
+  if (value && (searchStatus.value === 'idle' || searchStatus.value === 'error')) {
+    loadSearch()
+  }
 })
 
 if (!import.meta.dev) {
@@ -84,6 +92,7 @@ provide('navigation', navigation)
       <LazyUContentSearch
         :files="files"
         :navigation="navigation"
+        :loading="searchStatus === 'pending'"
       />
     </ClientOnly>
   </UApp>

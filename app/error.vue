@@ -30,8 +30,16 @@ const { data: navigation } = await useAsyncData(`navigation-${locale.value}`, ()
   return queryCollectionNavigation(`docs_${locale.value}` as keyof Collections)
     .then(nav => locale.value === 'en' ? nav : (nav[0]?.children ?? []))
 })
-const { data: files } = useLazyAsyncData(`search-${locale.value}`, () => queryCollectionSearchSections(`docs_${locale.value}` as keyof Collections), {
-  server: false
+const { open: searchOpen } = useContentSearch()
+const { data: files, status: searchStatus, execute: loadSearch } = useLazyAsyncData(`search-${locale.value}`, () => queryCollectionSearchSections(`docs_${locale.value}` as keyof Collections), {
+  server: false,
+  immediate: false
+})
+
+watch(searchOpen, (value) => {
+  if (value && (searchStatus.value === 'idle' || searchStatus.value === 'error')) {
+    loadSearch()
+  }
 })
 
 provide('navigation', navigation)
@@ -49,6 +57,7 @@ provide('navigation', navigation)
       <LazyUContentSearch
         :files="files"
         :navigation="navigation"
+        :loading="searchStatus === 'pending'"
       />
     </ClientOnly>
   </UApp>
