@@ -67,6 +67,8 @@ const links = computed(() => {
 
 <template>
   <UPage v-if="page">
+    <VersionBanner />
+
     <UPageHeader
       :title="page.title"
       :description="page.description"

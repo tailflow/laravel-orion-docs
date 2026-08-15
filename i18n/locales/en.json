@@ -4,7 +4,12 @@
   },
   "version": {
     "latest": "latest",
-    "deprecated": "deprecated"
+    "deprecated": "deprecated",
+    "banner": {
+      "title": "You are reading the Orion 1.x documentation.",
+      "description": "Version 1.x is no longer maintained. The current version is 2.x.",
+      "action": "View this page in the current version"
+    }
   },
   "toc": {
     "title": "Table of Contents",

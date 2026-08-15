@@ -4,7 +4,12 @@
   },
   "version": {
     "latest": "최신",
-    "deprecated": "지원 종료"
+    "deprecated": "지원 종료",
+    "banner": {
+      "title": "Orion 1.x 문서를 보고 있습니다.",
+      "description": "1.x 버전은 더 이상 유지되지 않습니다. 현재 버전은 2.x입니다.",
+      "action": "이 페이지를 현재 버전에서 보기"
+    }
   },
   "toc": {
     "title": "목차",

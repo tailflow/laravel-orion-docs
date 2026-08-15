@@ -4,7 +4,12 @@
   },
   "version": {
     "latest": "最新",
-    "deprecated": "非推奨"
+    "deprecated": "非推奨",
+    "banner": {
+      "title": "Orion 1.x のドキュメントを読んでいます。",
+      "description": "バージョン 1.x は保守されていません。現在のバージョンは 2.x です。",
+      "action": "このページを現在のバージョンで見る"
+    }
   },
   "toc": {
     "title": "目次",
